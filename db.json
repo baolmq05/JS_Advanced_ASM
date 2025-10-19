@@ -1,0 +1,488 @@
+{
+  "categories": [
+    {
+      "name": "Điện thoại",
+      "parent_id": null,
+      "status": "1",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "name": "Phụ kiện",
+      "parent_id": null,
+      "status": 1
+    },
+    {
+      "name": "Iphone",
+      "parent_id": "1",
+      "status": "1",
+      "id": "4"
+    },
+    {
+      "id": "5",
+      "name": "Samsung",
+      "parent_id": 1,
+      "status": 1
+    },
+    {
+      "id": "6",
+      "name": "Xiaomi",
+      "parent_id": 1,
+      "status": 1
+    },
+    {
+      "name": "Ốp lưng",
+      "parent_id": "2",
+      "status": "0",
+      "id": "7"
+    },
+    {
+      "id": "8",
+      "name": "Tai nghe",
+      "parent_id": 2,
+      "status": 1
+    },
+    {
+      "id": "9",
+      "name": "Cáp sạc",
+      "parent_id": 2,
+      "status": 1
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "iPhone 15 Pro Max",
+      "image": "",
+      "description": "Điện thoại flagship mới nhất của Apple với chip A17 Pro và camera 48MP.",
+      "category_id": 4,
+      "product_variants": [
+        {
+          "id": "1",
+          "variant_name": "iPhone 15 Pro Max 256GB - Titan Đen",
+          "price": 27990000,
+          "quantity": 8,
+          "image": "",
+          "color": "Titan Đen",
+          "color_code": "#3E3B3A",
+          "rom": "256GB"
+        },
+        {
+          "id": "2",
+          "variant_name": "iPhone 15 Pro Max 512GB - Titan Đen",
+          "price": 32490000,
+          "quantity": 10,
+          "image": "",
+          "color": "Titan Đen",
+          "color_code": "#3E3B3A",
+          "rom": "512GB"
+        },
+        {
+          "id": "3",
+          "variant_name": "iPhone 15 Pro Max 1TB - Titan Đen",
+          "price": 36490000,
+          "quantity": 12,
+          "image": "",
+          "color": "Titan Đen",
+          "color_code": "#3E3B3A",
+          "rom": "1TB"
+        },
+        {
+          "id": "4",
+          "variant_name": "iPhone 15 Pro Max 256GB - Titan Xanh",
+          "price": 27990000,
+          "quantity": 10,
+          "image": "",
+          "color": "Titan Xanh",
+          "color_code": "#3E5B74",
+          "rom": "256GB"
+        },
+        {
+          "id": "4",
+          "variant_name": "iPhone 15 Pro Max 512GB - Titan Xanh",
+          "price": 31990000,
+          "quantity": 7,
+          "image": "",
+          "color": "Titan Xanh",
+          "color_code": "#3E5B74",
+          "rom": "512GB"
+        },
+        {
+          "id": "5",
+          "variant_name": "iPhone 15 Pro Max 1TB - Titan Xanh",
+          "price": 36490000,
+          "quantity": 0,
+          "image": "",
+          "color": "Titan Xanh",
+          "color_code": "#3E5B74",
+          "rom": "1TB"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "iPhone 14",
+      "image": "",
+      "description": "Thiết kế hiện đại, hiệu năng mạnh mẽ, phù hợp cho người dùng yêu thích hệ sinh thái Apple.",
+      "category_id": 4,
+      "product_variants": [
+        {
+          "id": "6",
+          "variant_name": "iPhone 14 128GB - Xanh Dương",
+          "price": 13990000,
+          "quantity": 10,
+          "image": "",
+          "color": "Xanh dương",
+          "color_code": "#4F7EA6",
+          "rom": "128GB"
+        },
+        {
+          "id": "7",
+          "variant_name": "iPhone 14 256GB - Xanh Dương",
+          "price": 16290000,
+          "quantity": 0,
+          "image": "",
+          "color": "Xanh dương",
+          "color_code": "#4F7EA6",
+          "rom": "256GB"
+        },
+        {
+          "id": "8",
+          "variant_name": "iPhone 14 512GB - Xanh Dương",
+          "price": 18290000,
+          "quantity": 0,
+          "image": "",
+          "color": "Xanh dương",
+          "color_code": "#4F7EA6",
+          "rom": "512GB"
+        },
+        {
+          "id": "9",
+          "variant_name": "iPhone 14 128GB - Tím",
+          "price": 13990000,
+          "quantity": 9,
+          "image": "",
+          "color": "Tím",
+          "color_code": "#C8B7E2",
+          "rom": "128GB"
+        },
+        {
+          "id": "10",
+          "variant_name": "iPhone 14 256GB - Tím",
+          "price": 16290000,
+          "quantity": 0,
+          "image": "",
+          "color": "Tím",
+          "color_code": "#C8B7E2",
+          "rom": "256GB"
+        },
+        {
+          "id": "11",
+          "variant_name": "iPhone 14 512GB - Tím",
+          "price": 18290000,
+          "quantity": 0,
+          "image": "",
+          "color": "Tím",
+          "color_code": "#C8B7E2",
+          "rom": "512GB"
+        },
+        {
+          "id": "12",
+          "variant_name": "iPhone 14 128GB - Đen",
+          "price": 13990000,
+          "quantity": 5,
+          "image": "",
+          "color": "Tím",
+          "color_code": "#1E2328",
+          "rom": "128GB"
+        },
+        {
+          "id": "13",
+          "variant_name": "iPhone 14 256GB - Đen",
+          "price": 16290000,
+          "quantity": 0,
+          "image": "",
+          "color": "Tím",
+          "color_code": "#1E2328",
+          "rom": "256GB"
+        },
+        {
+          "id": "14",
+          "variant_name": "iPhone 14 512GB - Đen",
+          "price": 18290000,
+          "quantity": 0,
+          "image": "",
+          "color": "Tím",
+          "color_code": "#1E2328",
+          "rom": "512GB"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Samsung Galaxy S24 Ultra",
+      "image": "",
+      "description": "Mẫu điện thoại cao cấp của Samsung với bút S-Pen và camera zoom 100x.",
+      "category_id": 5,
+      "product_variants": [
+        {
+          "id": "15",
+          "variant_name": "Samsung Galaxy S24 Ultra Đen Titan - 256GB",
+          "price": 22290000,
+          "quantity": 11,
+          "image": "",
+          "color": "Titan Đen",
+          "color_code": "#1E2328",
+          "rom": "256GB"
+        },
+        {
+          "id": "16",
+          "variant_name": "Samsung Galaxy S24 Ultra Đen Titan - 512GB",
+          "price": 24690000,
+          "quantity": 4,
+          "image": "",
+          "color": "Titan Đen",
+          "color_code": "#1E2328",
+          "rom": "512GB"
+        },
+        {
+          "id": "17",
+          "variant_name": "Samsung Galaxy S24 Ultra Đen Titan - 1TB",
+          "price": 28990000,
+          "quantity": 0,
+          "image": "",
+          "color": "Titan Đen",
+          "color_code": "#1E2328",
+          "rom": "1TB"
+        },
+        {
+          "id": "18",
+          "variant_name": "Samsung Galaxy S24 Ultra Vàng Titan - 256GB",
+          "price": 22290000,
+          "quantity": 11,
+          "image": "",
+          "color": "Titan Vàng",
+          "color_code": "#C1A661",
+          "rom": "256GB"
+        },
+        {
+          "id": "19",
+          "variant_name": "Samsung Galaxy S24 Ultra Đen Titan - 512GB",
+          "price": 24690000,
+          "quantity": 4,
+          "image": "",
+          "color": "Titan Vàng",
+          "color_code": "#C1A661",
+          "rom": "512GB"
+        },
+        {
+          "id": "20",
+          "variant_name": "Samsung Galaxy S24 Ultra Đen Titan - 1TB",
+          "price": 28990000,
+          "quantity": 0,
+          "image": "",
+          "color": "Titan Vàng",
+          "color_code": "#C1A661",
+          "rom": "1TB"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Samsung Galaxy A55",
+      "image": "",
+      "description": "Điện thoại tầm trung có màn hình Super AMOLED và pin 5000mAh.",
+      "category_id": 5,
+      "product_variants": [
+        {
+          "id": "21",
+          "variant_name": "Samsung Galaxy A55 - 128GB",
+          "price": 7890000,
+          "quantity": 12,
+          "image": "",
+          "color": "Đen",
+          "color_code": "#1C1C1C",
+          "rom": "128GB"
+        },
+        {
+          "id": "22",
+          "variant_name": "Samsung Galaxy A55 Tím Nhạt - 128GB",
+          "price": 7890000,
+          "quantity": 30,
+          "image": "",
+          "color": "Tím nhạt",
+          "color_code": "#D8B7DD",
+          "rom": "128GB"
+        },
+        {
+          "id": "23",
+          "variant_name": "Samsung Galaxy A55 Xanh Nhạt - 128GB",
+          "price": 7890000,
+          "quantity": 20,
+          "image": "",
+          "color": "Xanh nhạt",
+          "color_code": "#A8D8F0",
+          "rom": "128GB"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Xiaomi Redmi Note 13 Pro",
+      "image": "",
+      "description": "Giá rẻ, pin trâu, hiệu năng ổn định, rất phù hợp cho sinh viên.",
+      "category_id": 6,
+      "product_variants": [
+        {
+          "id": "24",
+          "variant_name": "Xiaomi Redmi Note 13 Pro Đen - 128GB",
+          "price": 7290000,
+          "quantity": 20,
+          "image": "",
+          "color": "Đen",
+          "color_code": "#1C1C1C",
+          "rom": "128GB",
+          "product_id": 5
+        },
+        {
+          "id": "25",
+          "variant_name": "Xiaomi Redmi Note 13 Pro Xanh lá - 128GB",
+          "price": 7290000,
+          "quantity": 5,
+          "image": "",
+          "color": "Xanh lá",
+          "color_code": "#3B7A3E",
+          "rom": "128GB"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "name": "Tai nghe không dây Xiaomi Buds 3",
+      "image": "",
+      "description": "Tai nghe không dây chất lượng cao, âm thanh trong trẻo và pin lâu.",
+      "category_id": 8,
+      "product_variants": [
+        {
+          "id": "26",
+          "variant_name": "Tai nghe không dây Xiaomi Buds 3 Trắng",
+          "price": 2421000,
+          "quantity": 26,
+          "image": "",
+          "color": "Trắng",
+          "color_code": "#fff",
+          "rom": null
+        },
+        {
+          "id": "27",
+          "variant_name": "Tai nghe không dây Xiaomi Buds 3 Đen",
+          "price": 2421000,
+          "quantity": 20,
+          "image": "",
+          "color": "Đen",
+          "color_code": "#000",
+          "rom": null
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "name": "Ốp lưng bảo vệ iPhone 15 Promax Meetu giả da có khe đựng thẻ",
+      "image": "",
+      "description": "Ốp silicon trong suốt, bảo vệ chống trầy xước cho iPhone 15.",
+      "category_id": 7,
+      "product_variants": [
+        {
+          "id": "28",
+          "variant_name": "Ốp lưng bảo vệ iPhone 15 Promax Meetu giả da có khe đựng thẻ Đen",
+          "price": 99000,
+          "quantity": 12,
+          "image": "",
+          "color": "Đen",
+          "color_code": "#000",
+          "rom": null
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "name": "Bộ sạc nhanh 1 cổng 30W kèm cáp Type-C to Type-C 1M Smart Serie Devia",
+      "image": "",
+      "description": "Cáp sạc nhanh tương thích với nhiều thiết bị Android và iPad.",
+      "category_id": 9,
+      "product_variants": [
+        {
+          "id": "29",
+          "variant_name": "Bộ sạc nhanh 1 cổng 30W kèm cáp Type-C to Type-C 1M Smart Serie Devia Trắng",
+          "price": 349000,
+          "quantity": 50,
+          "image": "",
+          "color": "Trắng",
+          "color_code": "#fff",
+          "rom": null
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "name": "iPad Pro 12.9 2022 M2 WiFi 128GB",
+      "image": "",
+      "description": "Máy tính bảng mạnh mẽ với chip M2, hỗ trợ Apple Pencil 2.",
+      "category_id": 10,
+      "product_variants": [
+        {
+          "id": "30",
+          "variant_name": "iPad Pro 12.9 2022 M2 WiFi 128GB Xám",
+          "price": 9900000,
+          "quantity": 3,
+          "image": "",
+          "color": "Xám",
+          "color_code": "#333",
+          "rom": "128GB"
+        },
+        {
+          "id": "31",
+          "variant_name": "iPad Pro 12.9 2022 M2 WiFi 128GB Xám",
+          "price": 9900000,
+          "quantity": 0,
+          "image": "",
+          "color": "Đen",
+          "color_code": "#000",
+          "rom": "128GB"
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Quốc Bảo",
+      "email": "baolmq05@gmail.com",
+      "phone": "0792846735",
+      "address": "Nguyễn Văn Cừ, Cần Thơ",
+      "password": "Lmqb@1080",
+      "role": 1,
+      "status": 1
+    },
+    {
+      "id": "2",
+      "name": "Nguyễn Văn A",
+      "email": "baolmqpc09101@gmail.com",
+      "phone": "0939138756",
+      "address": "Ninh Kiều, Cần Thơ",
+      "password": "vanA@1234",
+      "role": 0,
+      "status": 1
+    },
+    {
+      "id": "3",
+      "name": "Lê Thị C",
+      "email": "lethic@gmail.com",
+      "phone": "0939123756",
+      "address": "Thốt Nốt, Cần Thơ",
+      "password": "thic@1234",
+      "role": 0,
+      "status": 0
+    }
+  ]
+}

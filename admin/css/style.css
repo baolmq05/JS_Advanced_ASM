@@ -1,0 +1,44 @@
+#alert_danger,
+#alert_success {
+    display: none;
+    align-items: center;
+    position: fixed;
+    top: 48px;
+    right: 0px;
+    z-index: 1000;
+    transition: all 0.5s ease-in-out;
+    animation: alert_in 1s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes alert_in {
+    0% {
+        right: -500px;
+    }
+
+    100% {
+        right: 0px;
+    }
+}
+
+#modal-delete {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.overlay {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.overlay::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}

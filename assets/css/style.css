@@ -1,0 +1,99 @@
+/* Common Classes */
+.h-180 {
+    height: 180px !important;
+}
+
+.h-240 {
+    height: 240px !important;
+}
+
+.h-400 {
+    height: 400px !important;
+}
+
+.h-500 {
+    height: 500px !important;
+}
+
+.ls-1 { letter-spacing: 1px; }
+.ls-2 { letter-spacing: 2px; }
+.ls-3 { letter-spacing: 3px; }
+
+.product-item .product-image-box {
+    width: 100%;
+    overflow: hidden;
+}
+
+.gallary-box img,
+.product-image-box .product-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+}
+
+.product-item .product-title, 
+.product-item .product-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.product-item:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.product-item:hover .product-image{
+    transform: scale(1.3);
+}
+
+/* HOME */
+.introduce-banner {
+    width: 100%;
+}
+
+.introduce-bg {
+    position: relative;
+    background-image: url("../images/orther/about-fullscreen-image-1-1920x600.jpg");
+}
+
+.form-bg {
+    background-color: rgba(0, 0, 0, 0.324);
+    border-radius: 10px;
+}
+
+/* PRODUCT */
+.product-banner {
+    background-image: url("../images/orther/banner-image-1-1920x500.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 400px;
+}
+
+/* PRODUCT-DETAIL */
+.detail-box-image {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.gallary-box {
+    width: 200px;
+    height: auto;
+    overflow: hidden;
+    opacity: 0.5;
+}
+
+.gallary-box:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+}
+
+.gallary-box-active {
+    opacity: 1;
+}
+
+
+
+

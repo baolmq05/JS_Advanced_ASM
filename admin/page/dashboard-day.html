@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Store - Admin</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/images/Logo.png">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        /* Cho sidebar full height trên desktop */
+        #side-bar {
+            min-height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- SIDEBAR (ẩn trên mobile) -->
+            <div class="col-md-3 d-none d-md-block p-0">
+                <div id="side-bar" class="card shadow-sm p-3">
+
+                </div>
+            </div>
+
+            <!-- MAIN CONTENT -->
+            <div class="col-12 col-md-9 p-0">
+                <!-- Navbar -->
+                <nav class="navbar navbar-light bg-white shadow-sm">
+                    <div class="container-fluid d-flex justify-content-md-end">
+                        <!-- Nút mở sidebar trên mobile -->
+                        <button class="btn btn-outline-dark d-md-none" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasSidebar">
+                            <i class="bi bi-list fs-3"></i>
+                        </button>
+
+                        <!-- Avatar -->
+                        <div class="dropdown">
+                            <a class="text-dark text-decoration-none dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown">
+                                <img width="30" class="avatar-image" src="../assets/images/avatar/avatar.png" alt="">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="bi bi-person"></i> Lê Minh Quốc Bảo
+                                    </a>
+                                </li>
+                                <li class="border-top">
+                                    <a class="dropdown-item text-danger" href="#">
+                                        <i class="bi bi-power"></i> Đăng xuất
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Nội dung -->
+                <div class="p-3">
+                    <h3 class="my-3">Doanh thu hôm nay</h3>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <a href="./dashboard-day.html" class="w-100 btn bg-primary p-3 text-white rounded">
+                                        Hôm nay
+                                    </a>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <a href="./dashboard-month.html"
+                                        class="w-100 btn bg-success p-3 text-white rounded">
+                                        Tháng này
+                                    </a>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <a href="./dashboard-year.html" class="w-100 btn bg-danger p-3 text-white rounded">
+                                        Năm nay
+                                    </a>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <a href="./dashboard-product.html"
+                                        class="w-100 btn bg-warning p-3 text-white rounded">
+                                        Sản phẩm bán chạy
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="col-6 col-md-3 mb-3">
+                            <button class="w-100 bg-dark p-3 text-white rounded border-0">
+                                Số lượng sản phẩm
+                            </button>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <button class="w-100 bg-dark p-3 text-white rounded border-0">
+                                Số lượng đơn hàng
+                            </button>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <button class="w-100 bg-dark p-3 text-white rounded border-0">
+                                Số lượng người dùng
+                            </button>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <button class="w-100 bg-dark p-3 text-white rounded border-0">
+                                Đơn hàng đã giao
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OFFCANVAS SIDEBAR (mobile) -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- copy sidebar menu -->
+            <a href="./dashboard-day.html" class="btn btn-dark p-2 mb-3 w-100">
+                <i class="bi bi-grid-1x2-fill"></i> Admin Page
+            </a>
+
+            <a href="./dashboard-day.html" class="btn btn-outline-dark p-2 mb-3 w-100">
+                <i class="bi bi-house-door"></i> Thống kê
+            </a>
+
+            <div class="btn-group w-100 mb-3">
+                <button type="button" class="btn btn-outline-dark dropdown-toggle p-2" data-bs-toggle="dropdown">
+                    <i class="bi bi-box"></i> Loại sản phẩm
+                </button>
+                <div class="dropdown-menu w-100 text-center">
+                    <a href="./category-index.html" class="dropdown-item">Danh sách</a>
+                    <a href="./category-add.html" class="dropdown-item">Thêm</a>
+                </div>
+            </div>
+
+            <div class="btn-group w-100 mb-3">
+                <button type="button" class="btn btn-outline-dark dropdown-toggle p-2" data-bs-toggle="dropdown">
+                    <i class="bi bi-border-all"></i> Sản phẩm
+                </button>
+                <div class="dropdown-menu w-100 text-center">
+                    <a href="./product-index.html" class="dropdown-item">Danh sách</a>
+                    <a href="./product-add.html" class="dropdown-item">Thêm</a>
+                </div>
+            </div>
+
+            <div class="btn-group w-100 mb-3">
+                <button type="button" class="btn btn-outline-dark dropdown-toggle p-2" data-bs-toggle="dropdown">
+                    <i class="bi bi-cart-fill"></i> Đơn hàng
+                </button>
+                <div class="dropdown-menu w-100 text-center">
+                    <a href="./order-index.html" class="dropdown-item">Danh sách</a>
+                    <a href="./order-add.html" class="dropdown-item">Thêm</a>
+                </div>
+            </div>
+
+            <div class="btn-group w-100 mb-3">
+                <button type="button" class="btn btn-outline-dark dropdown-toggle p-2" data-bs-toggle="dropdown">
+                    <i class="bi bi-people-fill"></i> Người dùng
+                </button>
+                <div class="dropdown-menu w-100 text-center">
+                    <a href="./user-index.html" class="dropdown-item">Danh sách</a>
+                    <a href="./user-add.html" class="dropdown-item">Thêm</a>
+                </div>
+            </div>
+
+            <a href="../../index.html" class="btn btn-outline-primary p-2 mb-3 w-100">Trang người dùng</a>
+        </div>
+    </div>
+
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/component/component.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: 'Thu nhập',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1,
+                    borderColor: 'blue',
+                    backgroundColor: '#fff',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

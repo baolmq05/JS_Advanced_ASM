@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Store</title>
+    <link rel="icon" type="image/x-icon" href="./assets/images/Logo.png">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+
+<body class="d-flex flex-column justify-content-between">
+    <!-- HEADER -->
+    <div id="header"></div>
+
+    <main>
+        <section class="mt-5 py-5">
+            <div class="container">
+                <h2 class="text-center mb-5">Thanh toán</h2>
+                <div class="row g-4">
+                    <!-- Form giao hàng -->
+                    <div class="col-md-7">
+                        <div class="card p-4 shadow-sm">
+                            <h4 class="mb-4 text-success"><i class="bi bi-truck"></i> Thông tin giao hàng</h4>
+                            <form action="">
+                                <!-- Họ tên -->
+                                <div class="mb-3">
+                                    <label class="form-label">Họ và tên</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                        <input type="text" class="form-control" placeholder="Lê Minh Quốc Bảo">
+                                    </div>
+                                </div>
+
+                                <!-- Số điện thoại -->
+                                <div class="mb-3">
+                                    <label class="form-label">Số điện thoại</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                        <input type="text" class="form-control" placeholder="0123456789">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Địa chỉ chi tiết</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+                                        <input type="text" class="form-control" placeholder="Đường 123, xã Cành Lá, tỉnh Bình Thường">
+                                    </div> 
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Tỉnh/Thành phố</label>
+                                    <select class="form-select">
+                                        <option selected>Chọn tỉnh/thành</option>
+                                        <option value="1">Hà Nội</option>
+                                        <option value="2">TP. Hồ Chí Minh</option>
+                                        <option value="3">Cần Thơ</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label">Phường/Xã</label>
+                                    <select class="form-select">
+                                        <option selected>Chọn phường/xã</option>
+                                        <option value="1">Phường 1</option>
+                                        <option value="2">Phường 2</option>
+                                        <option value="3">Phường 3</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label">Phương thức thanh toán</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="payment" id="cod" checked>
+                                        <label class="form-check-label" for="cod">
+                                            Thanh toán khi nhận hàng (COD)
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="payment" id="bank">
+                                        <label class="form-check-label" for="bank">
+                                            Chuyển khoản ngân hàng
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-success w-100">
+                                    <i class="bi bi-credit-card"></i> Thanh toán
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="card p-4 shadow-sm">
+                            <h4 class="text-center mb-3"><i class="bi bi-bag"></i> Tóm tắt giỏ hàng</h4>
+                            <ul class="list-group mb-3">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    iPhone 15
+                                    <span>25.000.000đ</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Ốp lưng
+                                    <span>300.000đ</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Phí vận chuyển
+                                    <span>30.000đ</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Tổng cộng</strong>
+                                    <strong class="text-danger">25.330.000đ</strong>
+                                </li>
+                            </ul>
+                            <a href="./cart.html" class="btn btn-outline-primary w-100">
+                                <i class="bi bi-pencil-square"></i> Chỉnh sửa giỏ hàng
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <script src="./assets/js/bootstrap.bundle.js"></script>
+    <script src="./assets/js/component/component.js"></script>
+</body>

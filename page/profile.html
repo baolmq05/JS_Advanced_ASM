@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Store</title>
+    <link rel="icon" type="image/x-icon" href="./assets/images/Logo.png">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+
+<body class="d-flex flex-column justify-content-between">
+    <!-- HEADER -->
+    <div id="header"></div>
+
+    <!-- CONTENT -->
+    <main>
+        <main class="container mt-5">
+            <div class="row py-5">
+                <!-- Thông tin cá nhân -->
+                <div class="col-lg-4 mb-4">
+                    <div class="card shadow-sm text-center">
+                        <div class="card-body">
+                            <img src="./assets/images/avatar/avatar.png" class="rounded-circle mb-3" width="120"
+                                alt="Avatar">
+                            <h4 class="card-title mb-1 text-primary">Lê Minh Quốc Bảo</h4>
+                            <p class="text-muted mb-3">baolmq05@gmail.com</p>
+                            <a href="./profile-edit.html" class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-pencil"></i> Sửa hồ sơ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chi tiết và đơn hàng -->
+                <div class="col-lg-8">
+                    <!-- Thông tin tài khoản -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <i class="bi bi-person-badge"></i> Thông tin tài khoản
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Tên:</strong> Lê Minh Quốc Bảo</li>
+                            <li class="list-group-item"><strong>Email:</strong> baolmq05@gmail.com</li>
+                            <li class="list-group-item"><strong>Số điện thoại:</strong> 0792846735</li>
+                            <li class="list-group-item"><strong>Địa chỉ:</strong> Cần Thơ</li>
+                        </ul>
+                    </div>
+
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <i class="bi bi-cart-fill"></i> Đơn hàng gần đây
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group">
+                                <a href="./order-detail.html"
+                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    <div><strong>Đơn hàng #001</strong> - Samsung Galaxy S25</div>
+                                    <span class="badge bg-success rounded-pill">Hoàn tất</span>
+                                </a>
+
+                                <a href="./order-detail.html"
+                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    <div><strong>Đơn hàng #002</strong> - iPhone 16 Pro Max</div>
+                                    <span class="badge bg-warning text-dark rounded-pill">Đang giao</span>
+                                </a>
+
+                                <a href="./order-detail.html"
+                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    <div><strong>Đơn hàng #003</strong> - Xiaomi 15 Ultra</div>
+                                    <span class="badge bg-danger rounded-pill">Đã hủy</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+    </main>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <script src="./assets/js/bootstrap.bundle.js"></script>
+    <script src="./assets/js/component/component.js"></script>
+</body>
+
+</html>
