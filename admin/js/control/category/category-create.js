@@ -78,6 +78,14 @@ const getData = () => {
         return null;
     }
 
+    let nameDuplicate = categoryList.find(item => item.name == name);
+
+    if (nameDuplicate) {
+        const nameError = document.querySelector("#name_error");
+        nameError.innerText = "Danh mục đã trùng";
+        return null;
+    }
+
     if (parentID == "") {
         parentID = null;
     }

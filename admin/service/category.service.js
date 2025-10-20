@@ -35,7 +35,7 @@ export class Category {
                 let htmlItem = `<tr>
                                 <td>${index}</td>
                                 <td>${this.categoryList[i].name}</td>
-                                <td>${this.categoryList[i].parent_id == null ? "(Không có)" : ""}</td>
+                                <td>${this.categoryList[i].parent_id == null || this.categoryList[i].parent_id == "" ? "(Không có)" : ""}</td>
                                 <td>
                                     ${this.categoryList[i].status == 1 ? '<span class="badge rounded-pill p-2 bg-success">Hiện</span>' : '<span class="badge rounded-pill p-2 bg-secondary">Ẩn</span>'}
                                 </td>

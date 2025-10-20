@@ -2,7 +2,7 @@
   "categories": [
     {
       "name": "Điện thoại",
-      "parent_id": null,
+      "parent_id": "",
       "status": "1",
       "id": "1"
     },

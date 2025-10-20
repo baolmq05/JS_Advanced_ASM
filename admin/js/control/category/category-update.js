@@ -77,6 +77,7 @@ const printParentId = () => {
         let option = document.createElement("option");
         option.selected = true;
         option.innerHTML = "Không có";
+        option.value = "";
 
         console.log(option);
 
@@ -99,13 +100,27 @@ const printData = (nameE, statusE) => {
 };
 
 // Update
-const checkError = (name) => {
+const checkError = (name, id) => {
+    console.log(name.value);
+    let nameDuplicate = categoryList.find(item =>
+        item.name == name.value && item.id != id
+    );
+
+    const nameError = document.querySelector("#name_error");
+
     if (!name.value) {
         showError(name.value);
         return false;
+    } else {
+        if (nameDuplicate) {
+            console.log(nameDuplicate);
+            nameError.innerText = "Danh mục bị trùng";
+            return false;
+        } else {
+            nameError.innerText = "";
+            return true;
+        }
     }
-
-    return true;
 };
 
 const showError = (name) => {
@@ -128,10 +143,11 @@ const updateHandle = () => {
     const name = document.querySelector("#name");
     const parentId = document.querySelector("#parent_id");
     const status = document.querySelector("#status");
+    const id = categoryData.id;
 
     const updateBtn = document.querySelector("#update_btn");
     updateBtn.addEventListener("click", () => {
-        if (!checkError(name)) return;
+        if (!checkError(name, id)) return;
 
         let objectToUpdate = {
             name: name.value,
