@@ -42,3 +42,48 @@
     background-color: rgba(0, 0, 0, 0.5);
     pointer-events: none;
 }
+
+.preview_container {
+    display: none;
+}
+
+.image-box {
+    width: 100%;
+    height: 200px;
+}
+
+.image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+body {
+    position: relative;
+}
+
+body::after {
+    display: none;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    content: "";
+    width: 100vw;
+    height: 100%;
+    opacity: 0.5;
+}
+
+body.show::after {
+    display: block;
+}
+
+.spinner_container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}

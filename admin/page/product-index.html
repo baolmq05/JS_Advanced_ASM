@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile Store - Đơn hàng</title>
-    <link rel="icon" type="image/x-icon" href="../assets/images/Logo.png">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/Logo.png">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
         #side-bar {
@@ -39,7 +39,7 @@
                         <div class="dropdown">
                             <a class="text-dark text-decoration-none dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown">
-                                <img width="30" class="avatar-image" src="../assets/images/avatar/avatar.png" alt="">
+                                <img width="30" class="avatar-image" src="../../assets/images/avatar/avatar.png" alt="">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
@@ -66,14 +66,13 @@
                     <div class="row d-flex justify-content-between">
                         <div class="col-md-8">
                             <form action="" class="d-flex">
-                                <input class="form-control" type="text" placeholder="Tìm kiếm">
-                                <button class="btn btn-primary">Tìm</button>
+                                <input id="search_input" class="form-control" type="text" placeholder="Tìm kiếm">
                             </form>
 
                         </div>
                         <div class="col-md-4">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Trạng thái</option>
+                            <select id="status_change" class="form-select" aria-label="Default select example">
+                                <option value="" selected>Trạng thái</option>
                                 <option value="1">Hiện</option>
                                 <option value="0">Ẩn</option>
                             </select>
@@ -84,62 +83,38 @@
                             <table class="table table-bordered align-middle">
                                 <thead class="bg-dark text-white">
                                     <tr>
+                                        <th scope="col">STT</th>
                                         <th scope="col">Tên</th>
                                         <th scope="col">Giá</th>
                                         <th scope="col">Hình ảnh</th>
-                                        <th scope="col">Description</th>
+                                        <th scope="col">Mô tả</th>
                                         <th scope="col">Loại sản phẩm</th>
                                         <th scope="col">Trạng thái</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
-                                <tbody class="table-group-divider">
-                                    <tr>
-                                        <td>Samsung Galaxy S25</td>
-                                        <td>25.000.000đ</td>
-                                        <td>
-                                            <img width="50px" src="../assets/images/product/samsung_galaxy_s24_fe.jpg"
-                                                alt="">
-                                        </td>
-                                        <td>Đây là Samsung Galaxy S25</td>
-                                        <td>Android</td>
-                                        <td>
-                                            <span class="badge rounded-pill p-2 bg-secondary">
-                                                Ẩn
-                                            </span>
-                                        </td>
-                                        <td class="d-flex gap-1">
-                                            <a href="./product-edit.html" class="btn btn-outline-warning">Sửa</a>
-                                            <form class="" action="" onsubmit="confirm('Chắc chắn xóa?')">
-                                                <button type="submit" class="btn btn-outline-danger">Xóa</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Samsung Galaxy S25</td>
-                                        <td>25.000.000đ</td>
-                                        <td>
-                                            <img width="50px" src="../assets/images/product/samsung_galaxy_s24_fe.jpg"
-                                                alt="">
-                                        </td>
-                                        <td>Đây là Samsung Galaxy S25</td>
-                                        <td>Android</td>
-                                        <td>
-                                            <span class="badge rounded-pill p-2 bg-secondary">
-                                                Ẩn
-                                            </span>
-                                        </td>
-                                        <td class="d-flex gap-1">
-                                            <a href="./product-edit.html" class="btn btn-outline-warning">Sửa</a>
-                                            <form class="" action="" onsubmit="confirm('Chắc chắn xóa?')">
-                                                <button type="submit" class="btn btn-outline-danger">Xóa</button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                <tbody class="table-group-divider" id="product-list">
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete -->
+    <div id="modal-delete" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="modal_title" class="modal-title">Xóa?</h5>
+                    <button type="button" id="close_modal_delete" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button id="delete-accept-btn" type="button" class="btn btn-danger">Xác nhận</button>
                 </div>
             </div>
         </div>
@@ -205,8 +180,10 @@
         </div>
     </div>
 
-    <script src="./js/bootstrap.bundle.min.js"></script>
-    <script src="./js/component/component.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/boostrap/bootstrap.bundle.min.js"></script>
+    <script src="../js/component/component.js"></script>
+    <script type="module" src="../js/control/product/product-index.js"></script>
 </body>
 
 </html>

@@ -56,10 +56,12 @@
       "image": "",
       "description": "Điện thoại flagship mới nhất của Apple với chip A17 Pro và camera 48MP.",
       "category_id": 4,
+      "status": 0,
+      "base_price": 27000000,
       "product_variants": [
         {
           "id": "1",
-          "variant_name": "iPhone 15 Pro Max 256GB - Titan Đen",
+          "variant_name": "Iphone 15 Pro Max 256GB - Titan Đen",
           "price": 27990000,
           "quantity": 8,
           "image": "",
@@ -125,6 +127,8 @@
       "image": "",
       "description": "Thiết kế hiện đại, hiệu năng mạnh mẽ, phù hợp cho người dùng yêu thích hệ sinh thái Apple.",
       "category_id": 4,
+      "status": 1,
+      "base_price": 27000000,
       "product_variants": [
         {
           "id": "6",
@@ -224,6 +228,8 @@
       "image": "",
       "description": "Mẫu điện thoại cao cấp của Samsung với bút S-Pen và camera zoom 100x.",
       "category_id": 5,
+      "status": 1,
+      "base_price": 27000000,
       "product_variants": [
         {
           "id": "15",
@@ -293,6 +299,8 @@
       "image": "",
       "description": "Điện thoại tầm trung có màn hình Super AMOLED và pin 5000mAh.",
       "category_id": 5,
+      "status": 1,
+      "base_price": 27000000,
       "product_variants": [
         {
           "id": "21",
@@ -332,6 +340,8 @@
       "image": "",
       "description": "Giá rẻ, pin trâu, hiệu năng ổn định, rất phù hợp cho sinh viên.",
       "category_id": 6,
+      "status": 1,
+      "base_price": 27000000,
       "product_variants": [
         {
           "id": "24",
@@ -362,6 +372,8 @@
       "image": "",
       "description": "Tai nghe không dây chất lượng cao, âm thanh trong trẻo và pin lâu.",
       "category_id": 8,
+      "status": 1,
+      "base_price": 27000000,
       "product_variants": [
         {
           "id": "26",
@@ -391,6 +403,8 @@
       "image": "",
       "description": "Ốp silicon trong suốt, bảo vệ chống trầy xước cho iPhone 15.",
       "category_id": 7,
+      "status": 1,
+      "base_price": 27000000,
       "product_variants": [
         {
           "id": "28",
@@ -410,6 +424,8 @@
       "image": "",
       "description": "Cáp sạc nhanh tương thích với nhiều thiết bị Android và iPad.",
       "category_id": 9,
+      "status": 1,
+      "base_price": 27000000,
       "product_variants": [
         {
           "id": "29",
@@ -429,6 +445,8 @@
       "image": "",
       "description": "Máy tính bảng mạnh mẽ với chip M2, hỗ trợ Apple Pencil 2.",
       "category_id": 10,
+      "status": 1,
+      "base_price": 27000000,
       "product_variants": [
         {
           "id": "30",

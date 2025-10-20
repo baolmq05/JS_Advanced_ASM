@@ -39,7 +39,6 @@ const statusEventHandle = () => {
 
 const searchEventHandle = () => {
     let searchInput = document.querySelector("#search_input");
-    const searchBtn = document.querySelector("#search_btn");
 
     searchInput.addEventListener("keyup", (event) => {
         if (searchInput.value == "") {
