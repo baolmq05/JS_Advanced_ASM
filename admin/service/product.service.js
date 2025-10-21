@@ -4,16 +4,20 @@ import { ENDPOINT, STATUS } from "../../config/config.js";
 
 export class Product {
     productList = [];
+    productOne = [];
 
     getProductList() {
         return this.productList;
+    }
+
+    getProductOne() {
+        return this.productOne;
     }
 
     async productLoadData() {
         await axios.get(API_URL + ENDPOINT.PRODUCT).then(response => {
             if (response.status === STATUS.OK) {
                 this.productList = response.data;
-                console.log(this.productList);
             }
         }).catch(error => console.error(error));
     }
@@ -37,7 +41,7 @@ export class Product {
                         ${item.status == 1 ? '<span class="badge rounded-pill p-2 bg-success">Hiện</span>' : '<span class="badge rounded-pill p-2 bg-secondary">Ẩn</span>'}
                     </td>
                     <td class="d-flex gap-1">
-                    <a href="./product-edit.html" class="btn btn-outline-primary">Xem</a>
+                    <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem</a>
                     <a href="./product-edit.html" class="btn btn-outline-warning">Sửa</a>
                     <form class="" action="">
                         <button type="button" class="btn btn-outline-danger">Xóa</button>
@@ -56,7 +60,6 @@ export class Product {
         const filtered = this.productList.filter(pro =>
             pro.name.toLowerCase().includes(searchValue.toLowerCase())
         );
-        console.log(filtered);
 
         let htmlList = ``;
 
@@ -79,7 +82,7 @@ export class Product {
                             ${item.status == 1 ? '<span class="badge rounded-pill p-2 bg-success">Hiện</span>' : '<span class="badge rounded-pill p-2 bg-secondary">Ẩn</span>'}
                         </td>
                         <td class="d-flex gap-1">
-                        <a href="./product-edit.html" class="btn btn-outline-primary">Xem</a>
+                        <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem</a>
                         <a href="./product-edit.html" class="btn btn-outline-warning">Sửa</a>
                         <form class="" action="">
                             <button type="button" class="btn btn-outline-danger">Xóa</button>
@@ -122,7 +125,7 @@ export class Product {
                         ${item.status == 1 ? '<span class="badge rounded-pill p-2 bg-success">Hiện</span>' : '<span class="badge rounded-pill p-2 bg-secondary">Ẩn</span>'}
                     </td>
                     <td class="d-flex gap-1">
-                    <a href="./product-edit.html" class="btn btn-outline-primary">Xem</a>
+                    <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem</a>
                     <a href="./product-edit.html" class="btn btn-outline-warning">Sửa</a>
                     <form class="" action="">
                         <button type="button" class="btn btn-outline-danger">Xóa</button>
@@ -172,13 +175,13 @@ export class Product {
     //     }).catch(error => console.error(error));
     // }
 
-    // async categoryGetOne(id) {
-    //     await axios.get(API_URL + ENDPOINT.CATEGORY + "/" + id).then(response => {
-    //         if (response.status == STATUS.OK) {
-    //             this.categoryOne = response.data;
-    //         }
-    //     }).catch(error => console.error(error));
-    // }
+    async productDetailLoad(id) {
+        await axios.get(API_URL + ENDPOINT.PRODUCT + "/" + id).then(response => {
+            if (response.status == STATUS.OK) {
+                this.productOne = response.data;
+            }
+        }).catch(error => console.error(error));
+    }
 
     // categoryUpdate(id, objectToUpdate) {
     //     axios.put(API_URL + ENDPOINT.CATEGORY + "/" + id, objectToUpdate).then(response => {

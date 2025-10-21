@@ -469,6 +469,16 @@
           "rom": "128GB"
         }
       ]
+    },
+    {
+      "id": "22e1",
+      "name": "Demo ",
+      "image": "https://res.cloudinary.com/dztcimwoe/image/upload/v1761010886/QuocBaoImage/bv0qlly1qjorbijpnkde.jpg",
+      "description": "<p>Hahaha</p>\n",
+      "category_id": "5",
+      "status": 1,
+      "base_price": "1200000",
+      "product_variant": []
     }
   ],
   "users": [
