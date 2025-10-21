@@ -4,18 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Store - Đơn hàng</title>
+    <title>Mobile Store</title>
     <link rel="icon" type="image/x-icon" href="../../assets/images/Logo.png">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
         #side-bar {
-            min-height: 100vh;
+            min-height: 100%;
         }
     </style>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
+    <!-- ALERT -->
+    <div id="alert_danger" class="alert alert-danger" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <div>
+            Có lỗi xảy ra khi tạo category!
+        </div>
+    </div>
+
+    <div id="alert_success" class="alert alert-success" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <div>
+            Thêm thành công
+        </div>
+    </div>
+
     <div class="container-fluid">
         <div class="row">
             <!-- SIDEBAR (desktop) -->
@@ -184,6 +200,7 @@
     <script src="../js/boostrap/bootstrap.bundle.min.js"></script>
     <script src="../js/component/component.js"></script>
     <script type="module" src="../js/control/product/product-index.js"></script>
+    <script type="module" src="../js/control/product/product-delete.js"></script>
 </body>
 
 </html>

@@ -35,7 +35,7 @@
     <div id="alert_success" class="alert alert-success" role="alert">
         <i class="bi bi-exclamation-triangle-fill me-2"></i>
         <div>
-            Thêm thành công
+            Xóa thành công
         </div>
     </div>
 
@@ -111,6 +111,368 @@
                             </div>
                         </form>
                     </div>
+
+                    <div class="col-12 d-flex justify-content-between align-items-center">
+                        <h3 class="my-3">Biến thể</h3>
+                        <button id="create_btn_modal" class="btn btn-primary">Thêm biến thể</button>
+                    </div>
+
+                    <div class="table-responsive" id="variant">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tên</th>
+                                    <th scope="col">Giá</th>
+                                    <th scope="col">Số lượng</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="variant_list">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL VARIANT DETAIL -->
+    <div id="variant_detail_modal" style="background-color: rgba(0, 0, 0, 0.5);" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content shadow-lg border-0 rounded-4">
+                <div class="modal-header bg-dark text-white rounded-top-4 border-0">
+                    <h5 id="modal_title" class="modal-title fw-bold">Chi tiết biến thể</h5>
+                    <button type="button" id="close_modal_detail" class="btn-close btn-close-white"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body p-4">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-header bg-light fw-semibold">Thông tin chung</div>
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+                                        <li
+                                            class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                            <label class="form-label mb-0 fw-semibold">Tên biến thể:</label>
+                                            <input type="text" name="variant_name" id="variant_name"
+                                                class="form-control form-control-sm w-50 text-end fw-bold"
+                                                value="Tên Sản Phẩm" readonly>
+                                        </li>
+                                        <li
+                                            class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                            <label class="form-label mb-0 fw-semibold">Giá:</label>
+                                            <input type="text" name="variant_price" id="variant_price"
+                                                class="form-control form-control-sm w-50 text-end fw-bold" value=""
+                                                readonly>
+                                        </li>
+                                        <li
+                                            class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                            <label class="form-label mb-0 fw-semibold">Số lượng tồn:</label>
+                                            <input type="text" name="variant_quantity" id="variant_quantity"
+                                                class="form-control form-control-sm w-50 text-end fw-bold text-success"
+                                                value="150" readonly>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-header bg-light fw-semibold">Thuộc tính & Hình ảnh</div>
+                                <div class="card-body">
+
+                                    <div class="text-center mb-3">
+                                        <label class="form-label fw-semibold">Hình ảnh:</label><br>
+                                        <img id="variant_image"
+                                            src="https://i.pinimg.com/736x/90/4c/84/904c840b4b97764e0426fcbdb8a9b805.jpg"
+                                            width="150px" height="150px" class="img-thumbnail rounded-3 shadow-sm"
+                                            alt="Hình ảnh biến thể">
+                                    </div>
+
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <label class="form-label mb-0 fw-semibold">Màu sắc:</label>
+                                            <div class="d-flex align-items-center">
+                                                <span id="variant_color" class="badge rounded-pill bg-primary me-2">Màu
+                                                    đỏ</span>
+                                                <div id="variant_color_code"
+                                                    style="width: 25px; height: 25px; background-color: red; border: 2px solid #ccc; display: inline-block; border-radius: 50%;">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <label class="form-label mb-0 fw-semibold">Bộ nhớ trong:</label>
+                                            <span id="variant_rom" class="badge rounded-pill bg-danger">1TB</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <label class="form-label mb-0 fw-semibold">Ram:</label>
+                                            <span id="variant_ram" class="badge rounded-pill bg-danger"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="modal-footer justify-content-end border-top-0 p-3">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL VARIANT CREATE =================== -->
+    <div id="modal-create-variant" style="background-color: rgba(0, 0, 0, 0.5);" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content shadow-lg border-0 rounded-4">
+                <div class="modal-header bg-dark text-white rounded-top-4 border-0">
+                    <h5 id="modal_create_title" class="modal-title fw-bold">Tạo Biến Thể Mới</h5>
+                    <button type="button" id="close_modal_create" class="btn-close btn-close-white"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body p-4">
+                    <form id="create_variant_form">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <div class="card-header bg-light fw-semibold">Thông tin cơ bản</div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="new_variant_name" class="form-label fw-semibold">Tên biến thể
+                                            </label>
+                                            <input type="text" id="new_variant_name" name="new_variant_name"
+                                                class="form-control" placeholder="Ví dụ: iPhone 15 Pro Max - Xanh"
+                                                required>
+                                            <small id="variant_name_error" class="text-danger"></small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="new_variant_price" class="form-label fw-semibold">Giá bán
+                                                (*)</label>
+                                            <input type="number" id="new_variant_price" name="new_variant_price"
+                                                class="form-control" placeholder="Ví dụ: 25000000" required min="0">
+                                            <small id="variant_price_error" class="text-danger"></small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="new_variant_quantity" class="form-label fw-semibold">Số lượng
+                                                tồn
+                                                (*)</label>
+                                            <input type="number" id="new_variant_quantity" name="new_variant_quantity"
+                                                class="form-control" placeholder="Ví dụ: 100" required min="0">
+                                            <small id="variant_quantity_error" class="text-danger"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <div class="card-header bg-light fw-semibold">Thuộc tính & Hình ảnh</div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="new_variant_color_name" class="form-label fw-semibold">Mã màu
+                                                sắc / Tên màu</label>
+                                            <div class="input-group">
+                                                <input type="color" id="new_variant_color_code"
+                                                    name="new_variant_color_code"
+                                                    class="form-control form-control-color" value="#FFFFFF"
+                                                    title="Chọn màu">
+
+                                                <input type="text" id="new_variant_color_name"
+                                                    name="new_variant_color_name" class="form-control"
+                                                    placeholder="Ví dụ: Đỏ">
+                                            </div>
+                                            <small id="variant_color_error" class="text-danger"></small>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="new_variant_rom" class="form-label fw-semibold">Bộ nhớ
+                                                trong</label>
+                                            <select name="" id="new_variant_rom" class="form-select">
+                                                <option value="" disabled selected>--Vui lòng chọn--</option>
+                                                <option value="64GB">64GB</option>
+                                                <option value="128GB">128GB</option>
+                                                <option value="256GB">256GB</option>
+                                                <option value="512GB">512G</option>
+                                                <option value="1TB">1TB</option>
+                                            </select>
+                                            <small id="variant_rom_error" class="text-danger"></small>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="new_variant_ram" class="form-label fw-semibold">Ram</label>
+                                            <select name="" id="new_variant_ram" class="form-select">
+                                                <option value="" disabled selected>--Vui lòng chọn--</option>
+                                                <option value="4GB">4GB</option>
+                                                <option value="6GB">6GB</option>
+                                                <option value="8GB">8GB</option>
+                                                <option value="12GB">12GB</option>
+                                                <option value="16GB">16GB</option>
+                                                <option value="24GB">24GB</option>
+                                            </select>
+                                            <small id="variant_ram_error" class="text-danger"></small>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="#image_file" class="form-label fw-semibold">Tải ảnh
+                                                biến thể</label>
+                                            <input type="file" id="image_file" name="#image_file" class="form-control">
+                                            <small class="text-danger" id="variant_image_error"></small>
+                                            <div class="mt-2 text-center preview_container">
+                                                <!-- <img id="new_variant_image_preview"
+                                                    src="https://via.placeholder.com/150x150.png?text=Preview"
+                                                    width="100px" height="100px" class="img-thumbnail rounded-3"
+                                                    alt="Ảnh Preview"> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer justify-content-between border-top-0 p-3">
+                    <button type="button" id="create_btn_submit" form="create_variant_form"
+                        class="btn btn-success fw-bold" id="save_new_variant">
+                        <i class="fas fa-save me-1"></i> Lưu biến thể
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL VARIANT UPDATE =================== -->
+    <div id="modal-update-variant" style="background-color: rgba(0, 0, 0, 0.5);" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content shadow-lg border-0 rounded-4">
+                <div class="modal-header bg-dark text-white rounded-top-4 border-0">
+                    <h5 id="modal_update_title" class="modal-title fw-bold">Chỉnh Sửa Biến Thể</h5>
+                    <button type="button" id="close_modal_update" class="btn-close btn-close-white"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body p-4">
+                    <form id="updatee_variant_form">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <div class="card-header bg-light fw-semibold">Thông tin cơ bản</div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="variant_name_edit" class="form-label fw-semibold">Tên biến thể
+                                            </label>
+                                            <input type="text" id="variant_name_edit" name="variant_name_edit"
+                                                class="form-control" placeholder="Ví dụ: iPhone 15 Pro Max - Xanh">
+                                            <small id="variant_name_error" class="text-danger"></small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="variant_price_edit" class="form-label fw-semibold">Giá bán
+                                                (*)</label>
+                                            <input type="number" id="variant_price_edit" name="variant_price_edit"
+                                                class="form-control" placeholder="Ví dụ: 25000000" min="0">
+                                            <small id="variant_price_error" class="text-danger"></small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="variant_quantity_edit" class="form-label fw-semibold">Số lượng
+                                                tồn
+                                                (*)</label>
+                                            <input type="number" id="variant_quantity_edit" name="variant_quantity_edit"
+                                                class="form-control" placeholder="Ví dụ: 100" min="0">
+                                            <small id="variant_quantity_error" class="text-danger"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <div class="card-header bg-light fw-semibold">Thuộc tính & Hình ảnh</div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="variant_color_name_edit" class="form-label fw-semibold">Mã màu
+                                                sắc / Tên màu</label>
+                                            <div class="input-group">
+                                                <input type="color" id="variant_color_code_edit"
+                                                    name="new_variant_color_code"
+                                                    class="form-control form-control-color" value="#FFFFFF"
+                                                    title="Chọn màu">
+
+                                                <input type="text" id="variant_color_name_edit"
+                                                    name="variant_color_name_edit" class="form-control"
+                                                    placeholder="Ví dụ: Đỏ">
+                                            </div>
+                                            <small id="variant_color_error" class="text-danger"></small>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="variant_rom_edit" class="form-label fw-semibold">Bộ nhớ
+                                                trong</label>
+                                            <select name="" id="variant_rom_edit" class="form-select">
+                                                <option value="" disabled selected>--Vui lòng chọn--</option>
+                                                <option value="64GB">64GB</option>
+                                                <option value="128GB">128GB</option>
+                                                <option value="256GB">256GB</option>
+                                                <option value="512GB">512G</option>
+                                                <option value="1TB">1TB</option>
+                                            </select>
+                                            <small id="variant_rom_error" class="text-danger"></small>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="variant_ram_edit" class="form-label fw-semibold">Ram</label>
+                                            <select name="" id="variant_ram_edit" class="form-select">
+                                                <option value="" disabled selected>--Vui lòng chọn--</option>
+                                                <option value="4GB">4GB</option>
+                                                <option value="6GB">6GB</option>
+                                                <option value="8GB">8GB</option>
+                                                <option value="12GB">12GB</option>
+                                                <option value="16GB">16GB</option>
+                                                <option value="24GB">24GB</option>
+                                            </select>
+                                            <small id="variant_ram_error" class="text-danger"></small>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="image_file2" class="form-label fw-semibold">Tải ảnh
+                                                biến thể</label>
+                                            <input type="file" id="image_file2" name="#image_file" class="form-control">
+                                            <small class="text-danger" id="variant_image_error"></small>
+                                            <div class="mt-2 text-center preview_container">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer justify-content-between border-top-0 p-3">
+                    <button type="button" id="update_btn_submit" form="create_variant_form"
+                        class="btn btn-success fw-bold" id="save_new_variant">
+                        <i class="fas fa-save me-1"></i> Cập nhật biến thể
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete -->
+    <div id="modal-delete" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="modal_title" class="modal-title">Xóa?</h5>
+                    <button type="button" id="close_modal_delete" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button id="delete-accept-btn" type="button" class="btn btn-danger">Xác nhận</button>
                 </div>
             </div>
         </div>
@@ -184,4 +546,8 @@
         // CKEDITOR.replace('editor');
     </script>
     <script type="module" src="../js/control/product/product-detail.js"></script>
+    <script type="module" src="../js/control/product/product_variant/product-variant-detail.js"></script>
+    <script type="module" src="../js/control/product/product_variant/product-variant-create.js"></script>
+    <script type="module" src="../js/control/product/product_variant/product-variant-delete.js"></script>
+    <script type="module" src="../js/control/product/product_variant/product-variant-update.js"></script>
 </body>

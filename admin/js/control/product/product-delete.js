@@ -1,4 +1,5 @@
-import { Category } from "../../../service/category.service.js";
+// import { Category } from "../../../service/category.service.js";
+import { Product } from "../../../service/product.service.js";
 
 // Session (Alert)
 const turnOffAlert = (alertElement, sessionName) => {
@@ -8,71 +9,53 @@ const turnOffAlert = (alertElement, sessionName) => {
     }, 3000);
 };
 
-if (sessionStorage.getItem("alert_delete_success")) {
-    let alertSuccessValue = sessionStorage.getItem("alert_delete_success");
+if (sessionStorage.getItem("delete_success")) {
+    let alertSuccessValue = sessionStorage.getItem("delete_success");
     let alertElement = document.querySelector("#alert_success");
     alertElement.style.display = "flex";
     alertElement.lastElementChild.innerText = alertSuccessValue;
 
-    turnOffAlert(alertElement, "alert_delete_success");
+    turnOffAlert(alertElement, "delete_success");
 }
 
-if (sessionStorage.getItem("alert_delete_danger")) {
-    let alertDangerValue = sessionStorage.getItem("alert_delete_danger");
+if (sessionStorage.getItem("delete_danger")) {
+    let alertDangerValue = sessionStorage.getItem("delete_danger");
     let alertElement = document.querySelector("#alert_danger");
     alertElement.style.display = "flex";
     alertElement.lastElementChild.innerText = alertDangerValue;
 
-    turnOffAlert(alertElement, "alert_delete_danger");
+    turnOffAlert(alertElement, "delete_danger");
 }
 // -----------------------------------------------------------------------------------------------
-const category = new Category();
-let categoryList;
+const product = new Product();
+let productList;
 
 
-const deleteAction = (category_id, hasChild) => {
-    if (hasChild) {
-        categoryList.forEach(item => {
-            if (item.parent_id == category_id) {
-                let objectToUpdate = {
-                    name: item.name,
-                    parent_id: null,
-                    status: item.status,
-                }
-                category.categoryUpdate(item.id, objectToUpdate);
-            }
-        });
-
-        category.categoryDelete(category_id);
-    } else {
-        category.categoryDelete(category_id);
-    }
+const deleteAction = (productId) => {
+    product.productDelete(productId);
 };
 
 const turnOnModal = () => {
     document.body.classList.add("show");
     const deleteModal = document.querySelector("#modal-delete");
     deleteModal.style.display = "block";
-
 };
 
-const checkDelete = (id) => {
+const checkDelete = (productId) => {
     const modalTitle = document.querySelector("#modal_title");
     const deleteAcceptBtn = document.querySelector("#delete-accept-btn");
-    let hasChild = categoryList.find((item) => item.parent_id == id);
+    let productItem = productList.find((item) => item.id == productId);
 
-    console.log(hasChild);
-
-    if (hasChild) {
+    if (productItem.product_variants.length > 0) {
         turnOnModal();
-        modalTitle.innerText = "Có danh mục con. Chắc chắn xóa?";
+        modalTitle.innerText = "Có biến thể. Chắc chắn xóa";
     } else {
         turnOnModal();
         modalTitle.innerText = "Chắc chắn xóa?";
     }
 
     deleteAcceptBtn.addEventListener("click", () => {
-        deleteAction(id, hasChild);
+        deleteAction(productId);
     });
 };
 
@@ -87,14 +70,16 @@ const turnOffModal = () => {
 
 turnOffModal();
 
-window.deleteCategoryHandle = (category_id) => {
-    checkDelete(category_id);
+window.deleteProductHandle = (productId) => {
+    checkDelete(productId);
     turnOnModal();
 }
 
-async function categoryLoading() {
-    await category.categoryLoadData();
-    categoryList = category.getCategoryList();
+async function productLoading() {
+    await product.productLoadData();
+    productList = product.getProductList();
+
+    console.log(productList);
 }
 
-categoryLoading();
+productLoading();

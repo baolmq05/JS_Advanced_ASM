@@ -139,7 +139,7 @@ export class Category {
             <td>
                 <a href="./category-detail.html?${cat.id}" class="btn btn-outline-primary">Xem</a>
                 <a href="./category-edit.html?${cat.id}" class="btn btn-outline-warning">Sửa</a>
-                <button type="submit" onclick="deleteCategoryHandle('${cat.id}')" class="btn btn-outline-danger">Xóa</button>
+                <button type="button" onclick="deleteCategoryHandle('${cat.id}')" class="btn btn-outline-danger">Xóa</button>
             </td>
         </tr>`;
         });

@@ -7,7 +7,7 @@ let categoryList;
 let productList;
 let productData;
 
-// Get URL To Get ID Cate
+// Get URL To Get ID PRODUCT
 const query = window.location.search;
 let productId = query.substring(1);
 
@@ -26,7 +26,11 @@ const getElement = () => {
 
 const findCategoryName = (categoryId) => {
     let cate = categoryList.find((item) => item.id == categoryId);
-    return cate.name;
+    if (cate) {
+        return cate.name;
+    } else {
+        return "Chưa phân loại";
+    }
 };
 
 const printData = (nameE, imageE, descriptionE, categoryE, statusE, basePriceE) => {
@@ -51,9 +55,7 @@ async function productLoading() {
     await product.productDetailLoad(productId);
     productData = product.getProductOne();
 
-    console.log(categoryList);
-    console.log(productList);
-    console.log(productData);
+    product.productRenderVariant(productData);
 
     getElement();
 }

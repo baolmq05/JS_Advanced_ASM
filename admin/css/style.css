@@ -25,24 +25,6 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.overlay {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.overlay::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    pointer-events: none;
-}
-
 .preview_container {
     display: none;
 }
@@ -63,15 +45,15 @@ body {
 }
 
 body::after {
+    content: "";
     display: none;
     top: 0;
+    position: absolute;
     bottom: 0;
     right: 0;
-    position: absolute;
-    content: "";
     width: 100vw;
     height: 100%;
-    opacity: 0.5;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 body.show::after {

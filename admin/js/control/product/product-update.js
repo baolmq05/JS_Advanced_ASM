@@ -15,30 +15,52 @@ const turnOffAlert = (alertElement, sessionName) => {
     }, 3000);
 };
 
-if (sessionStorage.getItem("create_success")) {
-    let alertSuccessValue = sessionStorage.getItem("create_success");
+if (sessionStorage.getItem("update_success")) {
+    let alertSuccessValue = sessionStorage.getItem("update_success");
     let alertElement = document.querySelector("#alert_success");
     alertElement.style.display = "flex";
     alertElement.lastElementChild.innerText = alertSuccessValue;
 
-    turnOffAlert(alertElement, "create_success");
+    turnOffAlert(alertElement, "update_success");
 }
 
-if (sessionStorage.getItem("create_danger")) {
-    let alertDangerValue = sessionStorage.getItem("create_danger");
+if (sessionStorage.getItem("update_danger")) {
+    let alertDangerValue = sessionStorage.getItem("update_danger");
     let alertElement = document.querySelector("#alert_danger");
     alertElement.style.display = "flex";
     alertElement.lastElementChild.innerText = alertDangerValue;
 
-    turnOffAlert(alertElement, "create_danger");
+    turnOffAlert(alertElement, "update_danger");
 }
 
 // ---------------------------------------------------------------------------------------------------
 
+// Get URL To Get ID Cate
+const query = window.location.search;
+let productId = query.substring(1);
+
 const category = new Category();
 const product = new Product();
 let productList = [];
+let productData = [];
 let categoryList = [];
+
+const renderData = () => {
+    let name = document.querySelector("#name");
+    let basePrice = document.querySelector("#base_price");
+    let status = document.querySelector("#status").children;
+
+    name.value = productData.name;
+    basePrice.value = productData.base_price;
+    CKEDITOR.instances.editor.setData(productData.description);
+
+    Array.from(status).forEach(item => {
+        console.log(item);
+        if (item.value == productData.status) {
+            item.selected = true;
+        }
+    });
+};
 
 const renderCategorySelect = () => {
     const categorySelectE = document.querySelector("#category");
@@ -50,6 +72,10 @@ const renderCategorySelect = () => {
             let newOption = document.createElement("option");
             newOption.value = item.id;
             newOption.innerText = item.name;
+
+            if (item.id == productData.category_id) {
+                newOption.selected = true;
+            }
 
             categorySelectE.appendChild(newOption);
         }
@@ -174,22 +200,17 @@ async function uploadImage(imageFile) {
     previewContainer.style.display = 'none';
 }
 
-// // Create
+// // Update
 
-const checkCanCreate = (nameValue, imageValue, basePriceValue, categoryValue) => {
+const checkCanUpdate = (nameValue, imageValue, basePriceValue, categoryValue) => {
     let isError = false;
     const nameError = document.querySelector("#name_error");
-    const imageError = document.querySelector("#image_error");
     const basePriceError = document.querySelector("#base_price_error");
     const categoryError = document.querySelector("#category_error");
 
     const ERRORTEXT = "Không được bỏ trống";
 
     if (!nameValue) {
-        isError = true;
-    }
-
-    if (!imageValue) {
         isError = true;
     }
 
@@ -206,12 +227,6 @@ const checkCanCreate = (nameValue, imageValue, basePriceValue, categoryValue) =>
             nameError.innerText = ERRORTEXT;
         } else {
             nameError.innerText = "";
-        }
-
-        if (!imageValue) {
-            imageError.innerText = ERRORTEXT;
-        } else {
-            imageError.innerText = "";
         }
 
         if (!basePriceValue) {
@@ -238,14 +253,15 @@ const getData = () => {
     let descriptionValue = CKEDITOR.instances.editor.getData();;
     let category = document.querySelector("#category");
     let imageTemp = document.querySelector("#image_file");
+    let status = document.querySelector("#status");
 
-    let canCreate = checkCanCreate(name.value, imageTemp.value, basePrice.value, category.value);
+    let canUpdate = checkCanUpdate(name.value, imageTemp.value, basePrice.value, category.value);
 
-    if (!canCreate) {
+    if (!canUpdate) {
         return null;
     }
 
-    let nameDuplicate = productList.find(item => item.name == name.value);
+    let nameDuplicate = productList.find(item => item.name == name.value && item.id != productId);
 
     if (nameDuplicate) {
         const nameError = document.querySelector("#name_error");
@@ -253,12 +269,22 @@ const getData = () => {
         return null;
     }
 
+    let imageValue;
+
+    if (imageTemp.value == "") {
+        imageValue = productData.image;
+    } else {
+        imageValue = imageTemp.files[0]; //FILE NOT VALUE
+    }
+
     let productObj = {
         name: name.value,
-        image_temp: imageTemp.files[0], //FILE NOT VALUE
+        image_temp: imageValue, //FILE NOT VALUE
         description: descriptionValue,
         category_id: category.value,
+        status: status.value,
         base_price: basePrice.value,
+        product_variants: productData.product_variants
     }
 
     return productObj;
@@ -270,17 +296,23 @@ async function createAction() {
 
     let imageFile = objectToCreateTemp.image_temp;
 
-    await uploadImage(imageFile);
+    if (imageFile != "" && imageFile != null) {
+        await uploadImage(imageFile);
+    } else {
+        imageToCreate = objectToCreateTemp.image_temp;
+    }
 
     let objectToCreate = {
         name: objectToCreateTemp.name,
         image: imageToCreate, //RESULT IMAGE
         description: objectToCreateTemp.description,
         category_id: objectToCreateTemp.category_id,
+        status: objectToCreateTemp.status,
         base_price: objectToCreateTemp.base_price,
+        product_variants: objectToCreateTemp.product_variants
     }
 
-    product.productCreate(...Object.values(objectToCreate));
+    product.productUpdate(productId, objectToCreate);
 };
 
 // ACTION ----------------------------------
@@ -289,8 +321,12 @@ async function productLoading() {
     categoryList = category.getCategoryList();
     await product.productLoadData();
     productList = product.getProductList();
+    await product.productDetailLoad(productId);
+    productData = product.getProductOne();
 
     renderCategorySelect();
+
+    renderData();
 
     selectImageEventHandle();
 

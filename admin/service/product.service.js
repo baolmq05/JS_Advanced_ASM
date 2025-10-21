@@ -42,10 +42,8 @@ export class Product {
                     </td>
                     <td class="d-flex gap-1">
                     <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem</a>
-                    <a href="./product-edit.html" class="btn btn-outline-warning">Sửa</a>
-                    <form class="" action="">
-                        <button type="button" class="btn btn-outline-danger">Xóa</button>
-                    </form>
+                    <a href="./product-edit.html?${item.id}" class="btn btn-outline-warning">Sửa</a>
+                    <button type="button" onclick="deleteProductHandle('${item.id}')" class="btn btn-outline-danger">Xóa</button>
                     </td>
                 </tr>
             `;
@@ -85,7 +83,7 @@ export class Product {
                         <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem</a>
                         <a href="./product-edit.html" class="btn btn-outline-warning">Sửa</a>
                         <form class="" action="">
-                            <button type="button" class="btn btn-outline-danger">Xóa</button>
+                            <button type="submit" onclick="" class="btn btn-outline-danger">Xóa</button>
                         </form>
                         </td>
                     </tr>
@@ -128,7 +126,7 @@ export class Product {
                     <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem</a>
                     <a href="./product-edit.html" class="btn btn-outline-warning">Sửa</a>
                     <form class="" action="">
-                        <button type="button" class="btn btn-outline-danger">Xóa</button>
+                        <button type="submit" onclick="" class="btn btn-outline-danger">Xóa</button>
                     </form>
                     </td>
                 </tr>
@@ -148,7 +146,7 @@ export class Product {
             category_id: category_id,
             status: 1,
             base_price: base_price,
-            product_variant: [],
+            product_variants: [],
         };
 
         console.log(objectToCreate);
@@ -165,15 +163,15 @@ export class Product {
         }).catch(error => console.error(error));
     }
 
-    // categoryDelete(id) {
-    //     axios.delete(API_URL + ENDPOINT.CATEGORY + "/" + id).then(response => {
-    //         if (response.status == STATUS.DELETED) {
-    //             sessionStorage.setItem("alert_delete_success", "Xóa thành công");
-    //         } else {
-    //             sessionStorage.setItem("alert_delete_danger", "Xóa thất bại. Lỗi hệ thống");
-    //         }
-    //     }).catch(error => console.error(error));
-    // }
+    productDelete(id) {
+        axios.delete(API_URL + ENDPOINT.PRODUCT + "/" + id).then(response => {
+            if (response.status == STATUS.DELETED) {
+                sessionStorage.setItem("delete_success", "Xóa thành công");
+            } else {
+                sessionStorage.setItem("delete_danger", "Xóa thất bại. Lỗi hệ thống");
+            }
+        }).catch(error => console.error(error));
+    }
 
     async productDetailLoad(id) {
         await axios.get(API_URL + ENDPOINT.PRODUCT + "/" + id).then(response => {
@@ -183,13 +181,45 @@ export class Product {
         }).catch(error => console.error(error));
     }
 
-    // categoryUpdate(id, objectToUpdate) {
-    //     axios.put(API_URL + ENDPOINT.CATEGORY + "/" + id, objectToUpdate).then(response => {
-    //         if (response.status === STATUS.OK) {
-    //             sessionStorage.setItem("update_success", "Cập nhật thành công");
-    //         } else {
-    //             sessionStorage.setItem("update_danger", "Cập nhật thất bại. Lỗi hệ thống");
-    //         }
-    //     }).catch(error => console.error(error));
-    // }
+    productRenderVariant(productData) {
+        let htmlVariantList = ``;
+
+        if (productData.product_variants.length == 0) {
+            document.querySelector("#variant").style.display = "none";
+        } else {
+            document.querySelector("#variant").style.display = "block";
+        }
+
+        productData.product_variants.forEach(itemVariant => {
+            let htmlItemVariant = `
+                <tr>
+                    <td scope="col">${itemVariant.variant_name}</td>
+                    <td scope="col">${itemVariant.price}đ</td>
+                    <td scope="col">${itemVariant.quantity <= 0 ? '<span class="badge bg-danger">Hết hàng</span>' : itemVariant.quantity}</td>
+                    <td scope="col" class="d-flex gap-1">
+                        <button onclick="findVariant('${itemVariant.id}')" class="btn btn-outline-primary">Xem</button>
+                        <button onclick="getVariantId('${itemVariant.id}')" class="btn btn-outline-warning">Sửa</button>
+                        <button type="submit" onclick="deleteVariant('${itemVariant.id}')" class="btn btn-outline-danger">Xóa</button>
+                    </td>
+                </tr>
+            `;
+
+            htmlVariantList += htmlItemVariant;
+        });
+
+        document.querySelector("#variant_list").innerHTML = htmlVariantList;
+    }
+
+    productUpdate(id, objectToUpdate, deleteUpdate) {
+        axios.put(API_URL + ENDPOINT.PRODUCT + "/" + id, objectToUpdate).then(response => {
+            if (response.status === STATUS.OK) {
+                if (deleteUpdate) {
+                    sessionStorage.setItem("delete_success", "Xóa thành công");
+                }
+                sessionStorage.setItem("update_success", "Cập nhật thành công");
+            } else {
+                sessionStorage.setItem("update_danger", "Cập nhật thất bại. Lỗi hệ thống");
+            }
+        }).catch(error => console.error(error));
+    }
 }
