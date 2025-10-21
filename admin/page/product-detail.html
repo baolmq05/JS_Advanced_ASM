@@ -1,3 +1,8 @@
+<script>
+    if (!sessionStorage.getItem("admin_allow")) {
+        window.location.href = "http://127.0.0.1:5501/index.html";
+    }
+</script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,9 +102,10 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="description" class="form-label">Mô tả</label>
-                                <textarea class="form-control description" name="" id="description"
-                                    placeholder="Nhập mô tả" readonly rows="5"></textarea>
+                                <label for="description" class="form-label">Mô tả:</label>
+                                <div class="form-control description" name="" id="description"></div>
+                                <!-- <textarea class="form-control description" name="" id="description"
+                                    placeholder="Nhập mô tả" readonly rows="5"></textarea> -->
                             </div>
                             <div class="mb-3">
                                 <label for="category" class="form-label">Danh mục</label>
@@ -385,6 +391,9 @@
                                                 class="form-control" placeholder="Ví dụ: 100" min="0">
                                             <small id="variant_quantity_error" class="text-danger"></small>
                                         </div>
+                                        <div class="mb-3">
+                                            <img id="image_current" width="100px" height="auto" src="" alt="">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -442,7 +451,7 @@
                                                 biến thể</label>
                                             <input type="file" id="image_file2" name="#image_file" class="form-control">
                                             <small class="text-danger" id="variant_image_error"></small>
-                                            <div class="mt-2 text-center preview_container">
+                                            <div class="mt-2 text-center preview_container2">
                                             </div>
                                         </div>
                                     </div>

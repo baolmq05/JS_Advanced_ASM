@@ -55,12 +55,14 @@ const renderingData = (variant_id) => {
     const variantRom = document.querySelector("#variant_rom_edit");
     const variantRam = document.querySelector("#variant_ram_edit");
     const imageTemp = document.querySelector("#image_file2");
+    const imageCurrentRender = document.querySelector("#image_current");
 
     variantName.value = productVariant.variant_name;
     variantPrice.value = productVariant.price;
     variantQuantity.value = productVariant.quantity;
     variantColorName.value = productVariant.color;
     variantColorCode.value = productVariant.color_code;
+    imageCurrentRender.src = productVariant.image;
 
     Array.from(variantRom).forEach(item => {
         if (item.value == productVariant.rom) {
@@ -129,7 +131,7 @@ const removeImageFile = () => {
 const previewImage = (file) => {
     console.log(file);
 
-    let previewContainer = document.querySelector(".preview_container");
+    let previewContainer = document.querySelector(".preview_container2");
     previewContainer.style.display = "block";
 
     let reader = new FileReader();
@@ -220,7 +222,7 @@ async function uploadImage(imageFile) {
 
     removeImageFile();
 
-    let previewContainer = document.querySelector(".preview_container");
+    let previewContainer = document.querySelector(".preview_container2");
     previewContainer.innerHTML = '';
     previewContainer.style.display = 'none';
 }

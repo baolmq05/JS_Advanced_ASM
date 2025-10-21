@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile Store</title>
-    <link rel="icon" type="image/x-icon" href="./assets/images/Logo.png">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="icon" type="image/x-icon" href="../assets/images/Logo.png">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
@@ -24,31 +24,19 @@
                             <img id="main-image-detail" class="product-image"
                                 src="./assets/images/product/SamsungGalaxyS25.jpg" alt="">
                         </div>
-
-                        <div class="gallary d-flex justify-content-between align-items-center mb-5">
-                            <div class="gallary-box gallary-box-active">
-                                <img src="./assets/images/product/SamsungGalaxyS25.jpg" alt="">
-                            </div>
-                            <div class="gallary-box">
-                                <img src="./assets/images/product/samsung_galaxy_s24_fe.jpg" alt="">
-                            </div>
-                            <div class="gallary-box">
-                                <img src="./assets/images/product/samsung_galaxy_s24_fe_2.jpg" alt="">
-                            </div>
-                        </div>
                     </div>
 
                     <div class="col-lg-6 mt-5">
                         <div class="container mt-5">
-                            <h3>Samsung Galaxy S25</h3>
-                            <p>Samsung Galaxy S24 FE là một kiệt tác công nghệ với sự hoàn hảo từ diện mạo đến cấu hình.
+                            <h3 id="product_name">Samsung Galaxy S25</h3>
+                            <p id="product_description">Samsung Galaxy S24 FE là một kiệt tác công nghệ với sự hoàn hảo
+                                từ diện mạo đến cấu hình.
                                 Màn hình 6.7 inch Dynamic AMOLED 2X, pin 4.700mAh và chip Exynos 2400e mang tới trải
                                 nghiệm mượt mà và thú vị cho mọi tác vụ. Quyền năng Galaxy AI cho bạn cơ hội thỏa sức
                                 sáng tạo và tận hưởng những lợi ích từ trí tuệ nhân tạo trong công việc và cuộc sống.
 
                             </p>
-                            <h4>Giá: <span class="text-danger">24.000.000đ</span> <span
-                                    class="text-secondary text-decoration-line-through">25.000.000đ</span></h4>
+                            <h4>Giá: <span class="text-danger" id="product_price"></span></h4>
                             <h5 class="my-3">Thêm vào giỏ hàng</h5>
                             <div class="col-lg-6">
                                 <div class="row">
@@ -202,13 +190,32 @@
             </div>
         </section>
     </main>
+    <!-- Modal Logout -->
+    <div id="modal_logout" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="modal_title" class="modal-title">Đăng xuất?</h5>
+                    <button type="button" id="close_modal_logout" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button id="logout_confirm_btn" type="button" class="btn btn-danger">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- FOOTER -->
     <div id="footer"></div>
 
-    <script src="./assets/js/component/component.js"></script>
-    <script src="./assets/js/self/main.js"></script>
-    <script src="./assets/js/bootstrap.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script type="module" src="../assets/js/component/component.js"></script>
+    <script src="../assets/js/self/main.js"></script>
+    <script src="../assets/js/bootstrap.bundle.js"></script>
+    <script type="module" src="../assets/js/control/product_detail.control.js"></script>
+    <script type="module" src="../assets/js/control/logout.control.js"></script>
 </body>
 
 </html>

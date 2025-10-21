@@ -1,10 +1,11 @@
-const headerElement = document.getElementById("header");
-const footerElement = document.getElementById("footer");
+async function renderComponent(params) {
+    const headerElement = document.getElementById("header");
+    const footerElement = document.getElementById("footer");
 
-const headerHTML = `<header class="fixed-top">
+    const headerHTML = `<header class="fixed-top">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand fw-bold text-uppercase" href="#">Mobile Store</a>
+                <a class="navbar-brand fw-bold text-uppercase" href="../index.html">Mobile Store</a>
                 <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -13,7 +14,7 @@ const headerHTML = `<header class="fixed-top">
                 <div class="collapse navbar-collapse" id="collapsibleNavId">
                     <ul class="navbar-nav ms-5 me-auto mt-2 mt-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" href="./index.html" aria-current="page">
+                            <a class="nav-link active" href="../index.html" aria-current="page">
                                 <i class="bi bi-house-door"></i>
                                 Trang chủ
                                 <span class="visually-hidden">(current)</span>
@@ -64,32 +65,32 @@ const headerHTML = `<header class="fixed-top">
                         <div class="dropdown">
                             <a class="text-dark text-decoration-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                <img width="30" class="avatar-image" src="./assets/images/avatar/avatar.png" alt="">
+                                <img width="30" class="avatar-image" src="../assets/images/avatar/avatar.png" alt="">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
+                                <li id="profile_select">
                                     <a class="dropdown-item" href="./profile.html">
                                         <i class="bi bi-person"></i>
-                                        Lê Minh Quốc Bảo
+                                        <span class="fullname">User</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li id="login_select">
                                     <a class="dropdown-item text-primary" href="./login.html">
                                         <i class="bi bi-person"></i>
                                         Đăng nhập
                                     </a>
                                 </li>
-                                <li>
+                                <li id="register_select">
                                     <a class="dropdown-item text-warning" href="./register.html">
                                         <i class="bi bi-person"></i>
                                         Đăng ký
                                     </a>
                                 </li>
-                                <li class="border-top">
-                                    <a class="dropdown-item text-danger" href="#">
+                                <li id="logout_select" class="border-top">
+                                    <button class="dropdown-item text-danger" id="logout_BTN">
                                         <i class="bi bi-power"></i>
                                         Đăng xuất
-                                    </a>
+                                    </button>
                                 </li>
                             </ul>
                         </div>
@@ -107,7 +108,7 @@ const headerHTML = `<header class="fixed-top">
         </nav> -->
     </header>`;
 
-const footerHTML = `<footer class="bg-dark">
+    const footerHTML = `<footer class="bg-dark">
         <div class="container py-5">
             <div class="row text-white">
                 <div class="col-lg-3 col-sm-12 col-md-6">
@@ -149,5 +150,72 @@ const footerHTML = `<footer class="bg-dark">
         </div>
     </footer>`;
 
-headerElement.innerHTML = headerHTML;
-footerElement.innerHTML = footerHTML;
+    headerElement.innerHTML = headerHTML;
+    footerElement.innerHTML = footerHTML;
+}
+import { User } from "../service/user.service.js";
+
+// // Session (Alert)
+const turnOffAlert = (alertElement, sessionName) => {
+    sessionStorage.removeItem(sessionName);
+    setTimeout(() => {
+        alertElement.style.display = "none";
+    }, 3000);
+};
+
+if (sessionStorage.getItem("login_success")) {
+    let alertSuccessValue = sessionStorage.getItem("login_success");
+    let alertElement = document.querySelector("#alert_success");
+    alertElement.style.display = "flex";
+    alertElement.lastElementChild.innerText = alertSuccessValue;
+
+    turnOffAlert(alertElement, "login_success");
+}
+
+if (sessionStorage.getItem("logout_success")) {
+    let alertSuccessValue = sessionStorage.getItem("logout_success");
+    let alertElement = document.querySelector("#alert_success");
+    alertElement.style.display = "flex";
+    alertElement.lastElementChild.innerText = alertSuccessValue;
+
+    turnOffAlert(alertElement, "logout_success");
+}
+
+const user = new User();
+let userList = [];
+let userCurrent = [];
+
+async function userLoading() {
+    await renderComponent();
+    await user.userLoadData();
+    userList = user.getUserList();
+
+    renderData();
+}
+
+const renderData = () => {
+    if (sessionStorage.getItem("client_allow")) {
+        let userID = sessionStorage.getItem("client_allow");
+        userCurrent = userList.find(userItem => userItem.id == userID);
+
+        renderProfileToggle();
+    } else {
+        let profileSelect = document.querySelector("#profile_select").style.display = "none";
+        document.querySelector(".fullname").innerText = "";
+        let logoutSelect = document.querySelector("#logout_select").style.display = "none";
+
+        document.querySelector("#register_select").style.display = "block";
+        document.querySelector("#login_select").style.display = "block";
+    }
+};
+
+const renderProfileToggle = () => {
+    let profileSelect = document.querySelector("#profile_select").style.display = "block";
+    document.querySelector(".fullname").innerText = userCurrent.name;
+    let logoutSelect = document.querySelector("#logout_select").style.display = "block";
+
+    document.querySelector("#register_select").style.display = "none";
+    document.querySelector("#login_select").style.display = "none";
+}
+
+userLoading();
