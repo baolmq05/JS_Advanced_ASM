@@ -9,45 +9,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Store - Đơn hàng</title>
+    <title>Mobile Store</title>
     <link rel="icon" type="image/x-icon" href="../../assets/images/Logo.png">
-    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <style>
-        #side-bar {
-            min-height: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/46.1.0/ckeditor5.css">
 </head>
+<style>
+    #side-bar {
+        min-height: 100%;
+    }
+</style>
 
 <body>
-    <!-- ALERT -->
-    <div id="alert_danger" class="alert alert-danger" role="alert">
-        <i class="bi bi-exclamation-triangle-fill me-2"></i>
-        <div>
-            Có lỗi xảy ra khi tạo category!
-        </div>
-    </div>
-
-    <div id="alert_success" class="alert alert-success" role="alert">
-        <i class="bi bi-exclamation-triangle-fill me-2"></i>
-        <div>
-            Thêm thành công
-        </div>
-    </div>
-
+    <!-- HEADER -->
     <div class="container-fluid">
         <div class="row">
-            <!-- SIDEBAR (desktop) -->
             <div class="col-md-3 d-none d-md-block p-0">
                 <div id="side-bar" class="card shadow-sm p-3">
                 </div>
             </div>
 
-            <!-- MAIN CONTENT -->
             <div class="col-12 col-md-9 p-0">
-                <!-- Navbar -->
                 <nav class="navbar navbar-light bg-white shadow-sm">
                     <div class="container-fluid d-flex justify-content-between justify-content-md-end">
                         <!-- Nút mở sidebar mobile -->
@@ -78,62 +61,58 @@
                     </div>
                 </nav>
 
-                <!-- Nội dung -->
                 <div class="p-3">
-                    <div class="col-12 d-flex justify-content-between align-items-center">
-                        <h3 class="my-3">Danh sách người dùng</h3>
-                        <a href="./user-add.html" class="btn btn-outline-primary">Thêm</a>
-                    </div>
-                    <div class="row d-flex justify-content-between">
-                        <div class="col-md-8">
-                            <form action="" class="d-flex">
-                                <input id="search_input" class="form-control" type="text" placeholder="Tìm kiếm">
-                            </form>
-
-                        </div>
-                        <div class="col-md-4">
-                            <select id="status_change" class="form-select" aria-label="">
-                                <option value="" selected>Trạng thái</option>
-                                <option value="1">Hoạt động</option>
-                                <option value="0">Vô hiệu hóa</option>
-                            </select>
-                        </div>
-                    </div>
+                    <h3 class="my-3">Chi tiết người dùng</h3>
                     <div class="col-12 mt-5">
-                        <div class="table-responsive">
-                            <table class="table table-bordered align-middle">
-                                <thead class="bg-dark text-white">
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Tên</th>
-                                        <th>Email</th>
-                                        <th>Ảnh đại diện</th>
-                                        <th>Vai trò</th>
-                                        <th>Trạng thái</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="user-list">
-                                </tbody>
-                            </table>
-                        </div>
+                        <form action="">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">
+                                    Tên người dùng:
+                                    <!-- <strong id="name"></strong> -->
+                                </label>
+                                <input type="text" name="" id="name" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">
+                                    Email:
+                                    <!-- <strong id="email"></strong> -->
+                                </label>
+                                <input class="form-control" type="email" id="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">
+                                    Số điện thoại:
+                                    <!-- <strong id="phone"></strong> -->
+                                </label>
+                                <input class="form-control" type="text" id="phone">
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">
+                                    Địa chỉ:
+                                </label>
+                                <input class="form-control" type="text" id="address">
+                            </div>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">
+                                    Ảnh đại diện:
+                                </label>
+                                <br>
+                                <img id="image" width="300px" src="" alt="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">
+                                    Trạng thái
+                                </label>
+                                <input class="form-control" type="text" id="status">
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">
+                                    Vai trò
+                                </label>
+                                <input class="form-control" type="text" id="role">
+                            </div>
+                        </form>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Delete -->
-    <div id="modal-delete" class="modal" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.3);">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 id="modal_title" class="modal-title">Xóa?</h5>
-                    <button type="button" id="close_modal_delete" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                    <button id="delete-accept-btn" type="button" class="btn btn-danger">Xác nhận</button>
                 </div>
             </div>
         </div>
@@ -202,8 +181,5 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../js/boostrap/bootstrap.bundle.min.js"></script>
     <script src="../js/component/component.js"></script>
-    <script type="module" src="../js/control/user/user-index.js"></script>
-    <script type="module" src="../js/control/user/user-delete.js"></script>
+    <script type="module" src="../js/control/user/user-detail.js"></script>
 </body>
-
-</html>

@@ -25,24 +25,53 @@ export class User {
         let htmlList = ``;
 
         this.userList.forEach((userItem, index) => {
-            let htmlItem = `
+            if (userItem.role == 1) {
+                let htmlItem = `
                 <tr>
                     <td>${index + 1}</td>
                     <td>${userItem.name}</td>
                     <td>${userItem.email}</td>
-                    <td><img width="50" src="../../assets/images/avatar/avatar.png" alt=""></td>
+                    <td><img width="50" src="${userItem.avatar != '' ? userItem.avatar : '../../assets/images/avatar/avatar.png'}" alt=""></td>
+                    <td>
+                ${userItem.role == 1
+                        ? '<span class="badge rounded-pill p-2 bg-success">Admin</span>'
+                        : '<span class="badge rounded-pill p-2 bg-primary">User</span>'}
+            </td>
                     <td>
                         ${userItem.status == 1 ? '<span class="badge rounded-pill bg-success">Hoạt động</span>' : '<span class="badge rounded-pill bg-secondary">Vô hiệu</span>'}
                     </td>
-                    <td class="d-flex flex-wrap gap-1">
-                        <a href="./user-edit.html" class="btn btn-sm btn-outline-primary">Xem</a>
-                        <a href="./user-edit.html" class="btn btn-sm btn-outline-warning">Sửa</a>
-                        <button type="submit" class="btn btn-sm btn-outline-danger">Xóa</button>
+                    <td class="">
+                        <a href="./user-detail.html?${userItem.id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
+                        <a href="./user-edit.html" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
                     </td>
                 </tr>
             `;
+                htmlList += htmlItem;
+            } else {
+                let htmlItem = `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${userItem.name}</td>
+                    <td>${userItem.email}</td>
+                    <td><img width="50" src="${userItem.avatar != '' ? userItem.avatar : '../../assets/images/avatar/avatar.png'}" alt=""></td>
+                    <td>
+                ${userItem.role == 1
+                        ? '<span class="badge rounded-pill p-2 bg-success">Admin</span>'
+                        : '<span class="badge rounded-pill p-2 bg-primary">User</span>'}
+            </td>
+                    <td>
+                        ${userItem.status == 1 ? '<span class="badge rounded-pill bg-success">Hoạt động</span>' : '<span class="badge rounded-pill bg-secondary">Vô hiệu</span>'}
+                    </td>
+                    <td class="">
+                        <a href="./user-detail.html?${userItem.id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
+                        <a href="./user-edit.html?${userItem.id}" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                        <button type="button" onclick="deleteUserHandle('${userItem.id}')" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
+                    </td>
+                </tr>
+            `;
+                htmlList += htmlItem;
+            }
 
-            htmlList += htmlItem;
         });
 
         return htmlList;
@@ -57,24 +86,52 @@ export class User {
 
         if (filtered.length > 0) {
             filtered.forEach((us, index) => {
-                htmlList += `<tr>
-                <td>${index + 1}</td>
-                <td>${us.name}</td>
-                <td>${us.email}</td>
-                <td>
-                    <img width="50" src="../../assets/images/avatar/avatar.png" alt="">
-                </td>
-                <td>
-                    ${us.status == 1
-                        ? '<span class="badge rounded-pill p-2 bg-success">Hoạt động</span>'
-                        : '<span class="badge rounded-pill p-2 bg-secondary">Vô hiệu hóa</span>'}
-                </td>
-                <td>
-                    <a href="./category-detail.html?${us.id}" class="btn btn-outline-primary">Xem</a>
-                    <a href="./category-edit.html?${us.id}" class="btn btn-outline-warning">Sửa</a>
-                    <button type="submit" onclick="deleteCategoryHandle('${us.id}')" class="btn btn-outline-danger">Xóa</button>
-                </td>
-            </tr>`;
+                if (us.role == 1) {
+                    let htmlItem = `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${us.name}</td>
+                    <td>${us.email}</td>
+                    <td><img width="50" src="${us.avatar != '' ? us.avatar : '../../assets/images/avatar/avatar.png'}" alt=""></td>
+                    <td>
+                ${us.role == 1
+                            ? '<span class="badge rounded-pill p-2 bg-success">Admin</span>'
+                            : '<span class="badge rounded-pill p-2 bg-primary">User</span>'}
+            </td>
+                    <td>
+                        ${us.status == 1 ? '<span class="badge rounded-pill bg-success">Hoạt động</span>' : '<span class="badge rounded-pill bg-secondary">Vô hiệu</span>'}
+                    </td>
+                    <td class="">
+                        <a href="./user-detail.html?${us.id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
+                        <a href="./user-edit.html" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                    </td>
+                </tr>
+            `;
+                    htmlList += htmlItem;
+                } else {
+                    let htmlItem = `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${us.name}</td>
+                    <td>${us.email}</td>
+                    <td><img width="50" src="${us.avatar != '' ? us.avatar : '../../assets/images/avatar/avatar.png'}" alt=""></td>
+                    <td>
+                ${us.role == 1
+                            ? '<span class="badge rounded-pill p-2 bg-success">Admin</span>'
+                            : '<span class="badge rounded-pill p-2 bg-primary">User</span>'}
+            </td>
+                    <td>
+                        ${us.status == 1 ? '<span class="badge rounded-pill bg-success">Hoạt động</span>' : '<span class="badge rounded-pill bg-secondary">Vô hiệu</span>'}
+                    </td>
+                    <td class="">
+                        <a href="./user-detail.html?${us.id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
+                        <a href="./user-edit.html" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                        <button type="button" onlick="deleteUserHandle('${us.id}')" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
+                    </td>
+                </tr>
+            `;
+                    htmlList += htmlItem;
+                }
             });
         } else {
             htmlList = `Không tìm thấy danh mục với tên: ${searchValue}`;
@@ -95,55 +152,74 @@ export class User {
         filtered.forEach((us, index) => {
             const parentItem = this.userList.find(item => item.id == us.parent_id);
 
-            console.log(parentItem);
-            const parentName = parentItem ? parentItem.name : "(Không có)";
-
-            htmlList += `<tr>
-            <td>${index + 1}</td>
-            <td>${us.name}</td>
-            <td>${us.email}</td>
-            <td>
-                <img width="50" src="../../assets/images/avatar/avatar.png" alt="">
+            if (us.role == 1) {
+                let htmlItem = `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${us.name}</td>
+                    <td>${us.email}</td>
+                    <td><img width="50" src="${us.avatar != '' ? us.avatar : '../../assets/images/avatar/avatar.png'}" alt=""></td>
+                    <td>
+                ${us.role == 1
+                        ? '<span class="badge rounded-pill p-2 bg-success">Admin</span>'
+                        : '<span class="badge rounded-pill p-2 bg-primary">User</span>'}
             </td>
-            <td>
-                ${us.status == 1
-                    ? '<span class="badge rounded-pill p-2 bg-success">Hoạt động</span>'
-                    : '<span class="badge rounded-pill p-2 bg-secondary">Vô hiệu hóa</span>'}
+                    <td>
+                        ${us.status == 1 ? '<span class="badge rounded-pill bg-success">Hoạt động</span>' : '<span class="badge rounded-pill bg-secondary">Vô hiệu</span>'}
+                    </td>
+                    <td class="">
+                        <a href="./user-detail.html?${us.id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
+                        <a href="./user-edit.html" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                    </td>
+                </tr>
+            `;
+                htmlList += htmlItem;
+            } else {
+                let htmlItem = `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${us.name}</td>
+                    <td>${us.email}</td>
+                    <td><img width="50" src="${us.avatar != '' ? us.avatar : '../../assets/images/avatar/avatar.png'}" alt=""></td>
+                    <td>
+                ${us.role == 1
+                        ? '<span class="badge rounded-pill p-2 bg-success">Admin</span>'
+                        : '<span class="badge rounded-pill p-2 bg-primary">User</span>'}
             </td>
-            <td>
-                <a href="?${us.id}" class="btn btn-outline-primary">Xem</a>
-                <a href="?${us.id}" class="btn btn-outline-warning">Sửa</a>
-                <button type="button" onclick="" class="btn btn-outline-danger">Xóa</button>
-            </td>
-        </tr>`;
+                    <td>
+                        ${us.status == 1 ? '<span class="badge rounded-pill bg-success">Hoạt động</span>' : '<span class="badge rounded-pill bg-secondary">Vô hiệu</span>'}
+                    </td>
+                    <td class="">
+                        <a href="./user-detail.html?${us.id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
+                        <a href="./user-edit.html" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                        <button type="button" onlick="deleteUserHandle('${us.id}')" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
+                    </td>
+                </tr>
+            `;
+                htmlList += htmlItem;
+            }
         });
 
         return htmlList;
     }
 
 
-    categoryCreate(name, parent_id, status) {
-        let objectToCreate = {
-            name: name,
-            parent_id: parent_id,
-            status: status
-        };
-
-        axios.post(API_URL + ENDPOINT.CATEGORY, objectToCreate).then(response => {
+    userCreate(objectToCreate) {
+        axios.post(API_URL + ENDPOINT.USER, objectToCreate).then(response => {
             if (response.status === STATUS.CREATED) {
-                sessionStorage.setItem("alert_success", "Thêm thành công");
+                sessionStorage.setItem("create_success", "Thêm thành công");
             } else {
-                sessionStorage.setItem("alert_danger", "Thêm thất bại. Lỗi hệ thống");
+                sessionStorage.setItem("create_danger", "Thêm thất bại. Lỗi hệ thống");
             }
         }).catch(error => console.error(error));
     }
 
-    categoryDelete(id) {
-        axios.delete(API_URL + ENDPOINT.CATEGORY + "/" + id).then(response => {
+    userDelete(id) {
+        axios.delete(API_URL + ENDPOINT.USER + "/" + id).then(response => {
             if (response.status == STATUS.DELETED) {
-                sessionStorage.setItem("alert_delete_success", "Xóa thành công");
+                sessionStorage.setItem("delete_success", "Xóa thành công");
             } else {
-                sessionStorage.setItem("alert_delete_danger", "Xóa thất bại. Lỗi hệ thống");
+                sessionStorage.setItem("delete_danger", "Xóa thất bại. Lỗi hệ thống");
             }
         }).catch(error => console.error(error));
     }

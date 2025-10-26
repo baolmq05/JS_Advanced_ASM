@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile Store</title>
     <link rel="icon" type="image/x-icon" href="../../assets/images/Logo.png">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/46.1.0/ckeditor5.css">
@@ -22,6 +23,27 @@
 </style>
 
 <body>
+    <div class="spinner_container">
+        <div id="spinner" class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- ALERT -->
+    <div id="alert_danger" class="alert alert-danger" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <div>
+            Có lỗi xảy ra khi tạo category!
+        </div>
+    </div>
+
+    <div id="alert_success" class="alert alert-success" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <div>
+            Thêm thành công
+        </div>
+    </div>
+
     <!-- HEADER -->
     <div class="container-fluid">
         <div class="row">
@@ -66,27 +88,37 @@
                     <div class="col-12 mt-5">
                         <form action="">
                             <div class="mb-3">
-                                <label for="formFile" class="form-label">Tên người dùng</label>
-                                <input class="form-control" type="text" id="formFile">
+                                <label for="name" class="form-label">Tên người dùng</label>
+                                <input class="form-control" type="text" id="name">
+                                <small id="name_error" class="text-danger"></small>
                             </div>
                             <div class="mb-3">
-                                <label for="formFile" class="form-label">Email</label>
-                                <input class="form-control" type="email" id="formFile">
+                                <label for="email" class="form-label">Email</label>
+                                <input class="form-control" type="email" id="email">
+                                <small id="email_error" class="text-danger"></small>
                             </div>
                             <div class="mb-3">
-                                <label for="formFile" class="form-label">Số điện thoại</label>
-                                <input class="form-control" type="text" id="formFile">
+                                <label for="phone" class="form-label">Số điện thoại</label>
+                                <input class="form-control" type="text" id="phone">
                             </div>
                             <div class="mb-3">
-                                <label for="formFile" class="form-label">Địa chỉ</label>
-                                <input class="form-control" type="text" id="formFile">
+                                <label for="address" class="form-label">Địa chỉ</label>
+                                <input class="form-control" type="text" id="address">
                             </div>
                             <div class="mb-3">
-                                <label for="formFile" class="form-label">Ảnh đại diện</label>
-                                <input class="form-control" type="file" id="formFile">
+                                <label for="image" class="form-label">Ảnh đại diện</label>
+                                <input class="form-control" type="file" id="image">
+                                <div class="preview_container">
+
+                                </div>
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary">
+                                <label for="password" class="form-label">Mật khẩu</label>
+                                <input class="form-control" type="password" id="password">
+                                <small id="password_error" class="text-danger"></small>
+                            </div>
+                            <div class="mb-3">
+                                <button type="button" id="create_btn" class="btn btn-primary">
                                     Thêm
                                 </button>
                             </div>
@@ -157,6 +189,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../js/boostrap/bootstrap.bundle.min.js"></script>
     <script src="../js/component/component.js"></script>
     <script type="module" src="../js/control/user/user-create.js"></script>

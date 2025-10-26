@@ -122,28 +122,12 @@ export class User {
     }
 
 
-    categoryCreate(name, parent_id, status) {
-        let objectToCreate = {
-            name: name,
-            parent_id: parent_id,
-            status: status
-        };
-
-        axios.post(API_URL + ENDPOINT.CATEGORY, objectToCreate).then(response => {
+    userCreate(objectToCreate) {
+        axios.post(API_URL + ENDPOINT.USER, objectToCreate).then(response => {
             if (response.status === STATUS.CREATED) {
-                sessionStorage.setItem("alert_success", "Thêm thành công");
+                sessionStorage.setItem("create_success", "Thêm thành công");
             } else {
-                sessionStorage.setItem("alert_danger", "Thêm thất bại. Lỗi hệ thống");
-            }
-        }).catch(error => console.error(error));
-    }
-
-    categoryDelete(id) {
-        axios.delete(API_URL + ENDPOINT.CATEGORY + "/" + id).then(response => {
-            if (response.status == STATUS.DELETED) {
-                sessionStorage.setItem("alert_delete_success", "Xóa thành công");
-            } else {
-                sessionStorage.setItem("alert_delete_danger", "Xóa thất bại. Lỗi hệ thống");
+                sessionStorage.setItem("create_danger", "Thêm thất bại. Lỗi hệ thống");
             }
         }).catch(error => console.error(error));
     }

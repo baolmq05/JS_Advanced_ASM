@@ -40,9 +40,9 @@ export class Category {
                                     ${this.categoryList[i].status == 1 ? '<span class="badge rounded-pill p-2 bg-success">Hiện</span>' : '<span class="badge rounded-pill p-2 bg-secondary">Ẩn</span>'}
                                 </td>
                                 <td>
-                                    <a href="./category-detail.html?${this.categoryList[i].id}" class="btn btn-outline-primary">Xem</a>
-                                    <a href="./category-edit.html?${this.categoryList[i].id}" class="btn btn-outline-warning">Sửa</a>
-                                    <button type="submit" onclick="deleteCategoryHandle('${this.categoryList[i].id}')" class="btn btn-outline-danger">Xóa</button>
+                                    <a href="./category-detail.html?${this.categoryList[i].id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
+                                    <a href="./category-edit.html?${this.categoryList[i].id}" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                                    <button type="submit" onclick="deleteCategoryHandle('${this.categoryList[i].id}')" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
                                 </td>
                             </tr>`;
 
@@ -58,9 +58,9 @@ export class Category {
                                 ${this.categoryList[j].status == 1 ? '<span class="badge rounded-pill p-2 bg-success">Hiện</span>' : '<span class="badge rounded-pill p-2 bg-secondary">Ẩn</span>'}
                             </td >
                         <td>
-                            <a href="./category-detail.html?${this.categoryList[j].id}" class="btn btn-outline-primary">Xem</a>
-                            <a href="./category-edit.html?${this.categoryList[j].id}" class="btn btn-outline-warning">Sửa</a>
-                            <button type="submit" onclick="deleteCategoryHandle('${this.categoryList[j].id}')" class="btn btn-outline-danger">Xóa</button>
+                            <a href="./category-detail.html?${this.categoryList[j].id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
+                            <a href="./category-edit.html?${this.categoryList[j].id}" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                            <button type="submit" onclick="deleteCategoryHandle('${this.categoryList[j].id}')" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
                         </td>
                         </tr >
                         `;
@@ -99,9 +99,9 @@ export class Category {
                         : '<span class="badge rounded-pill p-2 bg-secondary">Ẩn</span>'}
                 </td>
                 <td>
-                    <a href="./category-detail.html?${cat.id}" class="btn btn-outline-primary">Xem</a>
-                    <a href="./category-edit.html?${cat.id}" class="btn btn-outline-warning">Sửa</a>
-                    <button type="submit" onclick="deleteCategoryHandle('${cat.id}')" class="btn btn-outline-danger">Xóa</button>
+                    <a href="./category-detail.html?${cat.id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
+                    <a href="./category-edit.html?${cat.id}" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                    <button type="submit" onclick="deleteCategoryHandle('${cat.id}')" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
                 </td>
             </tr>`;
             });
@@ -137,9 +137,9 @@ export class Category {
                     : '<span class="badge rounded-pill p-2 bg-secondary">Ẩn</span>'}
             </td>
             <td>
-                <a href="./category-detail.html?${cat.id}" class="btn btn-outline-primary">Xem</a>
-                <a href="./category-edit.html?${cat.id}" class="btn btn-outline-warning">Sửa</a>
-                <button type="button" onclick="deleteCategoryHandle('${cat.id}')" class="btn btn-outline-danger">Xóa</button>
+                <a href="./category-detail.html?${cat.id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
+                <a href="./category-edit.html?${cat.id}" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                <button type="button" onclick="deleteCategoryHandle('${cat.id}')" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
             </td>
         </tr>`;
         });

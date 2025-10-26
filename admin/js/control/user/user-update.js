@@ -1,11 +1,11 @@
-import { Product } from "../../../service/product.service.js";
-import { Category } from "../../../service/category.service.js";
+import { User } from "../../../service/user.service.js";
 
 const CLOUD_NAME = "dztcimwoe";
 const UPLOAD_PRESET = "quocbaoimage";
 const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
 
-let imageToCreate = ``;
+let imageToUpdate = ``;
+let fileImageTarget;
 
 // Session(Alert)
 const turnOffAlert = (alertElement, sessionName) => {
@@ -37,50 +37,37 @@ if (sessionStorage.getItem("update_danger")) {
 
 // Get URL To Get ID Cate
 const query = window.location.search;
-let productId = query.substring(1);
+let userId = query.substring(1);
 
-const category = new Category();
-const product = new Product();
-let productList = [];
-let productData = [];
-let categoryList = [];
+const user = new User();
+let userList = [];
 
-const renderData = () => {
-    let name = document.querySelector("#name");
-    let basePrice = document.querySelector("#base_price");
-    let status = document.querySelector("#status").children;
+let name = document.querySelector("#name");
+let email = document.querySelector("#email");
+let phone = document.querySelector("#phone");
+let address = document.querySelector("#address");
+let image = document.querySelector("#image");
+let status = document.querySelector("#status");
+let role = document.querySelector("#role");
+// Render
+const renderData = (userCurrent) => {
+    name.value = userCurrent.name;
+    email.value = userCurrent.email;
+    phone.value = userCurrent.phone;
+    address.value = userCurrent.address;
 
-    name.value = productData.name;
-    basePrice.value = productData.base_price;
-    CKEDITOR.instances.editor.setData(productData.description);
-
-    Array.from(status).forEach(item => {
-        console.log(item);
-        if (item.value == productData.status) {
+    Array.from(status.children).forEach(item => {
+        if (item.value == userCurrent.status) {
             item.selected = true;
         }
-    });
-};
+    })
 
-const renderCategorySelect = () => {
-    const categorySelectE = document.querySelector("#category");
-
-    categoryList.forEach(item => {
-        if (item.parent_id == null || item.parent_id == "") {
-            console.log("Nothing");
-        } else {
-            let newOption = document.createElement("option");
-            newOption.value = item.id;
-            newOption.innerText = item.name;
-
-            if (item.id == productData.category_id) {
-                newOption.selected = true;
-            }
-
-            categorySelectE.appendChild(newOption);
+    Array.from(role.children).forEach(item => {
+        if (item.value == userCurrent.role) {
+            item.selected = true;
         }
-    });
-};
+    })
+}
 
 // UI Spinner Loading
 
@@ -97,7 +84,7 @@ const toogleSpinerLoad = (turnOn) => {
 // Image Get And Event
 
 const removeImageFile = () => {
-    let imageFile = document.querySelector("#image_file");
+    let imageFile = document.querySelector("#image");
     imageFile.value = '';
 };
 
@@ -141,11 +128,13 @@ const previewImage = (file) => {
 };
 
 const selectImageEventHandle = () => {
-    let imageFile = document.querySelector("#image_file");
+    let imageFile = document.querySelector("#image");
     imageFile.addEventListener("change", (e) => {
         let file = e.target.files[0];
-        if (file.type.startsWith('image/'))
+        if (file.type.startsWith('image/')) {
+            fileImageTarget = file;
             previewImage(file);
+        }
         else {
             alert("Vui lòng chọn file ảnh định dạng png hoặc jpg");
             imageFile.value = "";
@@ -180,8 +169,8 @@ async function uploadImage(imageFile) {
         console.log(`Tải lên thành công (${imageFile.name}): ${response.data.secure_url}`);
 
         // URL GETTED =================================
-        imageToCreate = uploadedUrl.url;
-        console.log("IMAGE LẤY ĐƯỢC LÀ: " + imageToCreate);
+        imageToUpdate = uploadedUrl.url;
+        console.log("IMAGE LẤY ĐƯỢC LÀ: " + imageToUpdate);
     } catch (error) {
         console.error(`Lỗi khi tải lên file ${imageFile.name}:`, error.response ? error.response.data : error.message);
         alert(`Tải lên file ${imageFile.name} thất bại! Vui lòng kiểm tra console.`);
@@ -202,136 +191,76 @@ async function uploadImage(imageFile) {
 
 // // Update
 
-const checkCanUpdate = (nameValue, imageValue, basePriceValue, categoryValue) => {
+const checkCanUpdate = () => {
     let isError = false;
-    const nameError = document.querySelector("#name_error");
-    const basePriceError = document.querySelector("#base_price_error");
-    const categoryError = document.querySelector("#category_error");
-
-    const ERRORTEXT = "Không được bỏ trống";
-
-    if (!nameValue) {
-        isError = true;
-    }
-
-    if (!basePriceValue) {
-        isError = true;
-    }
-
-    if (!categoryValue) {
+    const ERRORTEXT = "Không được để trống";
+    if (!name.value || !email.value) {
         isError = true;
     }
 
     if (isError) {
-        if (!nameValue) {
-            nameError.innerText = ERRORTEXT;
-        } else {
-            nameError.innerText = "";
+        if (!name.value) {
+            document.querySelector("#name_error").innerHTML = ERRORTEXT;
         }
-
-        if (!basePriceValue) {
-            basePriceError.innerText = ERRORTEXT;
-        } else {
-            basePriceError.innerText = "";
-        }
-
-        if (!categoryValue) {
-            categoryError.innerText = ERRORTEXT;
-        } else {
-            categoryError.innerText = "";
+        if (!email.value) {
+            document.querySelector("#email_error").innerHTML = ERRORTEXT;
         }
 
         return false;
     }
 
+    let userCurrent = userList.find(item => item.id == userId);
+
+    if (userCurrent.role == 1) {
+        if (role.value == 0) {
+            let roleError = document.querySelector("#role_error");
+            roleError.innerText = "Không được chuyển vai từ quản trị viên về người dùng";
+            return false;
+        }
+    }
+
     return true;
-};
-
-const getData = () => {
-    let name = document.querySelector("#name");
-    let basePrice = document.querySelector("#base_price");
-    let descriptionValue = CKEDITOR.instances.editor.getData();;
-    let category = document.querySelector("#category");
-    let imageTemp = document.querySelector("#image_file");
-    let status = document.querySelector("#status");
-
-    let canUpdate = checkCanUpdate(name.value, imageTemp.value, basePrice.value, category.value);
-
-    if (!canUpdate) {
-        return null;
-    }
-
-    let nameDuplicate = productList.find(item => item.name == name.value && item.id != productId);
-
-    if (nameDuplicate) {
-        const nameError = document.querySelector("#name_error");
-        nameError.innerText = "Sản phẩm đã trùng";
-        return null;
-    }
-
-    let imageValue;
-
-    if (imageTemp.value == "") {
-        imageValue = productData.image;
-    } else {
-        imageValue = imageTemp.files[0]; //FILE NOT VALUE
-    }
-
-    let productObj = {
-        name: name.value,
-        image_temp: imageValue, //FILE NOT VALUE
-        description: descriptionValue,
-        category_id: category.value,
-        status: status.value,
-        base_price: basePrice.value,
-        product_variants: productData.product_variants
-    }
-
-    return productObj;
-};
+}
 
 async function updateAction() {
-    let objectToCreateTemp = getData();
-    if (objectToCreateTemp == null) return;
+    if (!checkCanUpdate()) return;
 
-    let imageFile = objectToCreateTemp.image_temp;
+    let avatarUrl;
+    let userCurrent = userList.find(item => item.id == userId);
 
-    if (imageFile != "" && imageFile != null) {
-        await uploadImage(imageFile);
+    if (image.value == "") {
+        avatarUrl = userCurrent.avatar;
     } else {
-        imageToCreate = objectToCreateTemp.image_temp;
+        await uploadImage(fileImageTarget);
+        avatarUrl = imageToUpdate;
     }
 
-    let objectToCreate = {
-        name: objectToCreateTemp.name,
-        image: imageToCreate, //RESULT IMAGE
-        description: objectToCreateTemp.description,
-        category_id: objectToCreateTemp.category_id,
-        status: objectToCreateTemp.status,
-        base_price: objectToCreateTemp.base_price,
-        product_variants: objectToCreateTemp.product_variants
-    }
+    let objectToUpdate = {
+        name: name.value,
+        email: email.value,
+        avatar: avatarUrl,
+        phone: phone.value,
+        address: address.value,
+        password: userCurrent.password,
+        role: role.value,
+        status: status.value
+    };
+    // 
 
-    product.productUpdate(productId, objectToCreate);
+    user.userUpdate(userId, objectToUpdate);
 };
 
 // ACTION ----------------------------------
-async function productLoading() {
-    await category.categoryLoadData();
-    categoryList = category.getCategoryList();
-    await product.productLoadData();
-    productList = product.getProductList();
-    await product.productDetailLoad(productId);
-    productData = product.getProductOne();
-
-    renderCategorySelect();
-
-    renderData();
-
+async function userLoading() {
+    await user.userLoadData();
+    userList = user.getUserList();
     selectImageEventHandle();
 
-    const updateBtn = document.querySelector("#create_btn");
+    let userCurrent = userList.find(item => item.id == userId);
+    console.log(userCurrent);
+    renderData(userCurrent);
+    const updateBtn = document.querySelector("#update_btn");
     updateBtn.addEventListener("click", updateAction);
 }
 
-productLoading();
+userLoading();

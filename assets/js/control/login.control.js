@@ -8,10 +8,10 @@ const turnOffAlert = (alertElement, sessionName) => {
     }, 3000);
 };
 
-const turnOnAlert = () => {
+const turnOnAlert = (stringValue) => {
     let alertElement = document.querySelector("#alert_danger");
     alertElement.style.display = "flex";
-    alertElement.lastElementChild.innerText = "Email hoặc mật khẩu sai!";
+    alertElement.lastElementChild.innerText = stringValue;
 
     turnOffAlert(alertElement, "login_error");
 }
@@ -90,19 +90,24 @@ const loginAction = () => {
     if (!checkError(email.value, password.value)) {
 
         let userRoleCheck = userCurrent.role;
+        let userStatusCheck = userCurrent.status;
 
-        if (userRoleCheck == 1) {
-            sessionStorage.setItem("admin_allow", userId);
-            sessionStorage.setItem("client_allow", userId);
-
-            window.location.href = "http://127.0.0.1:5501/admin/page/dashboard-day.html";
+        if (userStatusCheck == 0) {
+            turnOffAlert("Tài khoản đã bị vô hiệu hóa");
         } else {
-            sessionStorage.setItem("client_allow", userId);
-            sessionStorage.setItem("login_success", "Đăng nhập thành công");
-            window.location.href = "http://127.0.0.1:5501/index.html";
+            if (userRoleCheck == 1) {
+                sessionStorage.setItem("admin_allow", userId);
+                sessionStorage.setItem("client_allow", userId);
+
+                window.location.href = "http://127.0.0.1:5501/admin/page/dashboard-day.html";
+            } else {
+                sessionStorage.setItem("client_allow", userId);
+                sessionStorage.setItem("login_success", "Đăng nhập thành công");
+                window.location.href = "http://127.0.0.1:5501/index.html";
+            }
         }
     } else {
-        turnOnAlert();
+        turnOnAlert("Email hoặc mật khẩu sai!");
     }
 };
 

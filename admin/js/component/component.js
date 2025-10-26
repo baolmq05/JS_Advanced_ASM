@@ -32,7 +32,7 @@ const sideBarHTML = `
                         </a>
                     </div>
 
-                    <a href="../index.html" class="fw-bold btn btn-outline-primary p-2 mb-3 w-100">
+                    <a href="../../index.html" class="fw-bold btn btn-outline-primary p-2 mb-3 w-100">
                         <i class="bi bi-arrow-return-left"></i> Trở về trang người dùng
                     </a>
 `;

@@ -31,7 +31,7 @@ export class Product {
                 <tr>
                     <td>${index + 1}</td>
                     <td>${item.name.length > 20 ? item.name.slice(0, 18) + "..." : item.name}</td>
-                    <td>${item.base_price}đ</td>
+                    <td>${this.formatPrice(item.base_price)}</td>
                     <td>
                         <img width="50px" src="${item.image ?? 'https://cdn.iconscout.com/icon/premium/png-256-thumb/no-image-1753539-1493784.png'}" alt="">
                     </td>
@@ -40,10 +40,10 @@ export class Product {
                     <td>
                         ${item.status == 1 ? '<span class="badge rounded-pill p-2 bg-success">Hiện</span>' : '<span class="badge rounded-pill p-2 bg-secondary">Ẩn</span>'}
                     </td>
-                    <td class="d-flex gap-1">
-                    <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem</a>
-                    <a href="./product-edit.html?${item.id}" class="btn btn-outline-warning">Sửa</a>
-                    <button type="button" onclick="deleteProductHandle('${item.id}')" class="btn btn-outline-danger">Xóa</button>
+                    <td class="">
+                        <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
+                        <a href="./product-edit.html?${item.id}" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                        <button type="button" onclick="deleteProductHandle('${item.id}')" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
                     </td>
                 </tr>
             `;
@@ -70,7 +70,7 @@ export class Product {
                     <tr>
                         <td>${index + 1}</td>
                         <td>${item.name.length > 20 ? item.name.slice(0, 18) + "..." : item.name}</td>
-                        <td>${item.base_price}đ</td>
+                        <td>${this.formatPrice(item.base_price)}</td>
                         <td>
                             <img width="50px" src="${item.image ?? 'https://cdn.iconscout.com/icon/premium/png-256-thumb/no-image-1753539-1493784.png'}" alt="">
                         </td>
@@ -79,12 +79,10 @@ export class Product {
                         <td>
                             ${item.status == 1 ? '<span class="badge rounded-pill p-2 bg-success">Hiện</span>' : '<span class="badge rounded-pill p-2 bg-secondary">Ẩn</span>'}
                         </td>
-                        <td class="d-flex gap-1">
-                        <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem</a>
-                        <a href="./product-edit.html" class="btn btn-outline-warning">Sửa</a>
-                        <form class="" action="">
-                            <button type="submit" onclick="" class="btn btn-outline-danger">Xóa</button>
-                        </form>
+                        <td class="">
+                            <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
+                            <a href="./product-edit.html" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                            <button type="button" onclick="deleteProductHandle('${item.id}')" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
                         </td>
                     </tr>
                 `;
@@ -113,7 +111,7 @@ export class Product {
                 <tr>
                     <td>${index + 1}</td>
                     <td>${item.name.length > 20 ? item.name.slice(0, 18) + "..." : item.name}</td>
-                    <td>${item.base_price}đ</td>
+                    <td>${this.formatPrice(item.base_price)}</td>
                     <td>
                         <img width="50px" src="${item.image ?? 'https://cdn.iconscout.com/icon/premium/png-256-thumb/no-image-1753539-1493784.png'}" alt="">
                     </td>
@@ -122,12 +120,10 @@ export class Product {
                     <td>
                         ${item.status == 1 ? '<span class="badge rounded-pill p-2 bg-success">Hiện</span>' : '<span class="badge rounded-pill p-2 bg-secondary">Ẩn</span>'}
                     </td>
-                    <td class="d-flex gap-1">
-                    <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem</a>
-                    <a href="./product-edit.html" class="btn btn-outline-warning">Sửa</a>
-                    <form class="" action="">
-                        <button type="submit" onclick="" class="btn btn-outline-danger">Xóa</button>
-                    </form>
+                    <td class="">
+                        <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
+                        <a href="./product-edit.html" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                        <button type="button" onclick="deleteProductHandle('${item.id}')" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
                     </td>
                 </tr>
             `;
@@ -149,15 +145,10 @@ export class Product {
             product_variants: [],
         };
 
-        console.log(objectToCreate);
-
         axios.post(API_URL + ENDPOINT.PRODUCT, objectToCreate).then(response => {
             if (response.status === STATUS.CREATED) {
                 sessionStorage.setItem("create_success", "Thêm thành công");
-                // alert("Thêm thành công");
-                // alert(response.data);
             } else {
-                // alert("Thất bại");
                 sessionStorage.setItem("create_danger", "Thêm thất bại. Lỗi hệ thống");
             }
         }).catch(error => console.error(error));
@@ -194,12 +185,12 @@ export class Product {
             let htmlItemVariant = `
                 <tr>
                     <td scope="col">${itemVariant.variant_name}</td>
-                    <td scope="col">${itemVariant.price}đ</td>
+                    <td scope="col">${this.formatPrice(itemVariant.price)}</td>
                     <td scope="col">${itemVariant.quantity <= 0 ? '<span class="badge bg-danger">Hết hàng</span>' : itemVariant.quantity}</td>
-                    <td scope="col" class="d-flex gap-1">
-                        <button onclick="findVariant('${itemVariant.id}')" class="btn btn-outline-primary">Xem</button>
-                        <button onclick="getVariantId('${itemVariant.id}')" class="btn btn-outline-warning">Sửa</button>
-                        <button type="submit" onclick="deleteVariant('${itemVariant.id}')" class="btn btn-outline-danger">Xóa</button>
+                    <td scope="col" class="">
+                        <button onclick="findVariant('${itemVariant.id}')" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></button>
+                        <button onclick="getVariantId('${itemVariant.id}')" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></button>
+                        <button type="submit" onclick="deleteVariant('${itemVariant.id}')" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
                     </td>
                 </tr>
             `;
@@ -221,5 +212,10 @@ export class Product {
                 sessionStorage.setItem("update_danger", "Cập nhật thất bại. Lỗi hệ thống");
             }
         }).catch(error => console.error(error));
+    }
+
+    formatPrice(x) {
+        let newNumber = x.toLocaleString('vi', { style: 'currency', currency: 'VND' });
+        return newNumber;
     }
 }

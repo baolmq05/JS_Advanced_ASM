@@ -38,11 +38,12 @@ export class Product {
                             </div>
                             <div class="card-body">
                                 <h5 class="product-title card-title">
-                                    <a href="./page/product-detail.html" class="text-decoration-none text-dark">
+                                    <a href="./page/product-detail.html?${item.id}" class="text-decoration-none text-dark">
                                         ${item.name}
                                     </a>
                                 </h5>
-                                <p class="">Giá: <span class="fw-bold">${item.base_price}đ</span></p>
+                                <p class="product-description card-text">${item.description}</p>
+                                <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
                                 <a href="./page/product-detail.html?${item.id}" class="btn btn-outline-secondary">Xem chi tiết</a>
                                 <a href="#" class="btn btn-primary">Thêm vào giỏ</a>
                             </div>
@@ -52,6 +53,34 @@ export class Product {
 
                 htmlList += htmlItem;
             }
+        });
+
+        return htmlList;
+    }
+
+    productRenderShop() {
+        let htmlList = ``;
+
+        this.productList.forEach((item) => {
+            let htmlItem = `
+                <div class="col-lg-4 mt-3">
+                                <div class="product-item card">
+                                    <div class="product-image-box h-180">
+                                        <img src="${item.image}"
+                                            class="card-img-top product-image" alt="...">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
+                                                class="text-decoration-none text-dark">${item.name}</a></h5>
+                                        <p class="product-description card-text">${item.description}</p>
+                                        <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
+                                        <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
+                                    </div>
+                                </div>
+                            </div>
+            `;
+
+            htmlList += htmlItem;
         });
 
         return htmlList;
@@ -107,5 +136,10 @@ export class Product {
                 this.productOne = response.data;
             }
         }).catch(error => console.error(error));
+    }
+
+    formatPrice(x) {
+        let newNumber = x.toLocaleString('vi', { style: 'currency', currency: 'VND' });
+        return newNumber;
     }
 }

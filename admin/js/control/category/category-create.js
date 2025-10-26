@@ -35,7 +35,7 @@ const renderParentIDSelect = () => {
     const parentID = document.querySelector("#parent_id");
 
     categoryList.forEach(item => {
-        if (item.parent_id == null) {
+        if (item.parent_id == null || item.parent_id == "") {
             let newOption = document.createElement("option");
             newOption.value = item.id;
             newOption.innerText = item.name;
