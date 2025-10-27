@@ -23,11 +23,16 @@ const email = document.querySelector("#email");
 const password = document.querySelector("#password");
 const passwordConfirm = document.querySelector("#password_confirm");
 
+const validateEmail = (email) => {
+    const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(String(email).toLowerCase());
+}
+
 const checkCanCreate = () => {
     let isError = false;
     const ERRORTEXT = "Không được để trống";
 
-    if (!fullname.value || !email.value || !password.value || !passwordConfirm.value) {
+    if (!fullname.value || !email.value || !validateEmail(email.value) || !password.value || !passwordConfirm.value || (password.value.length < 8) || (password.value != passwordConfirm.value)) {
         isError = true;
     }
 
@@ -44,14 +49,32 @@ const checkCanCreate = () => {
             document.querySelector("#email_error").innerHTML = "";
         }
 
+        if (!validateEmail(email.value)) {
+            document.querySelector("#email_error").innerHTML = "Email không đúng định dạng";
+        } else {
+            document.querySelector("#email_error").innerHTML = "";
+        }
+
         if (!password.value) {
             document.querySelector("#password_error").innerHTML = ERRORTEXT;
         } else {
             document.querySelector("#password_error").innerHTML = "";
         }
 
+        if (password.value.length < 8) {
+            document.querySelector("#password_error").innerHTML = "Mật khẩu phải từ 8 kí tự trở lên";
+        } else {
+            document.querySelector("#password_error").innerHTML = "";
+        }
+
         if (!passwordConfirm.value) {
             document.querySelector("#password_confirm_error").innerHTML = ERRORTEXT;
+        } else {
+            document.querySelector("#password_confirm_error").innerHTML = "";
+        }
+
+        if (password.value != passwordConfirm.value) {
+            document.querySelector("#password_confirm_error").innerHTML = "Vui lòng xác nhận đúng mật khẩu";
         } else {
             document.querySelector("#password_confirm_error").innerHTML = "";
         }
@@ -64,13 +87,6 @@ const checkCanCreate = () => {
 
 const createAction = () => {
     if (!checkCanCreate()) return;
-
-    if (password.value != passwordConfirm.value) {
-        document.querySelector("#password_confirm_error").innerHTML = "Vui lòng xác nhận đúng mật khẩu";
-        return;
-    } else {
-        document.querySelector("#password_confirm_error").innerHTML = "Vui lòng xác nhận đúng mật khẩu";
-    }
 
     let objectToCreate = {
         "name": fullname.value,

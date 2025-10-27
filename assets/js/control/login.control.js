@@ -98,6 +98,7 @@ const loginAction = () => {
             if (userRoleCheck == 1) {
                 sessionStorage.setItem("admin_allow", userId);
                 sessionStorage.setItem("client_allow", userId);
+                sessionStorage.setItem("avatar_login", userCurrent.avatar);
 
                 window.location.href = "http://127.0.0.1:5501/admin/page/dashboard-day.html";
             } else {

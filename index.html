@@ -60,19 +60,19 @@
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
-                        <!-- <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                                    <a class="dropdown-item" href="#">Action 1</a>
-                                    <a class="dropdown-item" href="#">Action 2</a>
-                                </div>
-                            </li> -->
+
+                        <li id="admin_link" class="nav-item">
+                            <a class="nav-link" href="./admin/page/dashboard-day.html" aria-current="page">
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                Quản trị
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
                     </ul>
                     <div class="d-flex align-items-center my-2 my-lg-0 list-unstyled">
-                        <form action="">
-                            <input type="text" class="form-control" placeholder="Tìm kiếm">
-                        </form>
+                        <!-- <form method="get" action="./page/product.html">
+                            <input name="keyword" type="text" class="form-control" placeholder="Tìm kiếm">
+                        </form> -->
 
                         <li class="nav-item">
                             <a class="nav-link" href="./page/cart.html" aria-current="page">
@@ -84,7 +84,8 @@
                         <div class="dropdown">
                             <a class="text-dark text-decoration-none dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <img width="30" class="avatar-image" src="./assets/images/avatar/avatar.png" alt="">
+                                <img id="main_avatar" width="30" class="avatar-image"
+                                    src="./assets/images/avatar/avatar.png" alt="">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li id="profile_select">

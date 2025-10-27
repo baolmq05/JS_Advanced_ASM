@@ -191,4 +191,8 @@ export class Category {
             }
         }).catch(error => console.error(error));
     }
+
+    categoryReplaceTable() {
+        new DataTable('#category-table');
+    }
 }

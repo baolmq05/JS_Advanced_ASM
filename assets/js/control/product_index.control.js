@@ -12,4 +12,5 @@ async function productLoading() {
     productListHTML.innerHTML = product.productRenderIndex();
 }
 
+
 productLoading();

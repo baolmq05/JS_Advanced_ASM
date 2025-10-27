@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/46.1.0/ckeditor5.css">
     <link rel="stylesheet" href="../css/style.css">
+    <!-- Link datatable -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.css">
 </head>
 <style>
     #side-bar {
@@ -124,7 +127,7 @@
                     </div>
 
                     <div class="table-responsive" id="variant">
-                        <table class="table table-bordered">
+                        <table id="product-variant-table" class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col">Tên</th>
@@ -550,13 +553,28 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../js/boostrap/bootstrap.bundle.min.js"></script>
     <script src="../js/component/component.js"></script>
-    <!-- <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script> -->
-    <script>
-        // CKEDITOR.replace('editor');
-    </script>
+
     <script type="module" src="../js/control/product/product-detail.js"></script>
     <script type="module" src="../js/control/product/product_variant/product-variant-detail.js"></script>
     <script type="module" src="../js/control/product/product_variant/product-variant-create.js"></script>
     <script type="module" src="../js/control/product/product_variant/product-variant-delete.js"></script>
     <script type="module" src="../js/control/product/product_variant/product-variant-update.js"></script>
+
+
+    <!-- Link Datatable -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#product-variant-table').DataTable({
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/2.3.4/i18n/vi.json"
+                },
+                "autoWidth": false
+            });
+        });
+    </script>
 </body>

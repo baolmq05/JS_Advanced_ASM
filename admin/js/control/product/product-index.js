@@ -13,14 +13,10 @@ async function load() {
 
     let productHTML = product.productRender(categoryList);
     document.querySelector("#product-list").innerHTML = productHTML;
+    product.productReplaceTable();
 
-    findByName();
     findByStatus();
 }
-
-const findByName = () => {
-    searchEventHandle();
-};
 
 const findByStatus = () => {
     statusEventHandle();
@@ -41,23 +37,9 @@ const statusEventHandle = () => {
 
         document.querySelector("#product-list").innerHTML = "";
         document.querySelector("#product-list").innerHTML = productHTML;
+
+        product.productReplaceTable();
     })
-};
-
-const searchEventHandle = () => {
-    let searchInput = document.querySelector("#search_input");
-
-    searchInput.addEventListener("keyup", (event) => {
-        if (searchInput.value == "") {
-            let productHTML = product.productRender(categoryList);
-            document.querySelector("#product-list").innerHTML = productHTML;
-            return;
-        }
-
-        let productHTML = product.productRenderByName(searchInput.value, categoryList);
-        document.querySelector("#product-list").innerHTML = "";
-        document.querySelector("#product-list").innerHTML = productHTML;
-    });
 };
 
 load();

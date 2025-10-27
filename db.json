@@ -64,9 +64,7 @@
           "variant_name": "iPhone 15 Pro Max 512GB - Titan Đen",
           "price": 32490000,
           "quantity": 10,
-          "image": 
-            "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307980220145280_iphone-15-promax-den-1.jpg",
-            
+          "image": "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307980220145280_iphone-15-promax-den-1.jpg",
           "color": "Titan Đen",
           "color_code": "#3E3B3A",
           "ram": "6GB",
@@ -77,9 +75,7 @@
           "variant_name": "iPhone 15 Pro Max 1TB - Titan Đen",
           "price": 36490000,
           "quantity": 12,
-          "image": 
-            "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307980220145280_iphone-15-promax-den-1.jpg",
-            
+          "image": "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307980220145280_iphone-15-promax-den-1.jpg",
           "color": "Titan Đen",
           "color_code": "#3E3B3A",
           "ram": "6GB",
@@ -90,9 +86,7 @@
           "variant_name": "iPhone 15 Pro Max 256GB - Titan Xanh",
           "price": 27990000,
           "quantity": 10,
-          "image": 
-            "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307989548944936_iphone-15-promax-xanh-1.jpg",
-            
+          "image": "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307989548944936_iphone-15-promax-xanh-1.jpg",
           "color": "Titan Xanh",
           "color_code": "#3E5B74",
           "ram": "6GB",
@@ -103,9 +97,7 @@
           "variant_name": "iPhone 15 Pro Max 256GB - Titan Đen",
           "price": 27990000,
           "quantity": 8,
-          "image": 
-            "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307989548944936_iphone-15-promax-xanh-1.jpg",
-            
+          "image": "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307989548944936_iphone-15-promax-xanh-1.jpg",
           "color": "Titan Đen",
           "ram": "6GB",
           "color_code": "#3e3b3a",
@@ -116,9 +108,7 @@
           "variant_name": "iPhone 15 Pro Max 1TB - Titan Xanh",
           "price": 36490000,
           "quantity": 150,
-          "image": 
-            "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307980220145280_iphone-15-promax-den-1.jpg",
-            
+          "image": "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307980220145280_iphone-15-promax-den-1.jpg",
           "color": "Titan Xanh",
           "ram": "6GB",
           "color_code": "#3e5b74",
@@ -509,15 +499,15 @@
       "status": 1
     },
     {
-      "name": "Demo",
-      "email": "demo@gmail.com",
-      "avatar": "https://res.cloudinary.com/dztcimwoe/image/upload/v1761475357/QuocBaoImage/n2ewphbkyqaj1laauexm.jpg",
-      "phone": "0123456789",
-      "address": "Cần Thơ",
-      "password": "123",
-      "role": "0",
-      "status": "0",
-      "id": "9f66"
+      "id": "9088",
+      "name": "Bảo Lê",
+      "email": "hoconline0201@gmail.com",
+      "avatar": "",
+      "phone": "",
+      "address": "",
+      "password": "12345678",
+      "role": 0,
+      "status": 1
     }
   ]
 }

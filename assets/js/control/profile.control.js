@@ -23,6 +23,7 @@ const renderData = () => {
 loading();
 
 const renderInfo = (userCurrent) => {
+    renderAvatar(userCurrent);
     let bigName = document.querySelector("#big_name").innerHTML = userCurrent.name;
     let bigEmail = document.querySelector("#big_email").innerHTML = userCurrent.email;
 
@@ -35,3 +36,8 @@ const renderInfo = (userCurrent) => {
     let phone = document.querySelector("#phone_info").innerHTML = "<strong>Số điện thoại: </strong>" + userCurrent.phone;
     let address = document.querySelector("#address_info").innerHTML = "<strong>Địa chỉ: </strong>" + userCurrent.address;
 };
+
+const renderAvatar = (userCurrent) => {
+    const avatarImage = document.querySelector("#avatar_profile");
+    avatarImage.src = userCurrent.avatar;
+}

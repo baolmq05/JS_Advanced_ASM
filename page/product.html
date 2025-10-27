@@ -31,26 +31,33 @@
         <section>
             <div class="container mt-3">
                 <div class="row d-flex justify-content-end mt-5 mb-4">
+                    <div class="col-lg-7">
+                        <nav id="" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="./product.html">Sản phẩm</a></li>
+                                <li id="breadcrumb1" class="breadcrumb-item active" aria-current="page">Tất cả sản phẩm
+                                </li>
+                                <li id="breadcrumb2" class="breadcrumb-item active" aria-current="page">
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
                     <div class="col-lg-2">
                         <form action="">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Sắp xếp</option>
-                                <option value="1">Giá giảm dần</option>
-                                <option value="2">Giá tăng dần</option>
+                            <select id="sort" class="form-select">
+                                <option value="" selected>Sắp xếp</option>
+                                <option value="1">Giá tăng dần</option>
+                                <option value="0">Giá giảm dần</option>
                             </select>
                         </form>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-3">
-                        <div class="list-group mt-3">
-                            <a class="list-group-item list-group-item-action active" aria-current="true">
-                                Tất cả sản phẩm
-                            </a>
-                            <a class="list-group-item list-group-item-action">Điện thoại</a>
-                            <a class="list-group-item list-group-item-action">Máy tính bảng</a>
-                            <a class="list-group-item list-group-item-action">Tai nghe</a>
+                    <div class="col-lg-3 mt-3">
+                        <input id="search" type="text" class="form-control" placeholder="Tìm kiếm">
+                        <div id="category-list" class="list-group mt-3">
+
                         </div>
                     </div>
 
@@ -60,7 +67,7 @@
 
                         <div class="row my-3 d-flex justify-content-center">
                             <div class="col-lg-3">
-                                <button class="btn btn-warning">Xem thêm</button>
+                                <!-- <button class="btn btn-warning">Xem thêm</button> -->
                             </div>
                         </div>
                     </div>
@@ -97,3 +104,15 @@
 </body>
 
 </html>
+
+<!-- <div class="dropdown">
+                                <button class="btn btn-light list-group-item-action w-100 dropdown-toggle" type="button"
+                                    id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Click
+                                </button>
+                                <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </div> -->

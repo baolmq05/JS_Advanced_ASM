@@ -6,14 +6,10 @@ async function userLoading() {
     await user.userLoadData();
     let userHTML = user.userRender();
     document.querySelector("#user-list").innerHTML = userHTML;
+    user.userReplaceTable();
 
-    findByName();
     findByStatus();
 }
-
-const findByName = () => {
-    searchEventHandle();
-};
 
 const findByStatus = () => {
     statusEventHandle();
@@ -34,23 +30,8 @@ const statusEventHandle = () => {
 
         document.querySelector("#user-list").innerHTML = "";
         document.querySelector("#user-list").innerHTML = userHTML;
+        user.userReplaceTable();
     })
-};
-
-const searchEventHandle = () => {
-    let searchInput = document.querySelector("#search_input");
-
-    searchInput.addEventListener("keyup", (event) => {
-        if (searchInput.value == "") {
-            let userHTML = user.userRender();
-            document.querySelector("#user-list").innerHTML = userHTML;
-            return;
-        }
-
-        let userHTML = user.userRenderByName(searchInput.value);
-        document.querySelector("#user-list").innerHTML = "";
-        document.querySelector("#user-list").innerHTML = userHTML;
-    });
 };
 
 userLoading();

@@ -86,56 +86,160 @@ export class Product {
         return htmlList;
     }
 
-    productRenderByName(searchValue, categoryList) {
-        const filtered = this.productList.filter(pro =>
-            pro.name.toLowerCase().includes(searchValue.toLowerCase())
-        );
-
-        let htmlList = ``;
-
-        if (filtered.length > 0) {
-            filtered.forEach((item, index) => {
-
-                let categoryName = categoryList.find(cate => cate.id == item.category_id)?.name;
-
-                let htmlItem = `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td>${item.name.length > 20 ? item.name.slice(0, 18) + "..." : item.name}</td>
-                        <td>${item.base_price}đ</td>
-                        <td>
-                            <img width="50px" src="${item.image ?? 'https://cdn.iconscout.com/icon/premium/png-256-thumb/no-image-1753539-1493784.png'}" alt="">
-                        </td>
-                        <td>...</td>
-                        <td>${categoryName == "" || categoryName == undefined ? "(Chưa phân loại)" : categoryName}</td>
-                        <td>
-                            ${item.status == 1 ? '<span class="badge rounded-pill p-2 bg-success">Hiện</span>' : '<span class="badge rounded-pill p-2 bg-secondary">Ẩn</span>'}
-                        </td>
-                        <td class="d-flex gap-1">
-                        <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem</a>
-                        <a href="./product-edit.html" class="btn btn-outline-warning">Sửa</a>
-                        <form class="" action="">
-                            <button type="submit" onclick="" class="btn btn-outline-danger">Xóa</button>
-                        </form>
-                        </td>
-                    </tr>
-                `;
-
-                htmlList += htmlItem;
-            });
-        } else {
-            htmlList = `Không tìm thấy danh mục với tên: ${searchValue}`;
-        }
-
-        return htmlList;
-    }
-
     async productDetailLoad(id) {
         await axios.get(API_URL + ENDPOINT.PRODUCT + "/" + id).then(response => {
             if (response.status == STATUS.OK) {
                 this.productOne = response.data;
             }
         }).catch(error => console.error(error));
+    }
+
+    // Find product
+    productRenderByCategory(categoryId) {
+        const filtered = this.productList.filter(pro =>
+            pro.category_id == categoryId
+        );
+
+        let htmlList = ``;
+
+        if (filtered.length > 0) {
+            filtered.forEach((item) => {
+                let htmlItem = `
+                <div class="col-lg-4 mt-3">
+                                <div class="product-item card">
+                                    <div class="product-image-box h-180">
+                                        <img src="${item.image}"
+                                            class="card-img-top product-image" alt="...">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
+                                                class="text-decoration-none text-dark">${item.name}</a></h5>
+                                        <p class="product-description card-text">${item.description}</p>
+                                        <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
+                                        <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
+                                    </div>
+                                </div>
+                            </div>
+            `;
+
+                htmlList += htmlItem;
+            });
+        } else {
+            htmlList = `Không tìm thấy sản phẩm nào`;
+        }
+
+        return htmlList;
+    }
+
+    productRenderBySort(productCurrentList, sortValue) {
+        let htmlList = ``;
+        let productSorted;
+        if (productCurrentList.length > 0) {
+            if (sortValue == "") {
+                productSorted = productCurrentList;
+            } else {
+                if (sortValue == 1) {
+                    productCurrentList.sort((a, b) => a.base_price - b.base_price);
+                    productSorted = productCurrentList;
+                } else if (sortValue == 0) {
+                    productCurrentList.sort((a, b) => b.base_price - a.base_price);
+                    productSorted = productCurrentList;
+                }
+            }
+
+            productSorted.forEach((item) => {
+                let htmlItem = `
+                    <div class="col-lg-4 mt-3">
+                                    <div class="product-item card">
+                                        <div class="product-image-box h-180">
+                                            <img src="${item.image}"
+                                                class="card-img-top product-image" alt="...">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
+                                                    class="text-decoration-none text-dark">${item.name}</a></h5>
+                                            <p class="product-description card-text">${item.description}</p>
+                                            <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
+                                            <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
+                                        </div>
+                                    </div>
+                                </div>
+                `;
+
+                htmlList += htmlItem;
+            });
+        } else {
+            htmlList = "Không có sản phẩm để sắp xếp";
+        }
+
+        return htmlList;
+    }
+
+    productRenderBySearch(productCurrentList, searchValue) {
+        let htmlList = ``;
+
+        if (searchValue == "") {
+            htmlList = this.productRenderShop();
+        } else {
+            const filtered = productCurrentList.filter(pro =>
+                pro.name.toLowerCase().includes(searchValue.toLowerCase())
+            );
+
+            if (filtered.length > 0) {
+                filtered.forEach((item) => {
+                    let htmlItem = `
+                    <div class="col-lg-4 mt-3">
+                        <div class="product-item card">
+                            <div class="product-image-box h-180">
+                                <img src="${item.image}"
+                                                class="card-img-top product-image" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
+                                class="text-decoration-none text-dark">${item.name}</a></h5>
+                                <p class="product-description card-text">${item.description}</p>
+                                <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
+                                <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
+                            </div>
+                       </div>
+                    </div>`;
+
+                    htmlList += htmlItem;
+                });
+            } else {
+                htmlList = "Không có sản phẩm để sắp xếp";
+            }
+
+            return htmlList;
+        }
+    }
+
+    productRenderByCurrentList(array) {
+        let htmlList = ``;
+
+        array.forEach((item) => {
+            let htmlItem = `
+                <div class="col-lg-4 mt-3">
+                                <div class="product-item card">
+                                    <div class="product-image-box h-180">
+                                        <img src="${item.image}"
+                                            class="card-img-top product-image" alt="...">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
+                                                class="text-decoration-none text-dark">${item.name}</a></h5>
+                                        <p class="product-description card-text">${item.description}</p>
+                                        <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
+                                        <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
+                                    </div>
+                                </div>
+                            </div>
+            `;
+
+            htmlList += htmlItem;
+        });
+
+        return htmlList;
     }
 
     formatPrice(x) {

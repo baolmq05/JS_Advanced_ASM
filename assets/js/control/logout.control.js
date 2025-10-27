@@ -3,6 +3,8 @@ const logoutAction = () => {
     logoutConfirmBtn.addEventListener("click", () => {
         sessionStorage.removeItem("client_allow");
         sessionStorage.removeItem("admin_allow");
+        // Remove Avatar
+        sessionStorage.removeItem("avatar_login");
 
         sessionStorage.setItem("logout_success", "Đã đăng xuất");
 

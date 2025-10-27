@@ -35,7 +35,6 @@ export class Product {
                     <td>
                         <img width="50px" src="${item.image ?? 'https://cdn.iconscout.com/icon/premium/png-256-thumb/no-image-1753539-1493784.png'}" alt="">
                     </td>
-                    <td>...</td>
                     <td>${categoryName == "" || categoryName == undefined ? "(Chưa phân loại)" : categoryName}</td>
                     <td>
                         ${item.status == 1 ? '<span class="badge rounded-pill p-2 bg-success">Hiện</span>' : '<span class="badge rounded-pill p-2 bg-secondary">Ẩn</span>'}
@@ -74,7 +73,6 @@ export class Product {
                         <td>
                             <img width="50px" src="${item.image ?? 'https://cdn.iconscout.com/icon/premium/png-256-thumb/no-image-1753539-1493784.png'}" alt="">
                         </td>
-                        <td>...</td>
                         <td>${categoryName == "" || categoryName == undefined ? "(Chưa phân loại)" : categoryName}</td>
                         <td>
                             ${item.status == 1 ? '<span class="badge rounded-pill p-2 bg-success">Hiện</span>' : '<span class="badge rounded-pill p-2 bg-secondary">Ẩn</span>'}
@@ -115,7 +113,6 @@ export class Product {
                     <td>
                         <img width="50px" src="${item.image ?? 'https://cdn.iconscout.com/icon/premium/png-256-thumb/no-image-1753539-1493784.png'}" alt="">
                     </td>
-                    <td>...</td>
                     <td>${categoryName == "" || categoryName == undefined ? "(Chưa phân loại)" : categoryName}</td>
                     <td>
                         ${item.status == 1 ? '<span class="badge rounded-pill p-2 bg-success">Hiện</span>' : '<span class="badge rounded-pill p-2 bg-secondary">Ẩn</span>'}
@@ -217,5 +214,13 @@ export class Product {
     formatPrice(x) {
         let newNumber = x.toLocaleString('vi', { style: 'currency', currency: 'VND' });
         return newNumber;
+    }
+
+    productReplaceTable() {
+        new DataTable('#product-table');
+    }
+
+    productVariantReplaceTable() {
+        new DataTable('#product-variant-table');
     }
 }

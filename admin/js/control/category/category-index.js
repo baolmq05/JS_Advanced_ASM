@@ -6,14 +6,10 @@ async function load() {
     await category.categoryLoadData();
     let categoryHTML = category.categoryRender();
     document.querySelector("#category-list").innerHTML = categoryHTML;
+    category.categoryReplaceTable();
 
-    findByName();
     findByStatus();
 }
-
-const findByName = () => {
-    searchEventHandle();
-};
 
 const findByStatus = () => {
     statusEventHandle();
@@ -34,23 +30,8 @@ const statusEventHandle = () => {
 
         document.querySelector("#category-list").innerHTML = "";
         document.querySelector("#category-list").innerHTML = categoryHTML;
+        category.categoryReplaceTable();
     })
-};
-
-const searchEventHandle = () => {
-    let searchInput = document.querySelector("#search_input");
-
-    searchInput.addEventListener("keyup", (event) => {
-        if (searchInput.value == "") {
-            let categoryHTML = category.categoryRender();
-            document.querySelector("#category-list").innerHTML = categoryHTML;
-            return;
-        }
-
-        let categoryHTML = category.categoryRenderByName(searchInput.value);
-        document.querySelector("#category-list").innerHTML = "";
-        document.querySelector("#category-list").innerHTML = categoryHTML;
-    });
 };
 
 load();

@@ -56,6 +56,7 @@ async function productLoading() {
     productData = product.getProductOne();
 
     product.productRenderVariant(productData);
+    product.productVariantReplaceTable();
 
     getElement();
 }
