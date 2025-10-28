@@ -46,6 +46,7 @@ let productData = [];
 let categoryList = [];
 
 const renderData = () => {
+    let isFeatured = document.querySelector("#is_featured");
     let name = document.querySelector("#name");
     let basePrice = document.querySelector("#base_price");
     let status = document.querySelector("#status").children;
@@ -53,6 +54,13 @@ const renderData = () => {
     name.value = productData.name;
     basePrice.value = productData.base_price;
     CKEDITOR.instances.editor.setData(productData.description);
+
+    Array.from(isFeatured.children).forEach(item => {
+        console.log(item);
+        if (item.value == productData.is_featured) {
+            item.selected = true;
+        }
+    });
 
     Array.from(status).forEach(item => {
         console.log(item);
@@ -248,6 +256,7 @@ const checkCanUpdate = (nameValue, imageValue, basePriceValue, categoryValue) =>
 };
 
 const getData = () => {
+    let isFeatured = document.querySelector("#is_featured");
     let name = document.querySelector("#name");
     let basePrice = document.querySelector("#base_price");
     let descriptionValue = CKEDITOR.instances.editor.getData();;
@@ -271,8 +280,8 @@ const getData = () => {
 
     let imageValue;
 
-    if (imageTemp.value == "") {
-        imageValue = productData.image;
+    if (!imageTemp.value) {
+        imageValue = "";
     } else {
         imageValue = imageTemp.files[0]; //FILE NOT VALUE
     }
@@ -282,6 +291,7 @@ const getData = () => {
         image_temp: imageValue, //FILE NOT VALUE
         description: descriptionValue,
         category_id: category.value,
+        is_featured: isFeatured.value,
         status: status.value,
         base_price: basePrice.value,
         product_variants: productData.product_variants
@@ -296,10 +306,12 @@ async function updateAction() {
 
     let imageFile = objectToCreateTemp.image_temp;
 
+    console.log(imageFile);
+
     if (imageFile != "" && imageFile != null) {
         await uploadImage(imageFile);
     } else {
-        imageToCreate = objectToCreateTemp.image_temp;
+        imageToCreate = productData.image;
     }
 
     let objectToCreate = {
@@ -308,6 +320,7 @@ async function updateAction() {
         description: objectToCreateTemp.description,
         category_id: objectToCreateTemp.category_id,
         status: objectToCreateTemp.status,
+        is_featured: objectToCreateTemp.is_featured,
         base_price: objectToCreateTemp.base_price,
         product_variants: objectToCreateTemp.product_variants
     }

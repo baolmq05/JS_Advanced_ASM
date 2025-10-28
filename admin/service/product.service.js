@@ -131,17 +131,7 @@ export class Product {
         return htmlList;
     }
 
-    productCreate(name, image, description, category_id, base_price) {
-        let objectToCreate = {
-            name: name,
-            image: image,
-            description: description,
-            category_id: category_id,
-            status: 1,
-            base_price: base_price,
-            product_variants: [],
-        };
-
+    productCreate(objectToCreate) {
         axios.post(API_URL + ENDPOINT.PRODUCT, objectToCreate).then(response => {
             if (response.status === STATUS.CREATED) {
                 sessionStorage.setItem("create_success", "Thêm thành công");

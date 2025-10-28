@@ -1,3 +1,6 @@
+<script>
+  sessionStorage.removeItem("order_sucess");
+</script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,76 +24,13 @@
 
       <div class="row">
         <div class="col-lg-8">
-          <div class="card shadow-sm border-0 mb-4">
+          <div id="cart-container" class="card shadow-sm border-0 mb-4">
             <ul id="cart_list" class="list-group list-group-flush">
 
-              <li class="list-group-item px-4 py-3">
-                <div class="row align-items-center g-3">
-                  <div class="col-12 col-sm-2 text-center">
-                    <img src="../assets/images/product/SamsungGalaxyS25.jpg" class="img-fluid rounded"
-                      alt="Samsung Galaxy S25" style="max-height: 80px;">
-                  </div>
-
-                  <div class="col-12 col-sm-4">
-                    <h5 class="mb-0 fs-6">Samsung Galaxy S25</h5>
-                    <p class="text-muted mb-0 small">Samsung</p>
-                  </div>
-
-                  <div class="col-6 col-sm-3">
-                    <div class="input-group input-group-sm">
-                      <button class="btn btn-outline-secondary" type="button">-</button>
-                      <input type="number" class="form-control text-center" value="1" min="1">
-                      <button class="btn btn-outline-secondary" type="button">+</button>
-                    </div>
-                  </div>
-
-                  <div class="col-4 col-sm-2 text-sm-end">
-                    <p class="fw-bold text-dark mb-0">25.000.000đ</p>
-                  </div>
-
-                  <div class="col-2 col-sm-1 text-end">
-                    <button class="btn btn-sm btn-outline-danger border-0">
-                      <i class="bi bi-trash-fill"></i>
-                    </button>
-                  </div>
-                </div>
-              </li>
-
-              <li class="list-group-item px-4 py-3">
-                <div class="row align-items-center g-3">
-                  <div class="col-12 col-sm-2 text-center">
-                    <img src="https://i.pravatar.cc/150?img=3" class="img-fluid rounded" alt="iPhone 17"
-                      style="max-height: 80px;">
-                  </div>
-
-                  <div class="col-12 col-sm-4">
-                    <h5 class="mb-0 fs-6">iPhone 17 Pro</h5>
-                    <p class="text-muted mb-0 small">Apple</p>
-                  </div>
-
-                  <div class="col-6 col-sm-3">
-                    <div class="input-group input-group-sm">
-                      <button class="btn btn-outline-secondary" type="button">-</button>
-                      <input type="number" class="form-control text-center" value="1" min="1">
-                      <button class="btn btn-outline-secondary" type="button">+</button>
-                    </div>
-                  </div>
-
-                  <div class="col-4 col-sm-2 text-sm-end">
-                    <p class="fw-bold text-dark mb-0">32.000.000đ</p>
-                  </div>
-
-                  <div class="col-2 col-sm-1 text-end">
-                    <button class="btn btn-sm btn-outline-danger border-0">
-                      <i class="bi bi-trash-fill"></i>
-                    </button>
-                  </div>
-                </div>
-              </li>
             </ul>
 
             <div class="card-footer bg-white text-end py-3">
-              <a href="#" class="btn btn-link text-danger">Xóa tất cả</a>
+              <button id="delete_all_btn" class="btn btn-danger text-white">Xóa tất cả</button>
             </div>
           </div>
         </div>
@@ -127,8 +67,40 @@
   <!-- FOOTER -->
   <div id="footer"></div>
 
+  <!-- Modal Delete Product -->
+  <div id="modal_delete" style="background-color: rgba(0, 0, 0, 0.5);" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="modal_title" class="modal-title">Xóa khỏi giỏ hàng?</h5>
+          <button type="button" id="close_modal_delete" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <button id="delete_confirm_btn" type="button" class="btn btn-danger">Xác nhận</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Delete Product ALL -->
+  <div id="modal_delete_all" style="background-color: rgba(0, 0, 0, 0.5);" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="modal_title" class="modal-title">Xóa tất cả khỏi giỏ hàng?</h5>
+          <button type="button" id="close_modal_delete_all" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <button id="delete_confirm_btn_all" type="button" class="btn btn-danger">Xác nhận</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal Logout -->
-  <div id="modal_logout" class="modal" tabindex="-1">
+  <div id="modal_logout" style="background-color: rgba(0, 0, 0, 0.5);" class="modal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

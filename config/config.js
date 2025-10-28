@@ -3,7 +3,8 @@ const ENDPOINT = {
     PRODUCT: "products",
     PRODUCT_VARIANT: "product_variants",
     USER: "users",
-    CART: "carts"
+    CART: "carts",
+    ORDER: "orders"
 };
 
 const STATUS = {

@@ -2,7 +2,7 @@ import { User } from "../service/user.service.js";
 
 // Session (Alert)
 const turnOffAlert = (alertElement, sessionName) => {
-    // sessionStorage.removeItem(sessionName);
+    sessionStorage.removeItem(sessionName);
     setTimeout(() => {
         alertElement.style.display = "none";
     }, 3000);
@@ -109,6 +109,8 @@ const loginAction = () => {
             } else {
                 sessionStorage.setItem("client_allow", userId);
                 sessionStorage.setItem("login_success", "Đăng nhập thành công");
+                sessionStorage.setItem("avatar_login", userCurrent.avatar);
+
                 window.location.href = "http://127.0.0.1:5501/index.html";
             }
         }

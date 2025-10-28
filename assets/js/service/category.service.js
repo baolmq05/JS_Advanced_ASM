@@ -36,27 +36,31 @@ export class Category {
 
         let index = 0;
         for (let i = 0; i < (this.categoryList.length); i++) {
-            if (this.categoryList[i].parent_id == null || this.categoryList[i].parent_id == "") {
-                index += 1;
-                let htmlItem = `<div class="dropdown">
+            if (this.categoryList[i].status == 1) {
+                if (this.categoryList[i].parent_id == null || this.categoryList[i].parent_id == "") {
+                    index += 1;
+                    let htmlItem = `<div class="dropdown">
                                     <button class="btn list-group-item list-group-item-action w-100 dropdown-toggle" type="button"
                                         id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                         ${this.categoryList[i].name}
                                     </button>
                                     <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">`;
 
-                for (let j = i + 1; j < this.categoryList.length; j++) {
-                    if (this.categoryList[j].parent_id == this.categoryList[i].id) {
-                        index += 1;
-                        let htmlItemChild = `<li><a class="dropdown-item" href="./product.html?${this.categoryList[j].id}">${this.categoryList[j].name}</a></li>`;
-                        htmlItem += htmlItemChild;
+                    for (let j = i + 1; j < this.categoryList.length; j++) {
+                        if (this.categoryList[j].status == 1) {
+                            if (this.categoryList[j].parent_id == this.categoryList[i].id) {
+                                index += 1;
+                                let htmlItemChild = `<li><a class="dropdown-item" href="./product.html?${this.categoryList[j].id}">${this.categoryList[j].name}</a></li>`;
+                                htmlItem += htmlItemChild;
+                            }
+                        }
                     }
-                }
 
-                htmlItem += `</ul>
+                    htmlItem += `</ul>
                             </div>`;
 
-                htmlList += htmlItem;
+                    htmlList += htmlItem;
+                }
             }
         }
 

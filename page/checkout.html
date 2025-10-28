@@ -30,8 +30,10 @@
                                     <label class="form-label">Họ và tên</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                        <input type="text" class="form-control" placeholder="Lê Minh Quốc Bảo">
+                                        <input id="fullname" type="text" class="form-control"
+                                            placeholder="Lê Minh Quốc Bảo">
                                     </div>
+                                    <small id="fullname_error" class="text-danger"></small>
                                 </div>
 
                                 <!-- Số điện thoại -->
@@ -39,86 +41,104 @@
                                     <label class="form-label">Số điện thoại</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-telephone"></i></span>
-                                        <input type="text" class="form-control" placeholder="0123456789">
+                                        <input id="phone" type="text" class="form-control" placeholder="0123456789">
                                     </div>
+                                    <small id="phone_error" class="text-danger"></small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Tỉnh/Thành phố</label>
+                                    <select id="province" class="form-select">
+                                        <option value="">Vui lòng chọn tỉnh thành</option>
+                                    </select>
+                                    <small id="province_error" class="text-danger"></small>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label">Quận huyện</label>
+                                    <select id="district" class="form-select">
+                                        <option value="">Vui lòng chọn quận huyện</option>
+                                    </select>
+                                    <small id="district_error" class="text-danger"></small>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label">Phường xã</label>
+                                    <select id="ward" class="form-select">
+                                        <option value="">Vui lòng chọn phường xã</option>
+                                    </select>
+                                    <small id="ward_error" class="text-danger"></small>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Địa chỉ chi tiết</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
-                                        <input type="text" class="form-control"
+                                        <input id="address" type="text" class="form-control"
                                             placeholder="Đường 123, xã Cành Lá, tỉnh Bình Thường">
                                     </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Tỉnh/Thành phố</label>
-                                    <select class="form-select">
-                                        <option selected>Chọn tỉnh/thành</option>
-                                        <option value="1">Hà Nội</option>
-                                        <option value="2">TP. Hồ Chí Minh</option>
-                                        <option value="3">Cần Thơ</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-4">
-                                    <label class="form-label">Phường/Xã</label>
-                                    <select class="form-select">
-                                        <option selected>Chọn phường/xã</option>
-                                        <option value="1">Phường 1</option>
-                                        <option value="2">Phường 2</option>
-                                        <option value="3">Phường 3</option>
-                                    </select>
+                                    <small id="address_error" class="text-danger"></small>
                                 </div>
 
                                 <div class="mb-4">
                                     <label class="form-label">Phương thức thanh toán</label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="payment" id="cod" checked>
-                                        <label class="form-check-label" for="cod">
-                                            Thanh toán khi nhận hàng (COD)
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="payment" id="bank">
-                                        <label class="form-check-label" for="bank">
-                                            Chuyển khoản ngân hàng
-                                        </label>
-                                    </div>
+                                    <select class="form-select" name="" id="payments">
+                                        <option value="">Vui lòng chọn phương thức thanh toán</option>
+                                        <option value="0">Thanh toán khi nhận hàng (COD)</option>
+                                        <option value="1">Chuyển khoản ngân hàng</option>
+                                    </select>
+                                    <small id="payments_error" class="text-danger"></small>
                                 </div>
 
-                                <button class="btn btn-success w-100">
-                                    <i class="bi bi-credit-card"></i> Thanh toán
+                                <button id="create" type="button" class="btn btn-success w-100">
+                                    <i id="" class="bi bi-credit-card"></i> Thanh toán
                                 </button>
                             </form>
                         </div>
                     </div>
 
                     <div class="col-md-5">
-                        <div class="card p-4 shadow-sm">
-                            <h4 class="text-center mb-3"><i class="bi bi-bag"></i> Tóm tắt giỏ hàng</h4>
-                            <ul class="list-group mb-3">
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    iPhone 15
-                                    <span>25.000.000đ</span>
+                        <div class="card p-4 shadow-sm position-sticky" style="top: 2rem;">
+                            <h4 class="text-center mb-4"><i class="bi bi-bag-check"></i> Tóm tắt đơn hàng</h4>
+
+                            <div id="cart_checkout" class="product-summary-list mb-3"
+                                style="max-height: 300px; overflow-y: auto;">
+
+
+                                <!-- <div class="d-flex gap-3 py-3 border-bottom">
+                                    <img src="../assets/images/product/op-lung.jpg" alt="Ốp lưng" class="rounded"
+                                        style="width: 65px; height: 65px; object-fit: cover;">
+
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex justify-content-between">
+                                            <h6 class="mb-0 fw-bold fs-6">Ốp lưng Silicon</h6>
+                                            <strong class="text-dark" style="white-space: nowrap;">300.000đ</strong>
+                                        </div>
+                                        <small class="text-muted d-block">Màu: Đen</small>
+                                        <small class="text-muted">Số lượng: 2</small>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    <span class="text-muted">Tạm tính</span>
+                                    <strong id="total_temp">25.300.000đ</strong>
                                 </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Ốp lưng
-                                    <span>300.000đ</span>
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    <span class="text-muted">Phí vận chuyển</span>
+                                    <strong>30.000đ</strong>
                                 </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Phí vận chuyển
-                                    <span>30.000đ</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <strong>Tổng cộng</strong>
-                                    <strong class="text-danger">25.330.000đ</strong>
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center px-0 border-0">
+                                    <strong class="fs-5">Tổng cộng</strong>
+                                    <strong id="total_price" class="text-danger fs-5">25.330.000đ</strong>
                                 </li>
                             </ul>
-                            <a href="./cart.html" class="btn btn-outline-primary w-100">
-                                <i class="bi bi-pencil-square"></i> Chỉnh sửa giỏ hàng
+
+                            <a href="./cart.html" class="btn btn-outline-secondary w-100">
+                                <i class="bi bi-pencil-square me-1"></i> Chỉnh sửa giỏ hàng
                             </a>
+
                         </div>
                     </div>
                 </div>
@@ -150,4 +170,6 @@
     <script src="../assets/js/bootstrap.bundle.js"></script>
     <script type="module" src="../assets/js/component/component.js"></script>
     <script type="module" src="../assets/js/control/logout.control.js"></script>
+    <script type="module" src="../assets/js/control/address_checkout.control.js"></script>
+    <script type="module" src="../assets/js/control/checkout.control.js"></script>
 </body>

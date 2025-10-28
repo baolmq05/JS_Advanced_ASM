@@ -27,8 +27,9 @@ export class Product {
 
         this.productList.forEach((item) => {
 
-            if (item.is_featured == 1) {
-                let htmlItem = `
+            if (item.status == 1) {
+                if (item.is_featured == 1) {
+                    let htmlItem = `
                 <div class="col-lg-3 col-sm-12 col-md-6 mt-3">
                         <div class="product-item card">
                             <div class="product-image-box h-180">
@@ -41,7 +42,7 @@ export class Product {
                                         ${item.name}
                                     </a>
                                 </h5>
-                                <p class="product-description card-text">${item.description}</p>
+                                <p class="product-description card-text">${this.stripHtml(item.description)}</p>
                                 <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
                                 <a href="./page/product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
                             </div>
@@ -49,18 +50,23 @@ export class Product {
                     </div>
             `;
 
-                htmlList += htmlItem;
+                    htmlList += htmlItem;
+                }
             }
         });
 
         return htmlList;
     }
 
-    productRenderShop() {
+    productRenderShop(categoryList) {
         let htmlList = ``;
 
         this.productList.forEach((item) => {
-            let htmlItem = `
+            let categoryCurrent = categoryList.find(cateItem => cateItem.id == item.category_id);
+            console.log(categoryCurrent);
+            console.log(categoryCurrent.status);
+            if (categoryCurrent.status == 1) {
+                let htmlItem = `
                 <div class="col-lg-4 mt-3">
                                 <div class="product-item card">
                                     <div class="product-image-box h-180">
@@ -70,15 +76,16 @@ export class Product {
                                     <div class="card-body">
                                         <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
                                                 class="text-decoration-none text-dark">${item.name}</a></h5>
-                                        <p class="product-description card-text">${item.description}</p>
+                                        <p class="product-description card-text">${this.stripHtml(item.description)}</p>
                                         <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
                                         <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
                                     </div>
                                 </div>
                             </div>
-            `;
+                `;
 
-            htmlList += htmlItem;
+                htmlList += htmlItem;
+            }
         });
 
         return htmlList;
@@ -112,7 +119,7 @@ export class Product {
                                     <div class="card-body">
                                         <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
                                                 class="text-decoration-none text-dark">${item.name}</a></h5>
-                                        <p class="product-description card-text">${item.description}</p>
+                                        <p class="product-description card-text">${this.stripHtml(item.description)}</p>
                                         <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
                                         <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
                                     </div>
@@ -129,7 +136,7 @@ export class Product {
         return htmlList;
     }
 
-    productRenderBySort(productCurrentList, sortValue) {
+    productRenderBySort(productCurrentList, sortValue, categoryList) {
         let htmlList = ``;
         let productSorted;
         if (productCurrentList.length > 0) {
@@ -146,25 +153,30 @@ export class Product {
             }
 
             productSorted.forEach((item) => {
-                let htmlItem = `
-                    <div class="col-lg-4 mt-3">
-                                    <div class="product-item card">
-                                        <div class="product-image-box h-180">
-                                            <img src="${item.image}"
-                                                class="card-img-top product-image" alt="...">
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
-                                                    class="text-decoration-none text-dark">${item.name}</a></h5>
-                                            <p class="product-description card-text">${item.description}</p>
-                                            <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
-                                            <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
-                                        </div>
+                let categoryCurrent = categoryList.find(cateItem => cateItem.id == item.category_id);
+                console.log(categoryCurrent);
+                console.log(categoryCurrent.status);
+                if (categoryCurrent.status == 1) {
+                    let htmlItem = `
+                        <div class="col-lg-4 mt-3">
+                                <div class="product-item card">
+                                    <div class="product-image-box h-180">
+                                        <img src="${item.image}"
+                                            class="card-img-top product-image" alt="...">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
+                                                class="text-decoration-none text-dark">${item.name}</a></h5>
+                                        <p class="product-description card-text">${this.stripHtml(item.description)}</p>
+                                        <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
+                                        <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
                                     </div>
                                 </div>
-                `;
+                            </div>
+                        `;
 
-                htmlList += htmlItem;
+                    htmlList += htmlItem;
+                }
             });
         } else {
             htmlList = "Không có sản phẩm để sắp xếp";
@@ -173,7 +185,7 @@ export class Product {
         return htmlList;
     }
 
-    productRenderBySearch(productCurrentList, searchValue) {
+    productRenderBySearch(productCurrentList, searchValue, categoryList) {
         let htmlList = ``;
 
         if (searchValue == "") {
@@ -185,24 +197,30 @@ export class Product {
 
             if (filtered.length > 0) {
                 filtered.forEach((item) => {
-                    let htmlItem = `
-                    <div class="col-lg-4 mt-3">
-                        <div class="product-item card">
-                            <div class="product-image-box h-180">
-                                <img src="${item.image}"
-                                                class="card-img-top product-image" alt="...">
+                    let categoryCurrent = categoryList.find(cateItem => cateItem.id == item.category_id);
+                    console.log(categoryCurrent);
+                    console.log(categoryCurrent.status);
+                    if (categoryCurrent.status == 1) {
+                        let htmlItem = `
+                        <div class="col-lg-4 mt-3">
+                                <div class="product-item card">
+                                    <div class="product-image-box h-180">
+                                        <img src="${item.image}"
+                                            class="card-img-top product-image" alt="...">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
+                                                class="text-decoration-none text-dark">${item.name}</a></h5>
+                                        <p class="product-description card-text">${this.stripHtml(item.description)}</p>
+                                        <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
+                                        <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
-                                class="text-decoration-none text-dark">${item.name}</a></h5>
-                                <p class="product-description card-text">${item.description}</p>
-                                <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
-                                <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
-                            </div>
-                       </div>
-                    </div>`;
+                        `;
 
-                    htmlList += htmlItem;
+                        htmlList += htmlItem;
+                    }
                 });
             } else {
                 htmlList = "Không có sản phẩm để sắp xếp";
@@ -212,12 +230,16 @@ export class Product {
         }
     }
 
-    productRenderByCurrentList(array) {
+    productRenderByCurrentList(array, categoryList) {
         let htmlList = ``;
 
         array.forEach((item) => {
-            let htmlItem = `
-                <div class="col-lg-4 mt-3">
+            let categoryCurrent = categoryList.find(cateItem => cateItem.id == item.category_id);
+            console.log(categoryCurrent);
+            console.log(categoryCurrent.status);
+            if (categoryCurrent.status == 1) {
+                let htmlItem = `
+                        <div class="col-lg-4 mt-3">
                                 <div class="product-item card">
                                     <div class="product-image-box h-180">
                                         <img src="${item.image}"
@@ -226,15 +248,16 @@ export class Product {
                                     <div class="card-body">
                                         <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
                                                 class="text-decoration-none text-dark">${item.name}</a></h5>
-                                        <p class="product-description card-text">${item.description}</p>
+                                        <p class="product-description card-text">${this.stripHtml(item.description)}</p>
                                         <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
                                         <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
                                     </div>
                                 </div>
                             </div>
-            `;
+                        `;
 
-            htmlList += htmlItem;
+                htmlList += htmlItem;
+            }
         });
 
         return htmlList;
@@ -243,5 +266,13 @@ export class Product {
     formatPrice(x) {
         let newNumber = x.toLocaleString('vi', { style: 'currency', currency: 'VND' });
         return newNumber;
+    }
+
+    stripHtml(htmlString) {
+        const tempDiv = document.createElement('div');
+
+        tempDiv.innerHTML = htmlString;
+
+        return tempDiv.textContent || tempDiv.innerText || "";
     }
 }

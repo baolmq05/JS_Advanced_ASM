@@ -1,13 +1,10 @@
-import { Product } from "../../../service/product.service.js";
-import { Category } from "../../../service/category.service.js";
+import { User } from "../service/user.service.js";
 
 const CLOUD_NAME = "dztcimwoe";
 const UPLOAD_PRESET = "quocbaoimage";
 const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
 
-let imageToCreate = ``;
-
-// Session(Alert)
+// Session (Alert)
 const turnOffAlert = (alertElement, sessionName) => {
     sessionStorage.removeItem(sessionName);
     setTimeout(() => {
@@ -15,48 +12,51 @@ const turnOffAlert = (alertElement, sessionName) => {
     }, 3000);
 };
 
-if (sessionStorage.getItem("create_success")) {
-    let alertSuccessValue = sessionStorage.getItem("create_success");
+if (sessionStorage.getItem("update_success")) {
+    let alertSuccessValue = sessionStorage.getItem("update_success");
     let alertElement = document.querySelector("#alert_success");
     alertElement.style.display = "flex";
     alertElement.lastElementChild.innerText = alertSuccessValue;
 
-    turnOffAlert(alertElement, "create_success");
+    turnOffAlert(alertElement, "update_success");
 }
 
-if (sessionStorage.getItem("create_danger")) {
-    let alertDangerValue = sessionStorage.getItem("create_danger");
-    let alertElement = document.querySelector("#alert_danger");
-    alertElement.style.display = "flex";
-    alertElement.lastElementChild.innerText = alertDangerValue;
+let fullname = document.querySelector("#fullname");
+let email = document.querySelector("#email");
+let phone = document.querySelector("#phone");
+let address = document.querySelector("#address");
+let image = document.querySelector("#image");
+let imageShow = document.querySelector("#image_show_current");
 
-    turnOffAlert(alertElement, "create_danger");
+const user = new User();
+let userId = sessionStorage.getItem("client_allow");
+let userList = [];
+let userCurrent = [];
+
+console.log(userId);
+
+let imageToUpdate;
+
+async function userLoading() {
+    await user.userLoadData();
+    userList = user.getUserList();
+
+    userCurrent = userList.find(item => item.id == userId);
+    renderData();
+    selectImageEventHandle();
+    updateEventHandle();
 }
 
-// ---------------------------------------------------------------------------------------------------
+// RENDER
+const renderData = () => {
+    fullname.value = userCurrent.name;
+    email.value = userCurrent.email;
+    phone.value = userCurrent.phone;
+    address.value = userCurrent.address;
+    imageShow.src = userCurrent.avatar;
+}
 
-const category = new Category();
-const product = new Product();
-let productList = [];
-let categoryList = [];
-
-const renderCategorySelect = () => {
-    const categorySelectE = document.querySelector("#category");
-
-    categoryList.forEach(item => {
-        if (item.parent_id == null || item.parent_id == "") {
-            console.log("Nothing");
-        } else {
-            let newOption = document.createElement("option");
-            newOption.value = item.id;
-            newOption.innerText = item.name;
-
-            categorySelectE.appendChild(newOption);
-        }
-    });
-};
-
-// UI Spinner Loading
+// UPDATE ====================================================================================================
 
 const toogleSpinerLoad = (turnOn) => {
     if (turnOn) {
@@ -67,11 +67,10 @@ const toogleSpinerLoad = (turnOn) => {
         document.querySelector(".spinner_container").style.display = "none";
     }
 }
-
 // Image Get And Event
 
 const removeImageFile = () => {
-    let imageFile = document.querySelector("#image_file");
+    let imageFile = document.querySelector("#image");
     imageFile.value = '';
 };
 
@@ -79,7 +78,7 @@ const previewImage = (file) => {
     console.log(file);
 
     let previewContainer = document.querySelector(".preview_container");
-    previewContainer.style.display = "block";
+    previewContainer.style.display = "flex";
 
     let reader = new FileReader();
     reader.readAsDataURL(file);
@@ -93,6 +92,7 @@ const previewImage = (file) => {
 
         const img = document.createElement('img');
         img.src = reader.result;
+        img.style.width = "100%";
         img.classList.add('preview-img');
 
         const deleteIcon = document.createElement('i');
@@ -115,7 +115,7 @@ const previewImage = (file) => {
 };
 
 const selectImageEventHandle = () => {
-    let imageFile = document.querySelector("#image_file");
+    let imageFile = document.querySelector("#image");
     imageFile.addEventListener("change", (e) => {
         let file = e.target.files[0];
         if (file.type.startsWith('image/'))
@@ -154,8 +154,8 @@ async function uploadImage(imageFile) {
         console.log(`Tải lên thành công (${imageFile.name}): ${response.data.secure_url}`);
 
         // URL GETTED =================================
-        imageToCreate = uploadedUrl.url;
-        console.log("IMAGE LẤY ĐƯỢC LÀ: " + imageToCreate);
+        imageToUpdate = uploadedUrl.url;
+        console.log("IMAGE LẤY ĐƯỢC LÀ: " + imageToUpdate);
     } catch (error) {
         console.error(`Lỗi khi tải lên file ${imageFile.name}:`, error.response ? error.response.data : error.message);
         alert(`Tải lên file ${imageFile.name} thất bại! Vui lòng kiểm tra console.`);
@@ -174,131 +174,121 @@ async function uploadImage(imageFile) {
     previewContainer.style.display = 'none';
 }
 
-// // Create
+// // Update
 
-const checkCanCreate = (nameValue, imageValue, basePriceValue, categoryValue) => {
+function validateVietnamesePhoneNumber(phoneNumber) {
+    // Regex này kiểm tra 10 chữ số, bắt đầu bằng 0 và theo sau là 
+    // các đầu số hợp lệ (3, 5, 7, 8, 9)
+    const regex = /^(0[3|5|7|8|9])+([0-9]{8})\b$/;
+
+    // Dùng .test() để kiểm tra
+    return regex.test(phoneNumber);
+}
+
+const checkCanUpdate = () => {
     let isError = false;
-    const nameError = document.querySelector("#name_error");
-    const imageError = document.querySelector("#image_error");
-    const basePriceError = document.querySelector("#base_price_error");
-    const categoryError = document.querySelector("#category_error");
 
     const ERRORTEXT = "Không được bỏ trống";
 
-    if (!nameValue) {
+    if (!fullname) {
         isError = true;
     }
 
-    if (!imageValue) {
+    if (!email.value) {
         isError = true;
     }
 
-    if (!basePriceValue) {
+    if (!address.value) {
         isError = true;
     }
 
-    if (!categoryValue) {
+    if (!phone.value) {
+        isError = true;
+    }
+
+    if (!validateVietnamesePhoneNumber(phone.value)) {
         isError = true;
     }
 
     if (isError) {
-        if (!nameValue) {
-            nameError.innerText = ERRORTEXT;
+        if (!fullname) {
+            document.querySelector("#fullname_error").innerText = ERRORTEXT;
         } else {
-            nameError.innerText = "";
+            document.querySelector("#fullname_error").innerText = "";
         }
 
-        if (!imageValue) {
-            imageError.innerText = ERRORTEXT;
+        if (!email.value) {
+            document.querySelector("#email_error").innerText = ERRORTEXT;
         } else {
-            imageError.innerText = "";
+            document.querySelector("#email_error").innerText = "";
         }
 
-        if (!basePriceValue) {
-            basePriceError.innerText = ERRORTEXT;
+        if (!address.value) {
+            document.querySelector("#address_error").innerText = ERRORTEXT;
         } else {
-            basePriceError.innerText = "";
+            document.querySelector("#address_error").innerText = "";
         }
 
-        if (!categoryValue) {
-            categoryError.innerText = ERRORTEXT;
+        if (!phone.value) {
+            document.querySelector("#phone_error").innerText = ERRORTEXT;
         } else {
-            categoryError.innerText = "";
+            document.querySelector("#phone_error").innerText = "";
+        }
+
+        if (!validateVietnamesePhoneNumber(phone.value)) {
+            document.querySelector("#phone_error").innerText = "Vui lòng nhập đúng số điện thoại";
+        } else {
+            document.querySelector("#phone_error").innerText = "";
         }
 
         return false;
     }
 
+    document.querySelector("#fullname_error").innerText = "";
+    document.querySelector("#image_error").innerText = "";
+    document.querySelector("#email_error").innerText = "";
+    document.querySelector("#address_error").innerText = "";
+    document.querySelector("#phone_error").innerText = "";
+
     return true;
 };
 
-const getData = () => {
-    let name = document.querySelector("#name");
-    let basePrice = document.querySelector("#base_price");
-    let descriptionValue = CKEDITOR.instances.editor.getData();;
-    let category = document.querySelector("#category");
-    let imageTemp = document.querySelector("#image_file");
-
-    let canCreate = checkCanCreate(name.value, imageTemp.value, basePrice.value, category.value);
-
-    if (!canCreate) {
-        return null;
+async function update() {
+    if (!checkCanUpdate()) {
+        return;
     }
 
-    let nameDuplicate = productList.find(item => item.name == name.value);
+    let imageFile = image.files[0];
 
-    if (nameDuplicate) {
-        const nameError = document.querySelector("#name_error");
-        nameError.innerText = "Sản phẩm đã trùng";
-        return null;
+    if (!image.value == "") {
+        await uploadImage(imageFile);
+        imageFile = imageToUpdate;
+    } else {
+        imageFile = userCurrent.avatar;
     }
 
-    let productObj = {
-        name: name.value,
-        image_temp: imageTemp.files[0], //FILE NOT VALUE
-        description: descriptionValue,
-        category_id: category.value,
-        base_price: basePrice.value,
+    let objectToUpdate = {
+        "name": fullname.value,
+        "email": email.value,
+        "avatar": imageFile,
+        "phone": phone.value,
+        "address": address.value,
+        "password": userCurrent.password,
+        "role": userCurrent.role,
+        "status": 1
     }
+    console.log(objectToUpdate);
 
-    return productObj;
+    user.userUpdate(userId, objectToUpdate);
 };
 
-async function createAction() {
-    let objectToCreateTemp = getData();
-    if (objectToCreateTemp == null) return;
-
-    let imageFile = objectToCreateTemp.image_temp;
-
-    await uploadImage(imageFile);
-
-    let objectToCreate = {
-        name: objectToCreateTemp.name,
-        image: imageToCreate, //RESULT IMAGE,
-        is_featured: 0,
-        status: 1,
-        description: objectToCreateTemp.description,
-        category_id: objectToCreateTemp.category_id,
-        base_price: objectToCreateTemp.base_price,
-        product_variants: []
-    }
-
-    product.productCreate(objectToCreate);
-};
-
-// ACTION ----------------------------------
-async function productLoading() {
-    await category.categoryLoadData();
-    categoryList = category.getCategoryList();
-    await product.productLoadData();
-    productList = product.getProductList();
-
-    renderCategorySelect();
-
-    selectImageEventHandle();
-
-    const createBtn = document.querySelector("#create_btn");
-    createBtn.addEventListener("click", createAction);
+const updateEventHandle = () => {
+    const updateBtn = document.querySelector("#update_btn");
+    updateBtn.addEventListener("click", () => {
+        update();
+    });
 }
 
-productLoading();
+
+// CALL LOADING
+userLoading();

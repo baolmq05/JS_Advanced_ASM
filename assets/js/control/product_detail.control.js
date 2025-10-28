@@ -1,6 +1,36 @@
 import { Product } from "../service/product.service.js";
 import { Cart } from "../service/cart.service.js";
 
+// Session (Alert)
+const turnOffAlert = (alertElement) => {
+    setTimeout(() => {
+        alertElement.style.display = "none";
+    }, 3000);
+};
+
+const turnOnAlert = (type, stringValue) => {
+    let alertElement = document.querySelector(type);
+    alertElement.style.display = "flex";
+    alertElement.lastElementChild.innerText = stringValue;
+
+    turnOffAlert(alertElement);
+}
+
+if (sessionStorage.getItem("add_success")) {
+    turnOnAlert("#alert_success", "Thêm thành cônng");
+    sessionStorage.removeItem("add_success");
+}
+
+if (sessionStorage.getItem("admin_cant_buy")) {
+    let alertElement = document.querySelector("#alert_danger");
+    alertElement.style.display = "flex";
+    alertElement.lastElementChild.innerText = sessionStorage.getItem("admin_cant_buy");
+
+    sessionStorage.removeItem("admin_cant_buy");
+    turnOffAlert(alertElement);
+}
+// ----------------------------------------------------
+
 const product = new Product();
 let productList = [];
 let productData = [];
@@ -9,6 +39,10 @@ let productVariant = [];
 // Get URL To Get ID PRODUCT
 const query = window.location.search;
 let productId = query.substring(1);
+
+if (productId == "") {
+    window.location.href = "./product.html";
+}
 
 const productName = document.querySelector("#product_name");
 const productPrice = document.querySelector("#product_price");
@@ -224,6 +258,12 @@ const addToCartAction = () => {
         window.location.href = "http://127.0.0.1:5501/page/login.html";
     }
 
+    if (sessionStorage.getItem("admin_allow")) {
+        sessionStorage.setItem("admin_cant_buy", "Quản trị viên không thể mua hàng");
+        window.location.reload();
+        return;
+    }
+
     if (variantIdCurrent == "") {
         document.querySelector(".variant_error").style.display = "inline";
         return;
@@ -235,6 +275,17 @@ const addToCartAction = () => {
     let productIdCurrent = productId;
     let quantityToAdd = document.querySelector("#input-quantity").value;
 
+    // check quantity
+    let productCurrent = productList.find(item => item.id == productIdCurrent);
+    let variantCurrent = productCurrent.product_variants.find(item => item.id == variantIdCurrent);
+    let quantityLimit = variantCurrent.quantity;
+
+    if (quantityToAdd > quantityLimit) {
+        turnOnAlert("#alert_danger", "Vượt quá số lượng kho");
+        return;
+    }
+
+    // Add action
     cart.update(cartCurrent.id, productIdCurrent, variantIdCurrent, unitPriceCurrent, Number(quantityToAdd));
 }
 

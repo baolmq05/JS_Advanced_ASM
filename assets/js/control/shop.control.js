@@ -49,7 +49,7 @@ const setBreadCrumb = () => {
 
 // Render
 const renderProductAll = () => {
-    productListHTML.innerHTML = product.productRenderShop();
+    productListHTML.innerHTML = product.productRenderShop(categoryList);
 }
 
 const renderByCategory = () => {
@@ -63,7 +63,7 @@ const renderByCategory = () => {
 // ------ Sort
 // Event Handle
 const renderBySort = () => {
-    let htmlSorted = product.productRenderBySort(productCurrentList, sortE.value);
+    let htmlSorted = product.productRenderBySort(productCurrentList, sortE.value, categoryList);
     productListHTML.innerHTML = htmlSorted;
 };
 
@@ -75,14 +75,14 @@ sortE.addEventListener("change", renderBySort);
 const searchE = document.querySelector("#search");
 const searchAction = () => {
     if (searchE.value == "") {
-        productListHTML.innerHTML = product.productRenderByCurrentList(productCurrentList);
+        productListHTML.innerHTML = product.productRenderByCurrentList(productCurrentList, categoryList);
     }
 
     searchE.addEventListener("input", () => {
         if (searchE.value == "") {
-            productListHTML.innerHTML = product.productRenderByCurrentList(productCurrentList);
+            productListHTML.innerHTML = product.productRenderByCurrentList(productCurrentList, categoryList);
         } else {
-            let htmlSearched = product.productRenderBySearch(productCurrentList, searchE.value);
+            let htmlSearched = product.productRenderBySearch(productCurrentList, searchE.value, categoryList);
             productListHTML.innerHTML = htmlSearched;
         }
     })

@@ -148,6 +148,7 @@ export class User {
         axios.put(API_URL + ENDPOINT.USER + "/" + id, objectToUpdate).then(response => {
             if (response.status === STATUS.OK) {
                 sessionStorage.setItem("update_success", "Cập nhật thành công");
+                sessionStorage.setItem("avatar_login", response.data.avatar);
             } else {
                 sessionStorage.setItem("update_danger", "Cập nhật thất bại. Lỗi hệ thống");
             }

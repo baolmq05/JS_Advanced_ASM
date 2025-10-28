@@ -52,12 +52,12 @@
   "products": [
     {
       "name": "iPhone 15 Pro Max",
-      "image": "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307980220145280_iphone-15-promax-den-1.jpg",
-      "is_featured": 1,
-      "description": "Chip A17 Pro siêu mạnh, camera 48MP đột phá. Khung viền Titan bền bỉ, cao cấp.",
+      "image": "https://res.cloudinary.com/dztcimwoe/image/upload/v1761663539/QuocBaoImage/ccyebxpufnmtdsux2mu2.webp",
+      "description": "<p>Chip A17 Pro si&ecirc;u mạnh, camera 48MP đột ph&aacute;. Khung viền Titan bền bỉ, cao cấp.</p>\n",
       "category_id": "4",
       "status": "1",
-      "base_price": 27990000,
+      "is_featured": "1",
+      "base_price": "27990000",
       "product_variants": [
         {
           "id": "2",
@@ -307,14 +307,13 @@
       ]
     },
     {
-      "id": "4",
       "name": "Samsung Galaxy A55",
-      "image": "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/samsung_galaxy_a55_5g_den_0d0f3bcb3b.jpg",
-      "is_featured": 1,
-      "description": "Thiết kế khung kim loại, kính cao cấp. Màn hình Super AMOLED, pin 5000mAh.",
-      "category_id": 5,
-      "status": 1,
-      "base_price": 7890000,
+      "image": "https://res.cloudinary.com/dztcimwoe/image/upload/v1761664701/QuocBaoImage/pjfouxeclrqgvcxsthky.webp",
+      "description": "<p>Thiết kế khung kim loại, k&iacute;nh cao cấp. M&agrave;n h&igrave;nh Super AMOLED, pin 5000mAh.</p>\n",
+      "category_id": "5",
+      "status": "0",
+      "is_featured": "1",
+      "base_price": "7890000",
       "product_variants": [
         {
           "id": "21",
@@ -349,7 +348,8 @@
           "ram": "6GB",
           "rom": "128GB"
         }
-      ]
+      ],
+      "id": "4"
     },
     {
       "id": "5",
@@ -499,55 +499,51 @@
       "status": 1
     },
     {
-      "id": "9088",
-      "name": "Bảo Lê",
+      "name": "Quốc Bảo Client",
       "email": "hoconline0201@gmail.com",
-      "avatar": "",
-      "phone": "",
-      "address": "",
+      "avatar": "https://res.cloudinary.com/dztcimwoe/image/upload/v1761658595/QuocBaoImage/huxbzwtcuihycd5jeixw.jpg",
+      "phone": "0939138768",
+      "address": "Cần Thơ Nè",
       "password": "12345678",
-      "role": 0,
-      "status": 1
+      "role": "1",
+      "status": "1",
+      "id": "9088"
     }
   ],
   "carts": [
     {
       "id": "1",
       "user_id": "4242",
-      "cart_details": [
-        {
-          "id": "1",
-          "product_id": "1",
-          "variant_id": "1",
-          "unit_price": 36490000,
-          "quantity": 1
-        }
-      ]
+      "cart_details": []
     },
     {
       "id": "2",
       "user_id": "9088",
-      "cart_details": [
+      "cart_details": []
+    }
+  ],
+  "orders": [
+    {
+      "id": "707c",
+      "order_code": "62812466",
+      "user_id": "9088",
+      "fullname": "Lee Min Hoo",
+      "phone": "0939138768",
+      "province": "Bình Thuận",
+      "district": "Huyện Hàm Thuận Nam",
+      "ward": "Xã Hàm Minh",
+      "address": "Xa Ham Minh, duong 123",
+      "payments": "0",
+      "status": 0,
+      "payment_status": 1,
+      "created_at": "2025-10-28",
+      "order_details": [
         {
-          "id": "1",
-          "product_id": "1",
-          "variant_id": "1",
-          "unit_price": 27990000,
-          "quantity": 11
-        },
-        {
-          "id": "2",
+          "id": "tbl5",
           "product_id": "2",
-          "variant_id": "8",
-          "unit_price": 18290000,
-          "quantity": 2
-        },
-        {
-          "id": "wxe2",
-          "product_id": "1",
-          "variant_id": "5",
-          "unit_price": 36490000,
-          "quantity": 5
+          "variant_id": "9",
+          "quantity": 3,
+          "total_price": 41970000
         }
       ]
     }

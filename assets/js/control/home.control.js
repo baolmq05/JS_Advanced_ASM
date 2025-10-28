@@ -26,6 +26,15 @@ if (sessionStorage.getItem("logout_success")) {
     turnOffAlert(alertElement, "logout_success");
 }
 
+if (sessionStorage.getItem("admin_cant_buy")) {
+    let alertDangerValue = sessionStorage.getItem("admin_cant_buy");
+    let alertElement = document.querySelector("#alert_danger");
+    alertElement.style.display = "flex";
+    alertElement.lastElementChild.innerText = alertDangerValue;
+
+    turnOffAlert(alertElement, "admin_cant_buy");
+}
+
 const user = new User();
 let userList = [];
 let userCurrent = [];
