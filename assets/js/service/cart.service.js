@@ -91,7 +91,7 @@ export class Cart {
                                             <strong class="text-dark" style="white-space: nowrap;">${this.formatPrice(productVariant.price)}</strong>
                                         </div>
                                         <small class="text-muted d-block">
-                                            ${productVariant.color} / ${productVariant.ram} / ${productVariant.rom}
+                                            ${productVariant.color} ${(productVariant.ram && productVariant.rom) ? "/" + productVariant.ram + "/" + productVariant.rom : ""}
                                         </small>
                                         <small class="text-muted">Số lượng: ${cartDetailItem.quantity}</small>
                                     </div>

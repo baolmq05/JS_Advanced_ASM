@@ -54,7 +54,7 @@ const renderOrderDetailsProduct = () => {
 
                 <div class="flex-grow-1">
                     <h6 class="mb-0 fw-bold">${variant.variant_name}</h6>
-                    <small class="text-muted d-block">Phân loại: ${variant.color} / ${variant.rom}</small>
+                    <small class="text-muted d-block">Phân loại: ${variant.color} ${variant.rom ? '/' + variant.rom : ""}</small>
                 </div>
 
                 <div class="text-end" style="min-width: 120px;">

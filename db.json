@@ -107,7 +107,7 @@
           "id": "5",
           "variant_name": "iPhone 15 Pro Max 1TB - Titan Xanh",
           "price": 36490000,
-          "quantity": 150,
+          "quantity": 140,
           "image": "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307989548944936_iphone-15-promax-xanh-1.jpg",
           "color": "Titan Xanh",
           "ram": "6GB",
@@ -546,6 +546,54 @@
         }
       ],
       "id": "707c"
+    },
+    {
+      "id": "6fa9",
+      "order_code": "87074897",
+      "user_id": "9088",
+      "fullname": "Bảo Lê",
+      "phone": "0939138768",
+      "province": "Cà Mau",
+      "district": "Thành phố Cà Mau",
+      "ward": "Phường 2",
+      "address": "Cần Thơ",
+      "payments": "0",
+      "status": 0,
+      "payment_status": 0,
+      "created_at": "2025-10-29",
+      "order_details": [
+        {
+          "id": "wl5p",
+          "product_id": "1",
+          "variant_id": "5",
+          "quantity": 5,
+          "total_price": 182450000
+        }
+      ]
+    },
+    {
+      "id": "8ff3",
+      "order_code": "88028666",
+      "user_id": "9088",
+      "fullname": "Demo Cần Thơ",
+      "phone": "0792834912",
+      "province": "Bạc Liêu",
+      "district": "Huyện Phước Long",
+      "ward": "Xã Vĩnh Phú Tây",
+      "address": "Phú Tây",
+      "payments": "0",
+      "status": 0,
+      "payment_status": 0,
+      "created_at": "2025-10-29",
+      "order_details": [
+        {
+          "id": "mxqs",
+          "product_id": "1",
+          "variant_id": "5",
+          "quantity": 5,
+          "total_price": 182450000
+        }
+      ]
     }
   ]
 }

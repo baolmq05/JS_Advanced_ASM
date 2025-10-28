@@ -11,6 +11,14 @@ if (sessionStorage.getItem("admin_allow")) {
     window.location.href = "http://127.0.0.1:5501/index.html";
 }
 
+function turnOnAlert() {
+    let alertDanger = document.querySelector("#alert_danger");
+    alertDanger.style.display = "flex";
+    setTimeout(function () {
+        alertDanger.style.display = "none";
+    }, 3000)
+}
+
 let userId = sessionStorage.getItem("client_allow");
 
 const cart = new Cart();
@@ -133,6 +141,16 @@ const confirmDeleteProductAll = () => {
         cart.deleteAllProduct(cartId);
     });
 };
+
+// Click to next checkout
+const checkOutBtn = document.querySelector("#checkout_btn");
+checkOutBtn.addEventListener("click", () => {
+    if (cartCurrent.cart_details == "") {
+        turnOnAlert();
+    } else {
+        window.location.href = "./checkout.html";
+    }
+})
 
 
 closeDeleteModal();

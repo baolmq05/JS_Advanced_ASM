@@ -33,6 +33,7 @@ async function cartLoading() {
     cartList = cart.getCartList();
 
     cartCurrent = cartList.find(item => item.user_id == userId);
+
     let cartResult = cart.cartRenderCheckout(cartCurrent, productList);
     cartCheckoutE.innerHTML = cartResult.html;
 
@@ -199,6 +200,30 @@ const createOrder = () => {
                 "created_at": createAtText,
                 "order_details": order_details
             }
+
+
+            cartCurrent.cart_details.forEach(cartDeItem => {
+                let productItem = productList.find(pro => pro.id == cartDeItem.product_id);
+                productItem.product_variants.forEach(element => {
+                    if (element.id == cartDeItem.variant_id) {
+                        element.quantity -= cartDeItem.quantity;
+                    }
+                });
+
+                let productID = productItem.id;
+
+                let newObjectToUpdate = {
+                    "name": productItem.name,
+                    "image": productItem.image,
+                    "description": productItem.description,
+                    "category_id": productItem.category_id,
+                    "status": productItem.status,
+                    "is_featured": productItem.is_featured,
+                    "base_price": Number(productItem.base_price),
+                    "product_variants": productItem.product_variants
+                }
+                product.productUpdate(productID, newObjectToUpdate);
+            })
 
             order.create(objectToCreate);
             cart.deleteAllProduct(cartCurrent.id);

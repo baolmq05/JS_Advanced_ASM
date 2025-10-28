@@ -278,4 +278,14 @@ export class Product {
 
         return tempDiv.textContent || tempDiv.innerText || "";
     }
+
+    productUpdate(id, objectToUpdate) {
+        axios.put(API_URL + ENDPOINT.PRODUCT + "/" + id, objectToUpdate).then(response => {
+            if (response.status === STATUS.OK) {
+                console.log("Giảm số lượng sản phẩm")
+            } else {
+                console.log("Giảm số lượng sản phẩm fall");
+            }
+        }).catch(error => console.error(error));
+    }
 }

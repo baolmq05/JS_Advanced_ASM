@@ -146,7 +146,33 @@ async function renderComponent(params) {
                 </div>
             </div>
         </div>
-    </footer>`;
+    </footer>
+    
+    <!-- ==============================ChatBot Layout================================ -->
+        <div id="chat-trigger">
+            <i class="bi bi-chat-dots-fill"></i>
+        </div>
+
+        <div id="chat-container">
+            <div class="chat-header">
+                <h5></i>Bot Hỗ Trợ</h5>
+                <button id="close-chat-btn">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div id="chat-window">
+                <div class="bot-message"><b>Bot:</b> Chào bạn, tôi có thể giúp gì cho Mobile Store?</div>
+            </div>
+
+            <div class="chat-footer">
+                <input type="text" id="chat-input" placeholder="Nhập tin nhắn...">
+                <button id="send-btn">
+                    <i class="bi bi-send-fill"></i>
+                </button>
+            </div>
+        </div>
+    `;
 
     headerElement.innerHTML = headerHTML;
     footerElement.innerHTML = footerHTML;
