@@ -321,7 +321,7 @@ async function updateAction() {
         category_id: objectToCreateTemp.category_id,
         status: objectToCreateTemp.status,
         is_featured: objectToCreateTemp.is_featured,
-        base_price: objectToCreateTemp.base_price,
+        base_price: Number(objectToCreateTemp.base_price),
         product_variants: objectToCreateTemp.product_variants
     }
 

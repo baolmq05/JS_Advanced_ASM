@@ -20,11 +20,28 @@ export class Order {
         let html = ``;
 
         orderCurrent.forEach(item => {
+
+            let statusBackground = '';
+            let statusText = '';
+            if (item.status == 0) {
+                statusBackground = "primary";
+                statusText = 'Đang chuẩn bị';
+            } else if (item.status == 1) {
+                statusBackground = "warning";
+                statusText = 'Đang vận chuyển';
+            } else if (item.status == 2) {
+                statusBackground = "success";
+                statusText = 'Đã giao hàng';
+            } else {
+                statusBackground = "danger";
+                statusText = 'Đã hủy';
+            }
+
             let itemHtml = `<a href="./order-detail.html?${item.id}"
                                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                     <div><strong>Đơn hàng: </strong>#${item.order_code} </div>
                                     <div><strong>Người đặt: </strong>${item.fullname}</div>
-                                    <span class="badge bg-${item.status == 1 ? "success" : "warning"} rounded-pill">${item.status == 1 ? "Đã giao" : "Đang giao"}</span>
+                                    <span class="badge bg-${statusBackground} rounded-pill">${statusText}</span>
                                 </a>`;
 
             html += itemHtml;
@@ -36,6 +53,22 @@ export class Order {
     orderDetailRender(orderCurrent, productList) {
         let html = ``;
         let total = 0;
+
+        let statusBackground = '';
+        let statusText = '';
+        if (orderCurrent.status == 0) {
+            statusBackground = "primary";
+            statusText = 'Đang chuẩn bị';
+        } else if (orderCurrent.status == 1) {
+            statusBackground = "warning";
+            statusText = 'Đang vận chuyển';
+        } else if (orderCurrent.status == 2) {
+            statusBackground = "success";
+            statusText = 'Đã giao hàng';
+        } else {
+            statusBackground = "danger";
+            statusText = 'Đã hủy';
+        }
 
         let headInforProduct = `
             <div class="card shadow-sm">
@@ -81,6 +114,8 @@ export class Order {
         });
 
         let inforOrder = `
+            
+
             <div class="row mt-5">
                 <div class="col-lg-4 mb-4 ">
                 <div class="card shadow-sm">
@@ -92,7 +127,7 @@ export class Order {
                         <li class="list-group-item"><strong>Ngày đặt:</strong> ${orderCurrent.created_at}</li>
                         <li class="list-group-item">
                             <strong>Trạng thái:</strong>
-                            <span class="badge bg-${orderCurrent.status == 1 ? "success" : "warning"}">${orderCurrent.status == 1 ? "Đã giao" : "Đang giao"}</span>
+                            <span class="badge bg-${statusBackground}">${statusText}</span>
                         </li>
                     </ul>
                 </div>

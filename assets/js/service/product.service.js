@@ -26,7 +26,6 @@ export class Product {
         let htmlList = ``;
 
         this.productList.forEach((item) => {
-
             if (item.status == 1) {
                 if (item.is_featured == 1) {
                     let htmlItem = `
@@ -66,7 +65,8 @@ export class Product {
             console.log(categoryCurrent);
             console.log(categoryCurrent.status);
             if (categoryCurrent.status == 1) {
-                let htmlItem = `
+                if (item.status == 1) {
+                    let htmlItem = `
                 <div class="col-lg-4 mt-3">
                                 <div class="product-item card">
                                     <div class="product-image-box h-180">
@@ -83,8 +83,8 @@ export class Product {
                                 </div>
                             </div>
                 `;
-
-                htmlList += htmlItem;
+                    htmlList += htmlItem;
+                }
             }
         });
 
@@ -201,23 +201,25 @@ export class Product {
                     console.log(categoryCurrent);
                     console.log(categoryCurrent.status);
                     if (categoryCurrent.status == 1) {
-                        let htmlItem = `
-                        <div class="col-lg-4 mt-3">
-                                <div class="product-item card">
-                                    <div class="product-image-box h-180">
-                                        <img src="${item.image}"
-                                            class="card-img-top product-image" alt="...">
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
-                                                class="text-decoration-none text-dark">${item.name}</a></h5>
-                                        <p class="product-description card-text">${this.stripHtml(item.description)}</p>
-                                        <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
-                                        <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
+                        if (item.status == 1) {
+                            let htmlItem = `
+                                <div class="col-lg-4 mt-3">
+                                                <div class="product-item card">
+                                                    <div class="product-image-box h-180">
+                                                        <img src="${item.image}"
+                                                            class="card-img-top product-image" alt="...">
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
+                                                                class="text-decoration-none text-dark">${item.name}</a></h5>
+                                                        <p class="product-description card-text">${this.stripHtml(item.description)}</p>
+                                                        <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
+                                                        <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                `;
+                        }
 
                         htmlList += htmlItem;
                     }
@@ -238,25 +240,26 @@ export class Product {
             console.log(categoryCurrent);
             console.log(categoryCurrent.status);
             if (categoryCurrent.status == 1) {
-                let htmlItem = `
-                        <div class="col-lg-4 mt-3">
-                                <div class="product-item card">
-                                    <div class="product-image-box h-180">
-                                        <img src="${item.image}"
-                                            class="card-img-top product-image" alt="...">
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
-                                                class="text-decoration-none text-dark">${item.name}</a></h5>
-                                        <p class="product-description card-text">${this.stripHtml(item.description)}</p>
-                                        <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
-                                        <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-
-                htmlList += htmlItem;
+                if (item.status == 1) {
+                    let htmlItem = `
+                                <div class="col-lg-4 mt-3">
+                                                <div class="product-item card">
+                                                    <div class="product-image-box h-180">
+                                                        <img src="${item.image}"
+                                                            class="card-img-top product-image" alt="...">
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <h5 class="product-title card-title"><a href="./product-detail.html?${item.id}"
+                                                                class="text-decoration-none text-dark">${item.name}</a></h5>
+                                                        <p class="product-description card-text">${this.stripHtml(item.description)}</p>
+                                                        <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
+                                                        <a href="./product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                `;
+                    htmlList += htmlItem;
+                }
             }
         });
 

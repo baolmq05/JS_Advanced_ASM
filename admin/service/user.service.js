@@ -43,7 +43,7 @@ export class User {
                     </td>
                     <td class="">
                         <a href="./user-detail.html?${userItem.id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
-                        <a href="./user-edit.html" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                        <a href="./user-edit.html?${userItem.id}" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
                     </td>
                 </tr>
             `;
@@ -126,7 +126,7 @@ export class User {
                     </td>
                     <td class="">
                         <a href="./user-detail.html?${us.id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
-                        <a href="./user-edit.html" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                        <a href="./user-edit.html?${us.id}" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
                         <button type="button" onlick="deleteUserHandle('${us.id}')" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
                     </td>
                 </tr>
@@ -170,7 +170,7 @@ export class User {
                     </td>
                     <td class="">
                         <a href="./user-detail.html?${us.id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
-                        <a href="./user-edit.html" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                        <a href="./user-edit.html?${us.id}" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
                     </td>
                 </tr>
             `;
@@ -192,7 +192,7 @@ export class User {
                     </td>
                     <td class="">
                         <a href="./user-detail.html?${us.id}" class="btn btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
-                        <a href="./user-edit.html" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
+                        <a href="./user-edit.html?${us.id}" class="btn btn-outline-warning"><i class="bi bi-pencil-fill"></i></a>
                         <button type="button" onlick="deleteUserHandle('${us.id}')" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
                     </td>
                 </tr>

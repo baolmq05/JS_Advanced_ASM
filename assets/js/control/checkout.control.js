@@ -174,6 +174,16 @@ const createOrder = () => {
                 order_details.push(orderDetailObject);
             });
 
+            let payment_status;
+
+            if (payments.value == 0) {
+                console.log("Thanh toán COD");
+                payment_status = 0;
+            } else {
+                console.log("Thanh toán Online");
+                payment_status = 1;
+            }
+
             let objectToCreate = {
                 "order_code": orderCode,
                 "user_id": userId,
@@ -185,7 +195,7 @@ const createOrder = () => {
                 "address": address.value,
                 "payments": payments.value,
                 "status": 0,
-                "payment_status": 1,
+                "payment_status": payment_status,
                 "created_at": createAtText,
                 "order_details": order_details
             }
