@@ -1,3 +1,4 @@
+import { Cart } from "./cart.service.js";
 import { API_URL } from "../../../../enviroment/enviroment.js";
 import { ENDPOINT, STATUS } from "../../../../config/config.js";
 
@@ -126,6 +127,9 @@ export class User {
         axios.post(API_URL + ENDPOINT.USER, objectToCreate).then(response => {
             if (response.status === STATUS.CREATED) {
                 sessionStorage.setItem("create_success", "Thêm thành công");
+                alert(response.data.id);
+                const cart = new Cart();
+                cart.create(response.data.id);
             } else {
                 sessionStorage.setItem("create_danger", "Thêm thất bại. Lỗi hệ thống");
             }

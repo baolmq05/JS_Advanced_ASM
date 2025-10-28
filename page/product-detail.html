@@ -21,8 +21,8 @@
                 <div class="row">
                     <div class="col-lg-6 mt-5">
                         <div class="image-detail-box h-400 mt-5 mb-3 d-flex justify-content-center align-items-center">
-                            <img id="main-image-detail" class="d-flex justify-content-center align-items-center"
-                                src="./assets/images/product/SamsungGalaxyS25.jpg" alt="">
+                            <img id="main-image-detail" class="d-flex justify-content-center align-items-center" src=""
+                                alt="">
                         </div>
                         <div id="gallary-container" class="d-flex justify-content-center gap-3">
 
@@ -44,9 +44,9 @@
                             <div class="my-3 gap-1" id="quantity_container">
 
                             </div>
-                            <h4>Giá: <span class="text-danger" id="product_price"></span></h4>
-                            <h5 class="my-3">Thêm vào giỏ hàng</h5>
-                            <div class="col-lg-6">
+                            <h4 id="price_container">Giá: <span class="text-danger" id="product_price"></span></h4>
+                            <h5 id="add_to_cart_text" class="my-3">Thêm vào giỏ hàng</h5>
+                            <div id="action_container" class="col-lg-6">
                                 <div class="row">
                                     <div class="col-lg-8 col-sm-12 d-flex justify-content-center">
                                         <button id="btn-decrement" class="btn btn-outline-primary">-</button>
@@ -56,7 +56,8 @@
                                     </div>
 
                                     <div class="col-lg-8 col-sm-12 mt-3">
-                                        <button class="btn btn-outline-success w-100">Thêm</button>
+                                        <button type="button" id="add_to_card"
+                                            class="btn btn-outline-success w-100">Thêm</button>
                                     </div>
                                 </div>
                             </div>

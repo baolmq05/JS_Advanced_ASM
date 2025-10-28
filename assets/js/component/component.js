@@ -196,8 +196,9 @@ const renderData = () => {
         let userID = sessionStorage.getItem("client_allow");
         userCurrent = userList.find(userItem => userItem.id == userID);
 
+        let isAdmin = userCurrent.role == 1 ? true : false;
         renderProfileToggle();
-        renderLinkToAdmin(true);
+        renderLinkToAdmin(isAdmin);
         renderAvatar();
     } else {
         let profileSelect = document.querySelector("#profile_select").style.display = "none";

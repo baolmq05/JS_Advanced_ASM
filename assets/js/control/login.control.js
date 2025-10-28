@@ -16,6 +16,11 @@ const turnOnAlert = (stringValue) => {
     turnOffAlert(alertElement, "login_error");
 }
 
+if (sessionStorage.getItem("must_cart")) {
+    turnOnAlert("Vui lòng đăng nhập");
+    sessionStorage.removeItem("must_cart");
+}
+
 const user = new User();
 let userId;
 let userCurrent = [];

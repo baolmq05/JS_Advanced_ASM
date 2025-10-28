@@ -1,4 +1,5 @@
 import { Product } from "../service/product.service.js";
+import { Cart } from "../service/cart.service.js";
 
 const product = new Product();
 let productList = [];
@@ -14,9 +15,22 @@ const productPrice = document.querySelector("#product_price");
 const productDescription = document.querySelector("#product_description");
 const productImage = document.querySelector("#main-image-detail");
 const quantityContainer = document.querySelector("#quantity_container");
-const gallaryContainer = document.querySelector("#gallary-container");
+
+// User ID By Session
+let userId = '';
+if (sessionStorage.getItem("client_allow")) {
+    userId = sessionStorage.getItem("client_allow");
+}
+
+// Variable For Cart
+const cart = new Cart();
+let cartList = [];
+let variantIdCurrent = ``;
+let unitPriceCurrent = 0;
 
 async function productLoading() {
+    await cart.cartLoadData();
+    cartList = cart.getCartList();
     await product.productLoadData();
     productList = product.getProductList();
     await product.productDetailLoad(productId);
@@ -52,8 +66,19 @@ const renderVariant = () => {
         newVariantBtn.classList.add("btn", "btn-outline-dark", "me-2", "my-2", "variant");
 
         newVariantBtn.innerHTML = item.color + ((item.rom && item.ram) ? " - (" + item.rom + " + " + item.ram + ")" : "");
+
+
         variantContainer.appendChild(newVariantBtn);
     });
+    let brElement = document.createElement("br");
+    let errorElement = document.createElement("span");
+    errorElement.classList.add("badge");
+    errorElement.classList.add("bg-danger");
+    errorElement.classList.add("variant_error");
+    errorElement.innerText = "Vui lòng chọn loại";
+    errorElement.style.display = "none";
+    variantContainer.appendChild(brElement);
+    variantContainer.appendChild(errorElement);
 }
 
 // ChangeData function
@@ -94,9 +119,15 @@ const changePrice = (priceAttribute) => {
 const quantityEnable = (quantityAttribute) => {
     let quantity = Number(quantityAttribute);
     if (quantity <= 0) {
-        quantityContainer.innerHTML = '<span class="badge bg-danger">Hết hàng</span>';
+        quantityContainer.innerHTML = '<h4><span class="badge bg-danger">Hết hàng</span></h4>';
+        document.querySelector("#add_to_cart_text").style.display = 'none';
+        document.querySelector("#action_container").style.display = 'none';
+        document.querySelector("#price_container").style.display = "none";
     } else {
-        quantityContainer.innerHTML = "<strong>Số lượng: </strong>" + quantity;
+        quantityContainer.innerHTML = `<h5>Tồn kho: ${quantity}</h5>`;
+        document.querySelector("#add_to_cart_text").style.display = 'block';
+        document.querySelector("#action_container").style.display = 'block';
+        document.querySelector("#price_container").style.display = "block";
     }
 }
 
@@ -116,8 +147,15 @@ const variantEventClick = () => {
             changePrice(item.getAttribute("data-price"));
             productImage.src = item.getAttribute("data-image");
 
+            // Set to add cart
+            variantIdCurrent = item.getAttribute("data-id");
+            unitPriceCurrent = Number(item.getAttribute("data-price"));
+
             // Quantity
             quantityEnable(item.getAttribute("data-quantity"));
+
+
+            document.querySelector(".variant_error").style.display = "none";
 
             //Image Gallary
             // let id = item.getAttribute("data-id");
@@ -131,7 +169,6 @@ const variantEventClick = () => {
 
 const clearStyleVariant = () => {
     const variants = document.getElementsByClassName("variant");
-    console.log(variants);
 
     Array.from(variants).forEach(item => {
         item.style.backgroundColor = "white";
@@ -179,6 +216,31 @@ const printRelationProduct = (productRelationData) => {
 
     document.querySelector("#relation_list").innerHTML = htmlListRelation;
 };
+
+// Cart action
+const addToCartAction = () => {
+    if (userId == "" || !sessionStorage.getItem("client_allow")) {
+        sessionStorage.setItem("must_cart", "Vui lòng đăng nhập");
+        window.location.href = "http://127.0.0.1:5501/page/login.html";
+    }
+
+    if (variantIdCurrent == "") {
+        document.querySelector(".variant_error").style.display = "inline";
+        return;
+    }
+
+    let cartCurrent = cartList.find(item => item.user_id == userId);
+
+    document.querySelector(".variant_error").style.display = "none";
+    let productIdCurrent = productId;
+    let quantityToAdd = document.querySelector("#input-quantity").value;
+
+    cart.update(cartCurrent.id, productIdCurrent, variantIdCurrent, unitPriceCurrent, Number(quantityToAdd));
+}
+
+const addToCartBtn = document.querySelector("#add_to_card");
+addToCartBtn.addEventListener("click", addToCartAction);
+
 
 // Call main function
 productLoading();

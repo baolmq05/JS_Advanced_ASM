@@ -1,4 +1,5 @@
 import { User } from "../../../service/user.service.js";
+import { Cart } from "../../../service/cart.service.js";
 
 // Session (Alert)
 const turnOffAlert = (alertElement, sessionName) => {
@@ -27,6 +28,8 @@ if (sessionStorage.getItem("delete_danger")) {
 }
 // -----------------------------------------------------------------------------------------------
 const user = new User();
+const cart = new Cart();
+let cartList = [];
 
 const deleteAction = (userId) => {
     user.userDelete(userId)
@@ -42,9 +45,19 @@ const checkDelete = (userId) => {
     const deleteAcceptBtn = document.querySelector("#delete-accept-btn");
 
     deleteAcceptBtn.addEventListener("click", () => {
+        let cartToDelete = cartList.find(item => item.user_id == userId);
+        cart.delete(cartToDelete.id);
         deleteAction(userId);
     });
 };
+
+async function cartLoading() {
+    await cart.cartLoadData();
+    cartList = cart.getCartList();
+    console.log(cartList);
+}
+
+cartLoading();
 
 const turnOffModal = () => {
     const closeDeleteButton = document.querySelector("#close_modal_delete");

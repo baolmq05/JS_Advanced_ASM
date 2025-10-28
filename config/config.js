@@ -2,7 +2,8 @@ const ENDPOINT = {
     CATEGORY: "categories",
     PRODUCT: "products",
     PRODUCT_VARIANT: "product_variants",
-    USER: "users"
+    USER: "users",
+    CART: "carts"
 };
 
 const STATUS = {

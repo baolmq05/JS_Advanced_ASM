@@ -97,7 +97,7 @@
           "variant_name": "iPhone 15 Pro Max 256GB - Titan Đen",
           "price": 27990000,
           "quantity": 8,
-          "image": "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307989548944936_iphone-15-promax-xanh-1.jpg",
+          "image": "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307980220145280_iphone-15-promax-den-1.jpg",
           "color": "Titan Đen",
           "ram": "6GB",
           "color_code": "#3e3b3a",
@@ -108,7 +108,7 @@
           "variant_name": "iPhone 15 Pro Max 1TB - Titan Xanh",
           "price": 36490000,
           "quantity": 150,
-          "image": "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307980220145280_iphone-15-promax-den-1.jpg",
+          "image": "https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/2023_9_20_638307989548944936_iphone-15-promax-xanh-1.jpg",
           "color": "Titan Xanh",
           "ram": "6GB",
           "color_code": "#3e5b74",
@@ -492,7 +492,7 @@
       "name": "Quốc Bảo",
       "email": "baolmq05@gmail.com",
       "avatar": "https://res.cloudinary.com/dztcimwoe/image/upload/v1761074875/QuocBaoImage/ysup5vxseoqkdpuyxojx.jpg",
-      "phone": "1230123012",
+      "phone": "0792846735",
       "address": "Cần Thơ Văn Cừ",
       "password": "Lmqb@1080",
       "role": 1,
@@ -508,6 +508,48 @@
       "password": "12345678",
       "role": 0,
       "status": 1
+    }
+  ],
+  "carts": [
+    {
+      "id": "1",
+      "user_id": "4242",
+      "cart_details": [
+        {
+          "id": "1",
+          "product_id": "1",
+          "variant_id": "1",
+          "unit_price": 36490000,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "user_id": "9088",
+      "cart_details": [
+        {
+          "id": "1",
+          "product_id": "1",
+          "variant_id": "1",
+          "unit_price": 27990000,
+          "quantity": 11
+        },
+        {
+          "id": "2",
+          "product_id": "2",
+          "variant_id": "8",
+          "unit_price": 18290000,
+          "quantity": 2
+        },
+        {
+          "id": "wxe2",
+          "product_id": "1",
+          "variant_id": "5",
+          "unit_price": 36490000,
+          "quantity": 5
+        }
+      ]
     }
   ]
 }

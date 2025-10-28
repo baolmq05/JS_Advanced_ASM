@@ -28,7 +28,6 @@ export class Product {
         this.productList.forEach((item) => {
 
             if (item.is_featured == 1) {
-                // const categoryName = categoryList.find(cateItem => cateItem.id == item.category_id)?.name;
                 let htmlItem = `
                 <div class="col-lg-3 col-sm-12 col-md-6 mt-3">
                         <div class="product-item card">
@@ -44,8 +43,7 @@ export class Product {
                                 </h5>
                                 <p class="product-description card-text">${item.description}</p>
                                 <p class="">Giá: <span class="fw-bold">${this.formatPrice(item.base_price)}</span></p>
-                                <a href="./page/product-detail.html?${item.id}" class="btn btn-outline-secondary">Xem chi tiết</a>
-                                <a href="#" class="btn btn-primary">Thêm vào giỏ</a>
+                                <a href="./page/product-detail.html?${item.id}" class="btn btn-outline-primary">Xem chi tiết</a>
                             </div>
                         </div>
                     </div>
