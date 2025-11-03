@@ -78,7 +78,7 @@ async function loadHistory() {
 
         chatHistory.push({
             role: 'model',
-            parts: [{ text: 'Chào bạn, tôi có thể giúp gì cho Mobile Store?' }]
+            parts: [{ text: 'Chào bạn, tôi có thể giúp gì cho bạn?' }]
         });
     }
 

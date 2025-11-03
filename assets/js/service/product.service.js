@@ -219,9 +219,9 @@ export class Product {
                                                 </div>
                                             </div>
                                 `;
+                            htmlList += htmlItem;
                         }
 
-                        htmlList += htmlItem;
                     }
                 });
             } else {

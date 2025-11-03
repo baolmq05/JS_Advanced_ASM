@@ -39,3 +39,12 @@ const sideBarHTML = `
 
 const sideBarElement = document.querySelector("#side-bar");
 sideBarElement.innerHTML = sideBarHTML;
+
+const btnLogOut = document.querySelector("#btn_logout");
+btnLogOut.addEventListener("click", () => {
+    sessionStorage.removeItem("admin_allow");
+    sessionStorage.removeItem("client_allow");
+    sessionStorage.removeItem("avatar_login");
+
+    window.location.reload();
+})
